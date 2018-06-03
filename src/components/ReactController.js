@@ -21,10 +21,16 @@ class ReactController extends Component{
 		};
 
 		const style2={
-			'position':'absolute',
+			'position':'relative',
 			'width':'100%',
 			'height':'20px',
-			'textAlign':'center'
+			'textAlign':'center',
+			'background':'#000',
+			'color':'#fff',
+			'fontFamily': 'sans-serif',
+			'fontSize': '12px',
+			'paddingTop': '3px',
+			'fontWeight': '100', 
 		};
 
 		return(

@@ -1,20 +1,24 @@
 import React,{Component} from 'react';
 
-
-
-// const InputText =(props)=>{
-// 	return(
-		
-// 	);
-// };
-
-
 class InputText extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			
+			val:''	
 		};
+		this.handleChange=this.handleChange.bind(this);
+	}
+
+	componentWillReceiveProps(newProps){
+		this.setState({
+			val:newProps.val;
+		})
+	}
+
+	handleChange(e){
+		this.setState({
+			val:e.target.value
+		})
 	}
 
 	render(){
@@ -43,7 +47,7 @@ class InputText extends Component{
 		return(
 			<div id='input-text' style={style}>
 				<div style={label}>Text</div>
-				<input type='text' style={input} value={this.props.val} onChange={this.props.onChange} />
+				<input type='text' style={input} value={this.state.val} onChange={this.state.handleChange} />
 			</div>
 		);
 	}

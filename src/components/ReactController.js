@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 
-
 class ReactController extends Component{
 	constructor(props){
 		super(props);
@@ -10,33 +9,52 @@ class ReactController extends Component{
 
 	render(){
 		const style={
-			'position':'fixed',
-			'width':'300px',
-			'height':'auto',
-			'background':'#fff',
-			'borderBottom':'2px solid #000',
-			'borderLeft':'2px solid #000',
-			'borderRight':'2px solid #000',            
-			'left':'50px'
+			'position': 'fixed',
+    		'width': '300px',
+    		'height': 'auto',
+    		'background': '#FAFAFA',
+    		'border': '1px solid #D6D6D6',
+    		'left': '50px',
+    		'borderRadius': '4px',
+    		'overflow': 'hidden'
 		};
 
 		const style2={
 			'position':'relative',
 			'width':'100%',
-			'height':'20px',
+			'height':'30px',
 			'textAlign':'center',
-			'background':'#000',
-			'color':'#fff',
+			'background':'#FAFAFA',
+			'color':'#779BFF',
 			'fontFamily': 'sans-serif',
 			'fontSize': '12px',
-			'paddingTop': '3px',
+			'paddingTop': '8px',
 			'fontWeight': '100', 
+			'cursor':'pointer'
 		};
+
+		const drag={
+			'position':'relative',
+			'width':'100%',
+			'height': '24px',
+			'borderBottom': '1px solid #D6D6D6'
+		};
+
+		const container={
+			'position':'relative',
+			'width':'100%',
+			'height':'auto',
+			'overflow':'hidden'
+		};
+		
 
 		return(
 			<div id='controller-body' style={style}>
-				{this.props.children}
-				<div style={style2}>close controls</div>
+				<div style={drag}/>
+				<div style={container}>
+					{this.props.children}
+				</div>
+				<div style={style2}>Close Controls</div>
 			</div>
 		);
 	}

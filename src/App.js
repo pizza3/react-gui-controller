@@ -31,7 +31,6 @@ class App extends Component{
 			<ReactController>
 				<InputText val={this.state.val} lable='message' onChange={this.handleInput}/>
 				<InputText val={this.state.val2} onChange={this.handleInput2}/>    
-				<CheckBox/>            
 			</ReactController>
 		);
 	}

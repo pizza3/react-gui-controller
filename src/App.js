@@ -4,6 +4,8 @@ import InputText from './components/InputText';
 import CheckBox from './components/CheckBox';
 import Button from './components/Button';
 import Color from './components/Color';
+import ProgressSlider from './components/ProgressSlider';
+import ProgessSlider from './components/ProgressSlider';
 class App extends Component{
 
 	constructor(props){
@@ -39,6 +41,7 @@ class App extends Component{
 				<CheckBox label='Gravity' />
 				<Color label='Color'/>				
 				<Button label='Button'/> 
+				<ProgessSlider/>
 			</ReactController>
 		);
 	}

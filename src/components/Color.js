@@ -6,7 +6,7 @@ class Color extends Component{
 		this.state={
 			hide:true,
 			drag:false,
-			color:'rgba(255,0,0,1)'
+			color:'rgba(0,0,0,1)'
 		};
 		this.handleHide=this.handleHide.bind(this);
 		this.handleDown=this.handleDown.bind(this);
@@ -20,7 +20,7 @@ class Color extends Component{
 		this.ctx1 = colorBlock.getContext('2d');
 		this.width1 = colorBlock.width;
 		this.height1 = colorBlock.height;
-		this.rgbaColor = 'rgba(255,0,0,1)';
+		this.rgbaColor = 'rgba(0,0,0,1)';
 		//
 		var colorStrip = document.getElementById('color-strip');
 		this.ctx2 = colorStrip.getContext('2d');
@@ -86,7 +86,7 @@ class Color extends Component{
 		//https://github.com/facebook/react/issues/4431   
 		let x = e.clientX-document.getElementById('color-strip').getBoundingClientRect().left;
 		let y = e.clientY-document.getElementById('color-strip').getBoundingClientRect().top;
-		var imageData = this.ctx2.getImageData(x, y, 1, 1).data;
+		let imageData = this.ctx2.getImageData(x, y, 1, 1).data;
 		this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 		this.fillGradient();
 		this.setState({
@@ -120,8 +120,6 @@ class Color extends Component{
 		});
 	}
     
-    
-
 	render(){
 		const style={
 			'position':'relative',
@@ -160,31 +158,31 @@ class Color extends Component{
 		const colorBlock={
 			'position':'relative',
 			'float':'right',
-			'marginTop':'4px',
+			'marginTop':'17px',
 			'marginRight':'4px',
 			'width':'82%',
-			'height':'177px',
+			'height':'150px',
 			'border': '1px solid #d4d3d3',
 			'cursor':'crosshair'
-            
 		};
         
 		const colorStrip={
 			'position':'relative',
 			'float':'left',
-			'marginTop':'4px',
-			'marginLeft':'5px',
-			'width':'11%',
-			'height':'177px',
-			'border': '1px solid #d4d3d3'
+			'marginTop':'17px',
+			'marginLeft':'8px',
+			'width':'4%',
+			'height':'150px',
+			'border': '1px solid #d4d3d3',
+			'cursor':'crosshair'            
 		};
 		
 		return(
 			<div id='input-color' style={style}>
 				<div style={label}>{this.props.label}</div>
 				<div style={pallete} onClick={this.handleHide}></div>
-				<canvas id='color-block' style={colorBlock} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}></canvas>            
-				<canvas id='color-strip' name='strip' style={colorStrip} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}></canvas>                            
+				<canvas id='color-block' style={colorBlock} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>            
+				<canvas id='color-strip' name='strip' style={colorStrip} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>                            
 			</div>
 		);
 	}

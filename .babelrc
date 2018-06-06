@@ -3,4 +3,7 @@
         "env",
         "react"
     ],
+    "plugins": [
+        "styled-jsx/babel"
+    ]
 }

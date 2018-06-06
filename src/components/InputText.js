@@ -47,15 +47,20 @@ class InputText extends Component{
 			'position':'relative',
 			'float':'right',
 			'height':'22px',
-			'marginRight':'4px',			
-			'background':'#FAFAFA',
+			'marginRight':'4px',		
+			'borderRadius': '3px',	
+			'background':'rgb(253, 253, 253)',
 			'border':'1px solid #E5E5E5',
-			'outline': 'none'
+			'outline': 'none',
+			'color':'#779BFF',
+			'paddingLeft': '5px',
+			'fontWeight': '500'
+			
 		};
 		return(
 			<div id='input-text' style={style}>
 				<div style={label}>Message</div>
-				<input type='text' style={input} value={this.state.val} onChange={this.state.handleChange} />
+				<input type='text' style={input} value={this.state.val} onChange={this.handleChange} />
 			</div>
 		);
 	}

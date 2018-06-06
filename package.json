@@ -20,7 +20,8 @@
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "styled-jsx": "^2.2.6"
   },
   "devDependencies": {
     "babel": "^6.23.0",

@@ -81,28 +81,36 @@ class Color extends Component{
 		});
 	}
     
-	// changeColorStrip(e){  
-	// 	//don't use offset.X
-	// 	//https://github.com/facebook/react/issues/4431   
-	// 	let x = e.clientX-document.getElementById('color-strip').getBoundingClientRect().left;
-	// 	let y = e.clientY-document.getElementById('color-strip').getBoundingClientRect().top;
-	// 	let  imageData = this.ctx1.getImageData(x, y, 1, 1).data;
-	// 	this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
-	// 	this.setState({
-	// 		color:this.rgbaColor
-	// 	});
-	// }
+	changeColorStrip(e){  
+		//don't use offset.X
+		//https://github.com/facebook/react/issues/4431   
+		let x = e.clientX-document.getElementById('color-strip').getBoundingClientRect().left;
+		let y = e.clientY-document.getElementById('color-strip').getBoundingClientRect().top;
+		var imageData = this.ctx2.getImageData(x, y, 1, 1).data;
+		this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
+		this.fillGradient();
+		this.setState({
+			color:this.rgbaColor
+		});
+	}
     
 	handleDown(e){
 		this.setState({
 			drag:true
 		});
-		this.changeColorBlock(e);
+		e.target.getAttribute('name') === 'strip'?
+			this.changeColorStrip(e)           
+			:
+			this.changeColorBlock(e);
+		
 	}
     
 	handleMove(e){
 		if(this.state.drag){
-			this.changeColorBlock(e);
+			e.target.getAttribute('name') === 'strip'?
+				this.changeColorStrip(e)           
+				:
+				this.changeColorBlock(e);
 		}
 	}
     
@@ -176,7 +184,7 @@ class Color extends Component{
 				<div style={label}>{this.props.label}</div>
 				<div style={pallete} onClick={this.handleHide}></div>
 				<canvas id='color-block' style={colorBlock} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}></canvas>            
-				<canvas id='color-strip' style={colorStrip}></canvas>                            
+				<canvas id='color-strip' name='strip' style={colorStrip} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}></canvas>                            
 			</div>
 		);
 	}

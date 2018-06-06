@@ -2,13 +2,18 @@ import React, {Component} from 'react';
 import ReactController from './components/ReactController';
 import InputText from './components/InputText';
 import CheckBox from './components/CheckBox';
+import Button from './components/Button';
+import Color from './components/Color';
 class App extends Component{
 
 	constructor(props){
 		super(props);
 		this.state={
 			val:'some shit',
-			val2:'some shit'            
+			val2:'some shit',
+			data:{
+
+			}            
 		};
 		this.handleInput=this.handleInput.bind(this);
 		this.handleInput2=this.handleInput2.bind(this);        
@@ -30,7 +35,10 @@ class App extends Component{
 		return(
 			<ReactController>
 				<InputText val={this.state.val} lable='message' onChange={this.handleInput}/>
-				<InputText val={this.state.val2} onChange={this.handleInput2}/>    
+				<InputText val={this.state.val2} onChange={this.handleInput2}/>   
+				<CheckBox label='Gravity' />
+				<Color label='Color'/>				
+				<Button label='Button'/> 
 			</ReactController>
 		);
 	}

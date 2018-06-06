@@ -4,7 +4,15 @@ class ReactController extends Component{
 	constructor(props){
 		super(props);
 		this.state={
+			hide:false
 		};
+		this.handleHide=this.handleHide.bind(this);
+	}
+
+	handleHide(){
+		this.setState({
+			hide:!this.state.hide
+		});
 	}
 
 	render(){
@@ -16,7 +24,9 @@ class ReactController extends Component{
     		'border': '1px solid #D6D6D6',
     		'left': '50px',
     		'borderRadius': '4px',
-    		'overflow': 'hidden'
+			'overflow': 'hidden',
+			'transition':'all .5s',			
+			
 		};
 
 		const style2={
@@ -43,8 +53,9 @@ class ReactController extends Component{
 		const container={
 			'position':'relative',
 			'width':'100%',
-			'height':'auto',
-			'overflow':'hidden'
+			'transition':'all .5s',			
+			'height':this.state.hide?'0px':'auto',
+			'overflow':'hidden',
 		};
 		
 
@@ -54,7 +65,7 @@ class ReactController extends Component{
 				<div style={container}>
 					{this.props.children}
 				</div>
-				<div style={style2}>Close Controls</div>
+				<div onClick={this.handleHide} style={style2}>{this.state.hide?'Open Controls':'Close Controls'}</div>
 			</div>
 		);
 	}

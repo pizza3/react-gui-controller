@@ -6,7 +6,11 @@ class Color extends Component{
 		this.state={
 			hide:true,
 			drag:false,
-			color:'rgba(0,0,0,1)'
+			color:'rgba(0,0,0,1)',
+			pos:{
+				x:0,
+				y:0
+			}
 		};
 		this.handleHide=this.handleHide.bind(this);
 		this.handleDown=this.handleDown.bind(this);
@@ -70,7 +74,6 @@ class Color extends Component{
 	}
     
 	changeColorBlock(e){  
-		console.log('okok');
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431   
 		let x = e.clientX-document.getElementById('color-block').getBoundingClientRect().left;
@@ -78,7 +81,11 @@ class Color extends Component{
 		let  imageData = this.ctx1.getImageData(x, y, 1, 1).data;
 		this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 		this.setState({
-			color:this.rgbaColor
+			color:this.rgbaColor,
+			pos:{
+				x:x,
+				y:y
+			}
 		});
 	}
     
@@ -126,7 +133,11 @@ class Color extends Component{
 			<div id='input-color' className={this.state.hide?'container':'container hide'}>
 				<div className='label'>{this.props.label}</div>
 				<div className='pallete' onClick={this.handleHide}></div>
-				<canvas id='color-block' className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>            
+				<div className='block-parent' onMouseLeave={this.handleUp}>
+					<canvas id='color-block' className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}>
+					</canvas> 
+					<div className='block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} />					           
+				</div>
 				<canvas id='color-strip' className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>    
 				<style jsx>
 					{`
@@ -147,7 +158,7 @@ class Color extends Component{
 					.hide{
 						height:200px;
 					}
-					.color-block{
+					.block-parent{
 						position: relative;
 						float: right;
 						margin-top: 17px;
@@ -155,7 +166,23 @@ class Color extends Component{
 						width: 82%;
 						height: 150px;
 						border: 1px solid rgb(212, 211, 211);
-						cursor: crosshair;
+					}
+
+					.color-block{
+						position: absolute;
+						float: right;
+						width: 100%;
+						height: 100%;
+					}
+
+					.block{
+						position:absolute;
+						width:10px;
+						height:10px;
+						border:1px solid #fff;
+						border-radius:50%;
+						transform-origin:center;
+						transform:translate(${this.state.pos.x}px,${this.state.pos.y}px);
 					}
 
 					.color-strip{
@@ -173,7 +200,7 @@ class Color extends Component{
 						position: relative;
 						float: right;
 						height: 23px;
-						width: 128px;
+						width: 132px;
 						border-radius: 3px;
 						background: ${this.state.color};
 						border: 1px solid rgb(229, 229, 229);
@@ -190,6 +217,12 @@ class Color extends Component{
 						font-weight: 100;
 						font-size: 12px;
 						color: rgb(119, 155, 255);
+						-webkit-touch-callout: none;
+						-webkit-user-select: none; 
+						-khtml-user-select: none; 
+						-moz-user-select: none; 
+						-ms-user-select: none; 
+						user-select: none;
 					}
 					`}
 				</style>                        

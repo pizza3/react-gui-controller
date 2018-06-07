@@ -37,11 +37,13 @@ class App extends Component{
 		return(
 			<ReactController>
 				<InputText val={this.state.val} lable='message' onChange={this.handleInput}/>
+				<Color label='Color2'/>								
 				<InputText val={this.state.val2} onChange={this.handleInput2}/>   
 				<CheckBox label='Gravity' />
 				<Color label='Color'/>				
 				<Button label='Button'/> 
 				<ProgessSlider/>
+				
 			</ReactController>
 		);
 	}

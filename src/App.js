@@ -40,6 +40,7 @@ class App extends Component{
 				<Color label='Color2'/>								
 				<InputText val={this.state.val2} onChange={this.handleInput2}/>   
 				<CheckBox label='Gravity' />
+				<CheckBox label='Wind' />				
 				<Color label='Color'/>				
 				<Button label='Button'/> 
 				<ProgessSlider/>

@@ -4,9 +4,15 @@ class ReactController extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			hide:false
+			hide:false,
+			drag:false,
+			pos:{
+				x:100,
+				y:50
+			}
 		};
 		this.handleHide=this.handleHide.bind(this);
+	
 	}
 
 	handleHide(){
@@ -15,12 +21,30 @@ class ReactController extends Component{
 		});
 	}
 
+	renderChildren(){
+		const { children } = this.props;
+		return React.Children.toArray(children).map((child, i) => {
+			// const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
+			// const labelWidth = isUndefined(child.props.labelWidth) ? this.props.labelWidth : child.props.labelWidth;
+	  
+			return React.cloneElement(child, {
+			  key: i,
+			  num:i
+			//   data,
+			//   liveUpdate,
+			//   labelWidth,
+			//   _onUpdateValue: this.handleUpdateValue,
+			});
+		  });
+	}
+
 	render(){
 		return(
-			<div id='controller-body' className='controller-body' >
+			<div id='controller-body' className='controller-body' onMouseMove={this.handleDragMove} >
 				<div className='drag'/>
 				<div className={this.state.hide?'container hide':'container'}>
-					{this.props.children}
+					{this.renderChildren()}
+
 				</div>
 				<div onClick={this.handleHide} className='control-button'>{this.state.hide?'Open Controls':'Close Controls'}</div>
 				<style jsx>
@@ -31,9 +55,10 @@ class ReactController extends Component{
 						height: auto;
 						background: rgb(250, 250, 250);
 						border: 1px solid rgb(214, 214, 214);
-						left: 50px;
+						// left: 50px;
 						border-radius: 4px;
 						overflow: hidden;
+						transform:translate(${this.state.pos.x}px,${this.state.pos.y}px);
 					}
 
 					.container{

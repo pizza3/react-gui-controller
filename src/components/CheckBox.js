@@ -21,8 +21,8 @@ class CheckBox extends Component{
 		return (
 			<div className='container'>
 				<div className='label'>{this.props.label}</div>
-				<input id="switch" name='view' type="checkbox" hidden checked={this.state.value} onChange={this.handleInputChange} />
-				<label htmlFor="switch" className="switch"></label>
+				<input id={'switch'+this.props.num} name='view' type="checkbox" hidden checked={this.state.value} onChange={this.handleInputChange} />
+				<label htmlFor={'switch'+this.props.num} className={'switch'+this.props.num}></label>
 				<style jsx>
 					{`
 					.label{
@@ -47,8 +47,7 @@ class CheckBox extends Component{
 						transition:.4s;						
 					}
 
-					.switch,
-					.switch2 {
+					.switch${this.props.num}{
 						display: inline-block;
 						float:right;
 						width: 42px;
@@ -66,10 +65,8 @@ class CheckBox extends Component{
 						border: 1px solid #e5e5e5;
 					}
 
-					.switch:before,
-					.switch:after,
-					.switch2:before,
-					.switch2:after {
+					.switch${this.props.num}:before,
+					.switch${this.props.num}:after {
 						content: "";
 						display: block;
 						width: 13px;
@@ -80,44 +77,37 @@ class CheckBox extends Component{
 						transition: all 350ms cubic-bezier(0, 0.95, 0.38, 0.98), background 150ms ease;
 					}
 
-					.switch:before,
-					.switch2:before {
+					.switch${this.props.num}:before {
 						background: rgba(128, 128, 128, 0.075);
 						transform: translate3d(0, -50%, 0) scale(0);
 					}
 
-					.switch:after,
-					.switch2:after {
+					.switch${this.props.num}:after{
 						background: #d8d8d8;
 						border: 1px solid #d6d6d6;					
 						transform: translate3d(-2px, -50%, 0);
 					}
 
-					.switch:active:before,
-					.switch2:active:before {
+					.switch${this.props.num}:active:before {
 						transform: translate3d(0, -50%, 0) scale(3);
 					}
 
-					input:checked+.switch,
-					input:checked+.switch2 {
+					input:checked+.switch${this.props.num} {
 						background: #769aff;
 					}
 
-					input:checked+.switch:before,
-					input:checked+.switch2:before {
+					input:checked+.switch${this.props.num}:before{
 						background: rgba(131, 177, 84, 0.075);
 						transform: translate3d(100%, -50%, 0) scale(1);
 					}
 
-					input:checked+.switch:after,
-					input:checked+.switch2:after {
+					input:checked+.switch${this.props.num}:after{
 						background: #fff;
 						border: 1px solid #fff;											
 						transform: translate3d(124%, -50%, 0);
 					}
 
-					input:checked+.switch:active:before,
-					input:checked+.switch2:active:before {
+					input:checked+.switch${this.props.num}:active:before{
 						background: rgba(131, 177, 84, 0.075);
 						transform: translate3d(100%, -50%, 0) scale(3);
 					}

@@ -20,13 +20,13 @@ class Color extends Component{
 	}
     
 	componentDidMount(){
-		var colorBlock = document.getElementById('color-block');
+		var colorBlock = document.getElementById('color-block'+this.props.num);
 		this.ctx1 = colorBlock.getContext('2d');
 		this.width1 = colorBlock.width;
 		this.height1 = colorBlock.height;
 		this.rgbaColor = 'rgba(0,0,0,1)';
 		//
-		var colorStrip = document.getElementById('color-strip');
+		var colorStrip = document.getElementById('color-strip'+this.props.num);
 		this.ctx2 = colorStrip.getContext('2d');
 		this.width2 = colorStrip.width;
 		this.height2 = colorStrip.height;
@@ -76,8 +76,8 @@ class Color extends Component{
 	changeColorBlock(e){  
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431   
-		let x = e.clientX-document.getElementById('color-block').getBoundingClientRect().left;
-		let y = e.clientY-document.getElementById('color-block').getBoundingClientRect().top;
+		let x = e.clientX-document.getElementById('color-block'+this.props.num).getBoundingClientRect().left;
+		let y = e.clientY-document.getElementById('color-block'+this.props.num).getBoundingClientRect().top;
 		let  imageData = this.ctx1.getImageData(x, y, 1, 1).data;
 		this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 		this.setState({
@@ -92,8 +92,8 @@ class Color extends Component{
 	changeColorStrip(e){  
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431   
-		let x = e.clientX-document.getElementById('color-strip').getBoundingClientRect().left;
-		let y = e.clientY-document.getElementById('color-strip').getBoundingClientRect().top;
+		let x = e.clientX-document.getElementById('color-strip'+this.props.num).getBoundingClientRect().left;
+		let y = e.clientY-document.getElementById('color-strip'+this.props.num).getBoundingClientRect().top;
 		let imageData = this.ctx2.getImageData(x, y, 1, 1).data;
 		this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 		this.fillGradient();
@@ -134,11 +134,11 @@ class Color extends Component{
 				<div className='label'>{this.props.label}</div>
 				<div className='pallete' onClick={this.handleHide}></div>
 				<div className='block-parent' onMouseLeave={this.handleUp}>
-					<canvas id='color-block' className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}>
+					<canvas id={'color-block'+this.props.num} className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}>
 					</canvas> 
 					<div className='block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} />					           
 				</div>
-				<canvas id='color-strip' className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>    
+				<canvas id={'color-strip'+this.props.num} className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>    
 				<style jsx>
 					{`
 
@@ -161,7 +161,7 @@ class Color extends Component{
 					.block-parent{
 						position: relative;
 						float: right;
-						margin-top: 17px;
+						margin-top: 4px;
 						margin-right: 4px;
 						width: 82%;
 						height: 150px;
@@ -188,7 +188,7 @@ class Color extends Component{
 					.color-strip{
 						position:relative;
 						float:left;
-						margin-top: 17px;
+						margin-top: 4px;
 						margin-right: 4px;
 						width: 4%;
 						height: 150px;

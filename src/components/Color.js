@@ -70,6 +70,7 @@ class Color extends Component{
 	}
     
 	changeColorBlock(e){  
+		console.log('okok');
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431   
 		let x = e.clientX-document.getElementById('color-block').getBoundingClientRect().left;
@@ -121,68 +122,77 @@ class Color extends Component{
 	}
     
 	render(){
-		const style={
-			'position':'relative',
-			'width':'100%',
-			'height': this.state.hide?'32px':'213px',
-			'borderBottom': '1px solid #D6D6D6',
-			'fontFamily': 'sans-serif',
-			'paddingTop': '4px',
-			'paddingLeft': '2px',
-			'paddingRight': '2px',
-			'overflow':'hidden'
-		};
-		
-		const label={
-			'position':'relative',
-			'float':'left',
-			'paddingTop': '5px',
-			'paddingLeft':'4px',
-			'fontWeight': '100'	,
-			'fontSize':'12px',
-			'color':'#779BFF'
-		};
-        
-		const pallete={
-			'position':'relative',
-			'float':'right',
-			'height':'23px',
-			'width':'128px',
-			'borderRadius':'3px',
-			'background':`${this.state.color}`,
-			'border':'1px solid #E5E5E5',            
-			'marginRight':'4px',	
-			'cursor':'pointer'		            
-		};
-        
-		const colorBlock={
-			'position':'relative',
-			'float':'right',
-			'marginTop':'17px',
-			'marginRight':'4px',
-			'width':'82%',
-			'height':'150px',
-			'border': '1px solid #d4d3d3',
-			'cursor':'crosshair'
-		};
-        
-		const colorStrip={
-			'position':'relative',
-			'float':'left',
-			'marginTop':'17px',
-			'marginLeft':'8px',
-			'width':'4%',
-			'height':'150px',
-			'border': '1px solid #d4d3d3',
-			'cursor':'crosshair'            
-		};
-		
 		return(
-			<div id='input-color' style={style}>
-				<div style={label}>{this.props.label}</div>
-				<div style={pallete} onClick={this.handleHide}></div>
-				<canvas id='color-block' style={colorBlock} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>            
-				<canvas id='color-strip' name='strip' style={colorStrip} onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>                            
+			<div id='input-color' className={this.state.hide?'container':'container hide'}>
+				<div className='label'>{this.props.label}</div>
+				<div className='pallete' onClick={this.handleHide}></div>
+				<canvas id='color-block' className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>            
+				<canvas id='color-strip' className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>    
+				<style jsx>
+					{`
+
+					.container{
+                        position: relative;
+                        width: 100%;
+                        height: 32px;
+                        border-top: 1px solid rgb(214, 214, 214);
+                        font-family: sans-serif;
+                        padding-top: 4px;
+                        padding-left: 2px;
+						padding-right: 2px;
+						overflow:hidden;
+						transition:.4s;						
+					}
+
+					.hide{
+						height:200px;
+					}
+					.color-block{
+						position: relative;
+						float: right;
+						margin-top: 17px;
+						margin-right: 4px;
+						width: 82%;
+						height: 150px;
+						border: 1px solid rgb(212, 211, 211);
+						cursor: crosshair;
+					}
+
+					.color-strip{
+						position:relative;
+						float:left;
+						margin-top: 17px;
+						margin-right: 4px;
+						width: 4%;
+						height: 150px;
+						cursor: crosshair;
+					}
+
+
+					.pallete{
+						position: relative;
+						float: right;
+						height: 23px;
+						width: 128px;
+						border-radius: 3px;
+						background: ${this.state.color};
+						border: 1px solid rgb(229, 229, 229);
+						margin-right: 4px;
+						cursor: pointer;
+					
+					}
+
+					.label{
+						position: relative;
+						float: left;
+						padding-top: 5px;
+						padding-left: 4px;
+						font-weight: 100;
+						font-size: 12px;
+						color: rgb(119, 155, 255);
+					}
+					`}
+				</style>                        
 			</div>
 		);
 	}

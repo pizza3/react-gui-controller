@@ -26,7 +26,7 @@ class InputText extends Component{
 			'position':'relative',
 			'width':'100%',
 			'height': '32px',
-			'borderBottom': '1px solid #D6D6D6',
+			'borderTop': '1px solid #D6D6D6',
 			'fontFamily': 'sans-serif',
 			'paddingTop': '4px',
 			'paddingLeft': '2px',

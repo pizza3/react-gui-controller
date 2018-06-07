@@ -1,40 +1,134 @@
-import React from 'react';
+import React,{Component} from 'react';
 
-const style={
-	'position':'relative',
-	'width':'100%',
-	'height': '32px',
-	'borderBottom': '1px solid #D6D6D6',
-	'fontFamily': 'sans-serif',
-	'paddingTop': '4px',
-	'paddingLeft': '2px',
-	'paddingRight': '2px'
-};
-const label={
-	'position':'relative',
-	'float':'left',
-	'paddingTop': '5px',
-	'paddingLeft':'4px',
-	'fontWeight': '100'	,
-	'fontSize':'12px',
-	'color':'#779BFF'
-};
-const input={
-	'position':'relative',
-	'float':'right',
-	'width': '15px',
-	'height': '15px',
-	'marginRight':'4px',				
-	'outline': 'rgb(229, 229, 229) solid 1px'
-};
+class CheckBox extends Component{
+	constructor(props){
+		super(props);
+		this.state={
+			value:false
+		};
+		
+		this.handleInputChange=this.handleInputChange.bind(this);
 
-const CheckBox = (props)=>{
-	return(
-		<div id='input-text' style={style}>
-			<div style={label}>{props.label}</div>
-			<input type='checkbox' style={input} value={true} onChange={props.onChange} />
-		</div>
-	);
-};
+	}
+	
+	handleInputChange(e){
+		this.setState({
+			value:e.target.checked
+		});
+	}
+
+	render() {
+		return (
+			<div className='container'>
+				<div className='label'>{this.props.label}</div>
+				<input id="switch" name='view' type="checkbox" hidden checked={this.state.value} onChange={this.handleInputChange} />
+				<label htmlFor="switch" className="switch"></label>
+				<style jsx>
+					{`
+					.label{
+						position: relative;
+						float: left;
+						padding-top: 5px;
+						padding-left: 4px;
+						font-weight: 100;
+						font-size: 12px;
+						color: rgb(119, 155, 255);
+					}
+					.container{
+						position: relative;
+						width: 100%;
+						height: 32px;
+						border-top: 1px solid rgb(214, 214, 214);
+						font-family: sans-serif;
+						padding-top: 4px;
+						padding-left: 2px;
+						padding-right: 2px;
+						overflow:hidden;
+						transition:.4s;						
+					}
+
+					.switch,
+					.switch2 {
+						display: inline-block;
+						float:right;
+						width: 42px;
+						height: 22px;
+						padding: 4px;
+						border-radius: 20px;
+						background: #fafafa;
+						vertical-align: middle;
+						position: relative;
+						cursor: pointer;
+						user-select: none;
+						transition: background 350ms ease;
+						margin-right: 4px;
+						margin-top: 1px;					
+						border: 1px solid #e5e5e5;
+					}
+
+					.switch:before,
+					.switch:after,
+					.switch2:before,
+					.switch2:after {
+						content: "";
+						display: block;
+						width: 13px;
+   						height: 13px;
+						border-radius: 50%;
+						position: absolute;
+						top: 50%;
+						transition: all 350ms cubic-bezier(0, 0.95, 0.38, 0.98), background 150ms ease;
+					}
+
+					.switch:before,
+					.switch2:before {
+						background: rgba(128, 128, 128, 0.075);
+						transform: translate3d(0, -50%, 0) scale(0);
+					}
+
+					.switch:after,
+					.switch2:after {
+						background: #d8d8d8;
+						border: 1px solid #d6d6d6;					
+						transform: translate3d(-2px, -50%, 0);
+					}
+
+					.switch:active:before,
+					.switch2:active:before {
+						transform: translate3d(0, -50%, 0) scale(3);
+					}
+
+					input:checked+.switch,
+					input:checked+.switch2 {
+						background: #769aff;
+					}
+
+					input:checked+.switch:before,
+					input:checked+.switch2:before {
+						background: rgba(131, 177, 84, 0.075);
+						transform: translate3d(100%, -50%, 0) scale(1);
+					}
+
+					input:checked+.switch:after,
+					input:checked+.switch2:after {
+						background: #fff;
+						border: 1px solid #fff;											
+						transform: translate3d(124%, -50%, 0);
+					}
+
+					input:checked+.switch:active:before,
+					input:checked+.switch2:active:before {
+						background: rgba(131, 177, 84, 0.075);
+						transform: translate3d(100%, -50%, 0) scale(3);
+					}
+
+
+
+			`}
+				</style>
+			</div>
+		);
+	}
+}
 
 export default CheckBox;

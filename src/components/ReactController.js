@@ -16,56 +16,61 @@ class ReactController extends Component{
 	}
 
 	render(){
-		const style={
-			'position': 'fixed',
-    		'width': '300px',
-    		'height': 'auto',
-    		'background': '#FAFAFA',
-    		'border': '1px solid #D6D6D6',
-    		'left': '50px',
-    		'borderRadius': '4px',
-			'overflow': 'hidden',
-			'transition':'all .5s',			
-			
-		};
-
-		const style2={
-			'position':'relative',
-			'width':'100%',
-			'height':'30px',
-			'textAlign':'center',
-			'background':'#FAFAFA',
-			'color':'#779BFF',
-			'fontFamily': 'sans-serif',
-			'fontSize': '12px',
-			'paddingTop': '8px',
-			'fontWeight': '100', 
-			'cursor':'pointer'
-		};
-
-		const drag={
-			'position':'relative',
-			'width':'100%',
-			'height': '24px',
-			'borderBottom': '1px solid #D6D6D6'
-		};
-
-		const container={
-			'position':'relative',
-			'width':'100%',
-			'transition':'all .5s',			
-			'height':this.state.hide?'0px':'auto',
-			'overflow':'hidden',
-		};
-		
-
 		return(
-			<div id='controller-body' style={style}>
-				<div style={drag}/>
-				<div style={container}>
+			<div id='controller-body' className='controller-body' >
+				<div className='drag'/>
+				<div className={this.state.hide?'container hide':'container'}>
 					{this.props.children}
 				</div>
-				<div onClick={this.handleHide} style={style2}>{this.state.hide?'Open Controls':'Close Controls'}</div>
+				<div onClick={this.handleHide} className='control-button'>{this.state.hide?'Open Controls':'Close Controls'}</div>
+				<style jsx>
+					{`
+					.controller-body{
+						position: fixed;
+						width: 300px;
+						height: auto;
+						background: rgb(250, 250, 250);
+						border: 1px solid rgb(214, 214, 214);
+						left: 50px;
+						border-radius: 4px;
+						overflow: hidden;
+					}
+
+					.container{
+						position: relative;
+						width: 100%;
+						transition: 0.4s;
+						max-height:100vh;
+						overflow: hidden;
+					}
+
+					.hide{
+						max-height:0px;
+					}
+
+					.drag{
+						position: relative;
+						width: 100%;
+						height: 24px;
+					}
+
+					.control-button{
+						position: relative;
+						width: 100%;
+						height: 30px;
+						text-align: center;
+						background: rgb(250, 250, 250);
+						color: rgb(119, 155, 255);
+						font-family: sans-serif;
+						font-size: 12px;
+						padding-top: 8px;
+						font-weight: 100;
+						cursor: pointer;
+                        border-top: 1px solid rgb(214, 214, 214);						
+					}
+
+				`}
+				</style>				
 			</div>
 		);
 	}

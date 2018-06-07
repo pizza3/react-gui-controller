@@ -15,7 +15,7 @@ class Button extends Component{
 			'height':'32px',
 			'background':'#779BFF',
 			'border':'none',
-			'borderBottom': '1px solid #D6D6D6',
+			'borderTop': '1px solid #D6D6D6',
 			'fontSize':'12px',      
 			'fontWeight': '100'	,
 			'cursor':'pointer',                  

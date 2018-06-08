@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import { controllerStyle } from './Styles/controllerStyles';
 
 class ReactController extends Component{
 	constructor(props){
@@ -9,7 +10,8 @@ class ReactController extends Component{
 			pos:{
 				x:100,
 				y:50
-			}
+			},
+			dark:true
 		};
 		this.handleHide=this.handleHide.bind(this);
 	
@@ -29,7 +31,8 @@ class ReactController extends Component{
 	  
 			return React.cloneElement(child, {
 			  key: i,
-			  num:i
+			  num:i,
+			  theme:this.state.dark
 			//   data,
 			//   liveUpdate,
 			//   labelWidth,
@@ -40,61 +43,15 @@ class ReactController extends Component{
 
 	render(){
 		return(
-			<div id='controller-body' className='controller-body' onMouseMove={this.handleDragMove} >
+			<div id='controller-body' className={this.state.dark?'controller-body dark':'controller-body'} onMouseMove={this.handleDragMove} >
 				<div className='drag'/>
 				<div className={this.state.hide?'container hide':'container'}>
 					{this.renderChildren()}
 
 				</div>
-				<div onClick={this.handleHide} className='control-button'>{this.state.hide?'Open Controls':'Close Controls'}</div>
+				<div onClick={this.handleHide} className={this.state.dark?'control-button control-button-dark':'control-button'}>{this.state.hide?'Open Controls':'Close Controls'}</div>
 				<style jsx>
-					{`
-					.controller-body{
-						position: fixed;
-						width: 300px;
-						height: auto;
-						background: rgb(250, 250, 250);
-						border: 1px solid rgb(214, 214, 214);
-						// left: 50px;
-						border-radius: 4px;
-						overflow: hidden;
-						transform:translate(${this.state.pos.x}px,${this.state.pos.y}px);
-					}
-
-					.container{
-						position: relative;
-						width: 100%;
-						transition: 0.4s;
-						max-height:100vh;
-						overflow: hidden;
-					}
-
-					.hide{
-						max-height:0px;
-					}
-
-					.drag{
-						position: relative;
-						width: 100%;
-						height: 24px;
-					}
-
-					.control-button{
-						position: relative;
-						width: 100%;
-						height: 30px;
-						text-align: center;
-						background: rgb(250, 250, 250);
-						color: rgb(119, 155, 255);
-						font-family: sans-serif;
-						font-size: 12px;
-						padding-top: 8px;
-						font-weight: 100;
-						cursor: pointer;
-                        border-top: 1px solid rgb(214, 214, 214);						
-					}
-
-				`}
+					{controllerStyle}
 				</style>				
 			</div>
 		);

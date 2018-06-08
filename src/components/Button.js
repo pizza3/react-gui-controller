@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import {buttonStyle} from './Styles/buttonStyles';
 class Button extends Component{
 	constructor(props){
 		super(props);
@@ -9,21 +9,11 @@ class Button extends Component{
 	}
 
 	render(){
-		const style={
-			'position':'relative',
-			'width':'100%',
-			'height':'32px',
-			'background':'#779BFF',
-			'border':'none',
-			'borderTop': '1px solid #D6D6D6',
-			'fontSize':'12px',      
-			'fontWeight': '100'	,
-			'cursor':'pointer',                  
-			'color':'rgb(250, 250, 250)',
-			'outline': 'none'                
-		};
 		return(
-			<button style={style}>{this.props.label}</button>
+			<div>
+				<button className={this.props.theme?'buttonStyle dark':'buttonStyle'}>{this.props.label}</button>
+				<style jsx>{buttonStyle}</style>							
+			</div>
 		);
 	}
 }

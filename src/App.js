@@ -36,14 +36,14 @@ class App extends Component{
 	render(){
 		return(
 			<ReactController>
-				<InputText val={this.state.val} lable='message' onChange={this.handleInput}/>
+				<InputText val={this.state.val} label='message' onChange={this.handleInput}/>
 				<Color label='Color2'/>								
-				<InputText val={this.state.val2} onChange={this.handleInput2}/>   
+				<InputText val={this.state.val2} label='message' onChange={this.handleInput2}/>   
 				<CheckBox label='Gravity' />
 				<CheckBox label='Wind' />				
 				<Color label='Color'/>				
 				<Button label='Button'/> 
-				<ProgessSlider/>
+				<ProgessSlider label='Noise'/>
 				
 			</ReactController>
 		);

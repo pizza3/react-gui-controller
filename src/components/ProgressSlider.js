@@ -1,5 +1,7 @@
 import React , {Component} from 'react';
-import './GlobalStyle';
+import {label, container} from './Styles/commonStyles';
+import Container from './Container';
+
 class ProgessSlider extends Component{
 	constructor(props){
 		super(props);
@@ -18,8 +20,7 @@ class ProgessSlider extends Component{
 
 	render(){
 		return(
-			<div className='container'>
-				<div className='label'>Noise</div>
+			<Container {...this.props} label={this.props.label}>
 				<input type='text' value={this.state.value}/>												 
 				<input
 					type="range"
@@ -29,28 +30,10 @@ class ProgessSlider extends Component{
 					value={this.state.value}
 					onChange={this.handleRange}
 				/> 
+				<style jsx>{label}</style>
+				<style jsx>{container}</style>				
 				<style jsx>
 					{` 
-                    .container{
-                        position: relative;
-                        width: 100%;
-                        height: 32px;
-                        border-top: 1px solid rgb(214, 214, 214);
-                        font-family: sans-serif;
-                        padding-top: 4px;
-                        padding-left: 2px;
-                        padding-right: 2px;
-					}
-					
-					.label{
-						position: relative;
-    					float: left;
-    					padding-top: 5px;
-    					padding-left: 4px;
-    					font-weight: 100;
-    					font-size: 12px;
-    					color: rgb(119, 155, 255);
-					}
 
 					input[type="range"] {
 						position:relative;
@@ -99,7 +82,8 @@ class ProgessSlider extends Component{
 					
                 `}
 				</style>              
-			</div>
+			</Container>
+
 		);
 	}
 }

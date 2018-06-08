@@ -1,4 +1,7 @@
 import React,{Component} from 'react';
+import {label, container} from './Styles/commonStyles';
+import {textInput} from './Styles/textInput';
+import Container from './Container';
 
 class InputText extends Component{
 	constructor(props){
@@ -22,46 +25,14 @@ class InputText extends Component{
 	}
 
 	render(){
-		const style={
-			'position':'relative',
-			'width':'100%',
-			'height': '32px',
-			'borderTop': '1px solid #D6D6D6',
-			'fontFamily': 'sans-serif',
-			'paddingTop': '4px',
-			'paddingLeft': '2px',
-			'paddingRight': '2px'
-		};
-		
-		const label={
-			'position':'relative',
-			'float':'left',
-			'paddingTop': '5px',
-			'paddingLeft':'4px',
-			'fontWeight': '100'	,
-			'fontSize':'12px',
-			'color':'#779BFF'
-		};
-		
-		const input={
-			'position':'relative',
-			'float':'right',
-			'height':'22px',
-			'marginRight':'4px',		
-			'borderRadius': '3px',	
-			'background':'rgb(253, 253, 253)',
-			'border':'1px solid #E5E5E5',
-			'outline': 'none',
-			'color':'#779BFF',
-			'paddingLeft': '5px',
-			'fontWeight': '500'
-			
-		};
 		return(
-			<div id='input-text' style={style}>
-				<div style={label}>Message</div>
-				<input type='text' style={input} value={this.state.val} onChange={this.handleChange} />
-			</div>
+			<Container {...this.props} label={this.props.label}>
+
+				<input type='text' className='inputText' value={this.state.val} onChange={this.handleChange} />
+				<style jsx>{label}</style>
+				<style jsx>{container}</style>	
+				<style jsx>{textInput}</style>							
+			</Container>
 		);
 	}
 }

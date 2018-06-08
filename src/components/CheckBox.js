@@ -1,14 +1,13 @@
 import React,{Component} from 'react';
-
+import {label, container} from './Styles/commonStyles';
+import Container from './Container';
 class CheckBox extends Component{
 	constructor(props){
 		super(props);
 		this.state={
 			value:false
 		};
-		
-		this.handleInputChange=this.handleInputChange.bind(this);
-
+		this.handleInputChange = this.handleInputChange.bind(this);
 	}
 	
 	handleInputChange(e){
@@ -19,34 +18,11 @@ class CheckBox extends Component{
 
 	render() {
 		return (
-			<div className='container'>
-				<div className='label'>{this.props.label}</div>
+			<Container {...this.props} label={this.props.label}>
 				<input id={'switch'+this.props.num} name='view' type="checkbox" hidden checked={this.state.value} onChange={this.handleInputChange} />
 				<label htmlFor={'switch'+this.props.num} className={'switch'+this.props.num}></label>
 				<style jsx>
 					{`
-					.label{
-						position: relative;
-						float: left;
-						padding-top: 5px;
-						padding-left: 4px;
-						font-weight: 100;
-						font-size: 12px;
-						color: rgb(119, 155, 255);
-					}
-					.container{
-						position: relative;
-						width: 100%;
-						height: 32px;
-						border-top: 1px solid rgb(214, 214, 214);
-						font-family: sans-serif;
-						padding-top: 4px;
-						padding-left: 2px;
-						padding-right: 2px;
-						overflow:hidden;
-						transition:.4s;						
-					}
-
 					.switch${this.props.num}{
 						display: inline-block;
 						float:right;
@@ -70,7 +46,7 @@ class CheckBox extends Component{
 						content: "";
 						display: block;
 						width: 13px;
-   						height: 13px;
+						height: 13px;
 						border-radius: 50%;
 						position: absolute;
 						top: 50%;
@@ -111,12 +87,9 @@ class CheckBox extends Component{
 						background: rgba(131, 177, 84, 0.075);
 						transform: translate3d(100%, -50%, 0) scale(3);
 					}
-
-
-
-			`}
+            `}
 				</style>
-			</div>
+			</Container>
 		);
 	}
 }

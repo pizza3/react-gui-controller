@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import {label, container} from './Styles/commonStyles';
 import Container from './Container';
 class CheckBox extends Component{
 	constructor(props){
@@ -30,7 +29,7 @@ class CheckBox extends Component{
 						height: 22px;
 						padding: 4px;
 						border-radius: 20px;
-						background: #fafafa;
+						background: ${this.props.theme?'#212121':'#fafafa'};
 						vertical-align: middle;
 						position: relative;
 						cursor: pointer;
@@ -38,7 +37,7 @@ class CheckBox extends Component{
 						transition: background 350ms ease;
 						margin-right: 4px;
 						margin-top: 1px;					
-						border: 1px solid #e5e5e5;
+						border: 1px solid ${this.props.theme?'#585858':'#e5e5e5'};
 					}
 
 					.switch${this.props.num}:before,
@@ -59,8 +58,8 @@ class CheckBox extends Component{
 					}
 
 					.switch${this.props.num}:after{
-						background: #d8d8d8;
-						border: 1px solid #d6d6d6;					
+						background: ${this.props.theme?'#585858':'#d8d8d8'};
+						border: 1px solid ${this.props.theme?'#585858':'#d6d6d6'};					
 						transform: translate3d(-2px, -50%, 0);
 					}
 
@@ -78,8 +77,8 @@ class CheckBox extends Component{
 					}
 
 					input:checked+.switch${this.props.num}:after{
-						background: #fff;
-						border: 1px solid #fff;											
+						background: ${this.props.theme?'#313131':'#fff'};
+						border: 1px solid ${this.props.theme?'#313131':'#fff'};											
 						transform: translate3d(124%, -50%, 0);
 					}
 

@@ -40,12 +40,12 @@ class ProgessSlider extends Component{
 						float:right;
 						-moz-appearance:none;						
 						-webkit-appearance: none;
-						background-color: #E5E5E5;
+						background-color: ${this.props.theme?'#585858':'#E5E5E5'};
 						width: 117px;
-						height: 1px;
+						height: 2px;
 						border-radius: 5px;
 						margin: 0 auto;
-						margin-top: 11px;
+						margin-top: 10px;
 						margin-right:5px;
 						outline: 0;
 						
@@ -54,7 +54,7 @@ class ProgessSlider extends Component{
 					input[type="range"]::-webkit-slider-thumb {
 						-webkit-appearance: none;
 						appearance:none;
-						background-color: #FFFFFF;
+						background-color: ${this.props.theme?'#313131':'#FFFFFF'};
 						width: 10px;
 						height: 10px;
 						border-radius: 50%;
@@ -73,9 +73,9 @@ class ProgessSlider extends Component{
 						width: 30px;
 						height: 22px;
 						border-radius: 3px;
-						border: 1px solid #e5e5e5;
+						border: 1px solid ${this.props.theme?'#4b4b4b':'#e5e5e5'};
 						outline: none;
-						background: #fafafa;
+						background: ${this.props.theme?'#212121':'#fafafa'};
 						margin-right: 4px;
 						color:#779BFF;
 					}

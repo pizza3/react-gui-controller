@@ -12,6 +12,12 @@ class InputText extends Component{
 		this.handleChange=this.handleChange.bind(this);
 	}
 
+	componentWillMount(){
+		this.setState({
+			val:this.props.val
+		});
+	}
+
 	componentWillReceiveProps(newProps){
 		this.setState({
 			val:newProps.val
@@ -27,8 +33,7 @@ class InputText extends Component{
 	render(){
 		return(
 			<Container {...this.props} label={this.props.label}>
-
-				<input type='text' className='inputText' value={this.state.val} onChange={this.handleChange} />
+				<input type='text' className={this.props.theme?'inputText inputText-dark':'inputText'} value={this.state.val} onChange={this.handleChange} />
 				<style jsx>{label}</style>
 				<style jsx>{container}</style>	
 				<style jsx>{textInput}</style>							

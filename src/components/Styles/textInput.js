@@ -15,4 +15,10 @@ export const textInput = css`
     padding-left: 5px;
     font-weight: 500;
 }
+
+.inputText-dark{
+    background:#212121;
+    border: 1px solid #585858;
+}
+
 `;

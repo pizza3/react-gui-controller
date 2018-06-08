@@ -1,4 +1,6 @@
 import React,{Component} from'react';
+import {colorStyle} from './Styles/colorStyles';
+import {label, container} from './Styles/commonStyles';
 
 class Color extends Component{
 	constructor(props){
@@ -129,16 +131,18 @@ class Color extends Component{
 	}
     
 	render(){
+		const theme = this.props.theme?'container dark':'container';
 		return(
-			<div id='input-color' className={this.state.hide?'container':'container hide'}>
+			<div id='input-color' className={this.state.hide?theme:`${theme} hide`}>
 				<div className='label'>{this.props.label}</div>
 				<div className='pallete' onClick={this.handleHide}></div>
-				<div className='block-parent' onMouseLeave={this.handleUp}>
+				<div className={this.props.theme?'block-parent block-parent-dark':'block-parent'} onMouseLeave={this.handleUp}>
 					<canvas id={'color-block'+this.props.num} className='color-block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp}>
 					</canvas> 
 					<div className='block' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} />					           
 				</div>
-				<canvas id={'color-strip'+this.props.num} className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas>    
+				<canvas id={'color-strip'+this.props.num} className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas> 
+				<style jsx>{colorStyle}</style>   
 				<style jsx>
 					{`
 
@@ -155,25 +159,14 @@ class Color extends Component{
 						transition:.4s;						
 					}
 
+					.dark{
+						border-top: 1px solid #313131;
+					}
+
 					.hide{
 						height:200px;
 					}
-					.block-parent{
-						position: relative;
-						float: right;
-						margin-top: 4px;
-						margin-right: 4px;
-						width: 82%;
-						height: 150px;
-						border: 1px solid rgb(212, 211, 211);
-					}
-
-					.color-block{
-						position: absolute;
-						float: right;
-						width: 100%;
-						height: 100%;
-					}
+				
 
 					.block{
 						position:absolute;
@@ -185,17 +178,6 @@ class Color extends Component{
 						transform:translate(${this.state.pos.x}px,${this.state.pos.y}px);
 					}
 
-					.color-strip{
-						position:relative;
-						float:left;
-						margin-top: 4px;
-						margin-right: 4px;
-						width: 4%;
-						height: 150px;
-						cursor: crosshair;
-					}
-
-
 					.pallete{
 						position: relative;
 						float: right;
@@ -203,10 +185,10 @@ class Color extends Component{
 						width: 132px;
 						border-radius: 3px;
 						background: ${this.state.color};
-						border: 1px solid rgb(229, 229, 229);
+						border: 1px solid ${this.props.theme?'#585858':'rgb(229, 229, 229)'};
 						margin-right: 4px;
 						cursor: pointer;
-					
+				
 					}
 
 					.label{

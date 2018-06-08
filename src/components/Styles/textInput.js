@@ -18,7 +18,7 @@ export const textInput = css`
 
 .inputText-dark{
     background:#212121;
-    border: 1px solid #585858;
+    border: 1px solid #424242;
 }
 
 `;

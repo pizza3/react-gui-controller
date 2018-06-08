@@ -4,46 +4,33 @@ import InputText from './components/InputText';
 import CheckBox from './components/CheckBox';
 import Button from './components/Button';
 import Color from './components/Color';
-import ProgressSlider from './components/ProgressSlider';
 import ProgessSlider from './components/ProgressSlider';
 class App extends Component{
 
 	constructor(props){
 		super(props);
 		this.state={
-			val:'some shit',
-			val2:'some shit',
 			data:{
-
+				'message':'some awesome shit',
+				'message2':'some awesome shitzooooo!'				
 			}            
 		};
-		this.handleInput=this.handleInput.bind(this);
-		this.handleInput2=this.handleInput2.bind(this);        
+		this.update=this.update.bind(this); 		      
 	}
 
-	handleInput(e){
-		this.setState({
-			val:e.target.value
-		});
-	}
 
-	handleInput2(e){
+	update(data){
 		this.setState({
-			val2:e.target.value
+			data
 		});
 	}
 
 	render(){
+		const { data } = this.state;
 		return(
-			<ReactController>
-				<InputText val={this.state.val} label='Message' onChange={this.handleInput}/>
-				<Color label='Color2'/>								
-				<InputText val={this.state.val2} label='Message' onChange={this.handleInput2}/>   
-				<CheckBox label='Gravity' />
-				<CheckBox label='Wind' />				
-				<Color label='Color'/>				
-				<Button label='Button'/> 
-				<ProgessSlider label='Noise'/>
+			<ReactController data={data} onUpdate={this.update}>
+				<InputText path='message' label='Message' />
+				<InputText path='message2' label='Message' />				
 			</ReactController>
 		);
 	}

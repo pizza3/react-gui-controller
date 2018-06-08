@@ -1,6 +1,6 @@
 import React,{Component} from'react';
 import {colorStyle} from './Styles/colorStyles';
-import {label, container} from './Styles/commonStyles';
+import {label} from './Styles/commonStyles';
 
 class Color extends Component{
 	constructor(props){
@@ -143,6 +143,7 @@ class Color extends Component{
 				</div>
 				<canvas id={'color-strip'+this.props.num} className='color-strip'  name='strip' onMouseDown={this.handleDown} onMouseMove={this.handleMove} onMouseUp={this.handleUp} onMouseLeave={this.handleUp}></canvas> 
 				<style jsx>{colorStyle}</style>   
+				<style jsx>{label}</style>   
 				<style jsx>
 					{`
 
@@ -185,26 +186,10 @@ class Color extends Component{
 						width: 132px;
 						border-radius: 3px;
 						background: ${this.state.color};
-						border: 1px solid ${this.props.theme?'#585858':'rgb(229, 229, 229)'};
+						border: 1px solid ${this.props.theme?'#424242':'rgb(229, 229, 229)'};
 						margin-right: 4px;
 						cursor: pointer;
 				
-					}
-
-					.label{
-						position: relative;
-						float: left;
-						padding-top: 5px;
-						padding-left: 4px;
-						font-weight: 100;
-						font-size: 12px;
-						color: rgb(119, 155, 255);
-						-webkit-touch-callout: none;
-						-webkit-user-select: none; 
-						-khtml-user-select: none; 
-						-moz-user-select: none; 
-						-ms-user-select: none; 
-						user-select: none;
 					}
 					`}
 				</style>                        

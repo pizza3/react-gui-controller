@@ -7,26 +7,16 @@ class InputText extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			val:''	
+			val:this.props.data[this.props.path]	
 		};
 		this.handleChange=this.handleChange.bind(this);
-	}
-
-	componentWillMount(){
-		this.setState({
-			val:this.props.val
-		});
-	}
-
-	componentWillReceiveProps(newProps){
-		this.setState({
-			val:newProps.val
-		});
 	}
 
 	handleChange(e){
 		this.setState({
 			val:e.target.value
+		},()=>{
+			this.props.updateData(this.props.path,this.state.val);
 		});
 	}
 

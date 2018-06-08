@@ -40,7 +40,7 @@ class ProgessSlider extends Component{
 						float:right;
 						-moz-appearance:none;						
 						-webkit-appearance: none;
-						background-color: ${this.props.theme?'#585858':'#E5E5E5'};
+						background-color: ${this.props.theme?'#424242':'#E5E5E5'};
 						width: 117px;
 						height: 2px;
 						border-radius: 5px;
@@ -73,7 +73,7 @@ class ProgessSlider extends Component{
 						width: 30px;
 						height: 22px;
 						border-radius: 3px;
-						border: 1px solid ${this.props.theme?'#4b4b4b':'#e5e5e5'};
+						border: 1px solid ${this.props.theme?'#424242':'#e5e5e5'};
 						outline: none;
 						background: ${this.props.theme?'#212121':'#fafafa'};
 						margin-right: 4px;

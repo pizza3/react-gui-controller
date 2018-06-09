@@ -6,7 +6,7 @@ class ProgessSlider extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			value:0
+			val:props.data[props.path]
 		};
 		this.handleRange=this.handleRange.bind(this);
 	}
@@ -14,20 +14,23 @@ class ProgessSlider extends Component{
 
 	handleRange(e){
 		this.setState({
-			value:e.target.value
+			val:e.target.value
+		},()=>{
+			this.props.updateData(this.props.path,this.state.val);
 		});
 	}
 
 	render(){
+		const {min, max, step}=this.props;
 		return(
 			<Container {...this.props} label={this.props.label}>
-				<input type='text' value={this.state.value}/>												 
+				<input type='text' value={this.state.val} onChange={this.handleRange}/>												 
 				<input
 					type="range"
-					min="0.05"
-					max="1"
-					step="0.05"
-					value={this.state.value}
+					min={min}
+					max={max}
+					step={step}
+					value={this.state.val}
 					onChange={this.handleRange}
 				/> 
 				<style jsx>{label}</style>

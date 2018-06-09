@@ -7,7 +7,7 @@ class InputText extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			val:this.props.data[this.props.path]	
+			val:props.data[props.path]	
 		};
 		this.handleChange=this.handleChange.bind(this);
 	}

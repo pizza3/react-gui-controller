@@ -14,8 +14,7 @@ class ReactController extends Component{
 			dark:true
 		};
 		this.handleHide=this.handleHide.bind(this);
-		this.handleData=this.handleData.bind(this);		
-	
+		this.handleData=this.handleData.bind(this);	
 	}
 
 	handleHide(){
@@ -33,18 +32,12 @@ class ReactController extends Component{
 	renderChildren(){
 		const { children ,data} = this.props;
 		return React.Children.toArray(children).map((child, i) => {
-			// const liveUpdate = isUndefined(child.props.liveUpdate) ? this.props.liveUpdate : child.props.liveUpdate;
-			// const labelWidth = isUndefined(child.props.labelWidth) ? this.props.labelWidth : child.props.labelWidth;
-	  
 			return React.cloneElement(child, {
 			  key: i,
 			  num:i,
 			  theme:this.state.dark,
 			  updateData:this.handleData,
 			  data:data
-			//   liveUpdate,
-			//   labelWidth,
-			//   _onUpdateValue: this.handleUpdateValue,
 			});
 		  });
 	}

@@ -4,21 +4,23 @@ class CheckBox extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			value:false
+			val:props.data[props.path]
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 	}
 	
 	handleInputChange(e){
 		this.setState({
-			value:e.target.checked
+			val:e.target.checked
+		},()=>{
+			this.props.updateData(this.props.path,this.state.val);
 		});
 	}
 
 	render() {
 		return (
 			<Container {...this.props} label={this.props.label}>
-				<input id={'switch'+this.props.num} name='view' type="checkbox" hidden checked={this.state.value} onChange={this.handleInputChange} />
+				<input id={'switch'+this.props.num} name='view' type="checkbox" hidden checked={this.state.val} onChange={this.handleInputChange} />
 				<label htmlFor={'switch'+this.props.num} className={'switch'+this.props.num}></label>
 				<style jsx>
 					{`

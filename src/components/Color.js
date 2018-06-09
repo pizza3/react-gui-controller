@@ -19,6 +19,7 @@ class Color extends Component{
 		this.handleMove=this.handleMove.bind(this);
 		this.handleUp=this.handleUp.bind(this); 
 		this.changeColorBlock=this.changeColorBlock.bind(this);       
+		this.fillGradient=this.fillGradient.bind(this);       
 	}
     
 	componentDidMount(){
@@ -26,8 +27,9 @@ class Color extends Component{
 		this.ctx1 = colorBlock.getContext('2d');
 		this.width1 = colorBlock.width;
 		this.height1 = colorBlock.height;
-		this.rgbaColor = 'rgba(0,0,0,1)';
-		//
+		this.rgbaColor = '#f76262';
+
+		
 		var colorStrip = document.getElementById('color-strip'+this.props.num);
 		this.ctx2 = colorStrip.getContext('2d');
 		this.width2 = colorStrip.width;
@@ -35,6 +37,10 @@ class Color extends Component{
 		this.ctx1.rect(0, 0, this.width1, this.height1);
 		this.fillGradient();
 		this.fillStrip();
+		// console.log(this.hexToRgbA(this.rgbaColor));
+		//postion pointer indicator
+	
+		
 	}
     
 
@@ -59,6 +65,22 @@ class Color extends Component{
 		grdBlack.addColorStop(1, 'rgba(0,0,0,1)');
 		this.ctx1.fillStyle = grdBlack;
 		this.ctx1.fillRect(0, 0, this.width1, this.height1);
+		let color = this.hexToRgbA(this.rgbaColor);		
+		for(let i=0;i<this.width1;i++){
+			for(let j=0;j<this.height1;j++){
+				let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
+				// console.log(imageData);				
+				if(color==='rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)'){
+					this.setState({
+						pos:{
+							x:i,
+							y:j
+						}
+					});
+					console.log(i+','+j);
+				}
+			}
+		}
 	}
 
 	fillStrip(){
@@ -123,6 +145,20 @@ class Color extends Component{
 				this.changeColorBlock(e);
 		}
 	}
+
+	hexToRgbA(hex){
+		var c;
+		if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+			c= hex.substring(1).split('');
+			if(c.length== 3){
+				c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+			}
+			c= '0x'+c.join('');
+			return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
+		}
+		throw new Error('Bad Hex');
+	}
+	
     
 	handleUp(){
 		this.setState({

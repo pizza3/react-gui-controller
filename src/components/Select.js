@@ -20,15 +20,16 @@ class Select extends Component{
     
 
 	render(){
+		const options=this.props.options.map((val,i)=>{
+			return(
+				<option key={i} value={val}>{val}</option>
+			);
+		});
 		return(
 			<Container {...this.props} label={this.props.label}>
 				<div className={this.props.theme?'dropdown dropdown-dark':'dropdown'}>
 					<select value={this.state.val} onChange={this.handleChange} className={this.props.theme?'dropdown-select dropdown-select-dark ':'dropdown-select'}>
-						{this.props.options.map((val,i)=>{
-							return(
-								<option key={i} value={val}>{val}</option>
-							);
-						})}
+						{options}
 					</select>
 				</div>
 				<style jsx>

@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {label, container} from './Styles/commonStyles';
+import {label, container} from './JSXStyles/commonStyles';
 import Container from './Container';
 
 class ProgessSlider extends Component{

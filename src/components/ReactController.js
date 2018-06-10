@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { controllerStyle } from './Styles/controllerStyles';
+import { controllerStyle } from './JSXStyles/controllerStyles';
 
 class ReactController extends Component{
 	constructor(props){
@@ -33,13 +33,13 @@ class ReactController extends Component{
 		const { children ,data} = this.props;
 		return React.Children.toArray(children).map((child, i) => {
 			return React.cloneElement(child, {
-			  key: i,
-			  num:i,
-			  theme:this.state.dark,
-			  updateData:this.handleData,
-			  data:data
+				key: i,
+				num:i,
+				theme:this.state.dark,
+				updateData:this.handleData,
+				data:data
 			});
-		  });
+		});
 	}
 
 	render(){

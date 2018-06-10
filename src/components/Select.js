@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import Container from './Container';
-import {selectStyle} from './Styles/selectStyles';
+import {selectStyle} from './JSXStyles/selectStyles';
 class Select extends Component{
 	constructor(props){
 		super(props);

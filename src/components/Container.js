@@ -1,5 +1,5 @@
 import React from 'react';
-import {label, container} from './Styles/commonStyles';
+import {label, container} from './JSXStyles/commonStyles';
 
 const Container=(props)=>{
 	return(

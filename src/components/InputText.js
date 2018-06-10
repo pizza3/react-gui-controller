@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {textInput} from './Styles/textInput';
+import {textInput} from './JSXStyles/textInput';
 import Container from './Container';
 
 class InputText extends Component{

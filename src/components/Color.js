@@ -1,6 +1,6 @@
 import React,{Component} from'react';
-import {colorStyle} from './Styles/colorStyles';
-import {label} from './Styles/commonStyles';
+import {colorStyle} from './JSXStyles/colorStyles';
+import {label} from './JSXStyles/commonStyles';
 
 class Color extends Component{
 	constructor(props){

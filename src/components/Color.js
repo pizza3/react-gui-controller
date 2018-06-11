@@ -208,7 +208,7 @@ class Color extends Component {
 	render() {
 		const theme = this.props.theme ? 'container dark' : 'container';
 		return (
-			<CustomContainer {...this.props}>
+			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
 				<div className="pallete" onClick={this.handleHide} />
 				<div
 					className={

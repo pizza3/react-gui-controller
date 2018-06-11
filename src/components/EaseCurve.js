@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { label } from './JSXStyles/commonStyles';
-import { container } from './JSXStyles/customCommonStyles';
-
+import CustomContainer from './CustomContainer';
 //creates the 2d square grid on the svg
 const Grid = () => {
 	let xAxis = [];
@@ -36,7 +34,9 @@ const Grid = () => {
 class EaseCurve extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			hide: false
+		};
 	}
 
 	render() {
@@ -44,14 +44,12 @@ class EaseCurve extends Component {
 		let grid = Grid();
 
 		return (
-			<div className={this.state.hide ? theme : `${theme} hide`}>
-				<div className="label">{this.props.label}</div>
+			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
 				<div className="pallete">Ease-In-Out</div>
 				<svg width="250" height="250" xmlns="http://www.w3.org/2000/svg">
 					{grid[0]}
 					{grid[1]}
 				</svg>
-				<style jsx>{label}</style>
 				<style jsx>
 					{`
 						.container {
@@ -95,7 +93,7 @@ class EaseCurve extends Component {
 						}
 					`}
 				</style>
-			</div>
+			</CustomContainer>
 		);
 	}
 }

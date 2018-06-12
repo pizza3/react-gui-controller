@@ -30,6 +30,7 @@ export const container = css`
 		padding-top: 4px;
 		padding-left: 2px;
 		padding-right: 2px;
+		transition: 0.4s;
 	}
 
 	.container:hover {

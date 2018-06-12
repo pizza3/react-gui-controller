@@ -1,46 +1,15 @@
 import React, { Component } from 'react';
 import CustomContainer from './CustomContainer';
-//creates the 2d square grid on the svg
-const Grid = () => {
-	let xAxis = [];
-	let yAxis = [];
-	let offsetY = 50;
-	let offsetX = 45;
-	for (let i = 0; i < 180; i += 18) {
-		xAxis.push(
-			<line
-				key={i}
-				x1={18 + offsetX}
-				y1={i + 18 + offsetY}
-				x2={180 + offsetX}
-				y2={i + 18 + offsetY}
-				stroke="#2a3251"
-				strokeWidth="0.5"
-			/>
-		);
-		yAxis.push(
-			<line
-				key={i}
-				x1={i + 18 + offsetX}
-				y1={18 + offsetY}
-				x2={i + 18 + offsetX}
-				y2={180 + offsetY}
-				stroke="#2a3251"
-				strokeWidth="0.5"
-			/>
-		);
-	}
-	return [xAxis, yAxis];
-};
-
-const path = (ac1, ac2) => {
-	return `M63 230 C ${ac1.x} ${ac1.y}, ${ac2.x} ${ac2.y}, 225 68`;
-};
+import SvgGrid from './EaseCurveUtils/SvgGrid';
+import SvgPath from './EaseCurveUtils/SvgPath';
+import { easeCurveStyle } from './JSXStyles/easeCurveStyles';
+import { selectStyle } from './JSXStyles/selectStyles';
 
 //map function is used to naomalise the values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
 };
+
 class EaseCurve extends Component {
 	state = {
 		hide: false,
@@ -64,8 +33,12 @@ class EaseCurve extends Component {
 
 	componentDidMount() {
 		this.isMove = false;
-		console.log(document.getElementById('svg1').getBoundingClientRect());
-		this.element = document.getElementById('svg1').getBoundingClientRect();
+		console.log(
+			document.getElementById(`svg${this.props.num}`).getBoundingClientRect()
+		);
+		this.element = document
+			.getElementById(`svg${this.props.num}`)
+			.getBoundingClientRect();
 	}
 
 	setPointer = () => {
@@ -95,7 +68,9 @@ class EaseCurve extends Component {
 		this.el = e.target.getAttribute('id');
 		this.isMove = true;
 		this.x = this.state[this.el].x;
-		this.element = document.getElementById('svg1').getBoundingClientRect();
+		this.element = document
+			.getElementById(`svg${this.props.num}`)
+			.getBoundingClientRect();
 		console.log(this.x);
 	};
 
@@ -103,7 +78,7 @@ class EaseCurve extends Component {
 		if (this.isMove) {
 			console.log(this.element.x + this.x + ',' + e.clientX);
 			//check if anchor is leaving the grid from the right on x-axis
-			if (e.clientX - this.element.x >= 235) {
+			if (e.clientX - this.element.x >= 225) {
 				this.setState({
 					[this.el]: {
 						x: 225,
@@ -140,14 +115,27 @@ class EaseCurve extends Component {
 
 	render() {
 		const theme = this.props.theme ? 'container dark' : 'container';
-		let grid = Grid();
-		let ac1 = this.state.anchor1;
-		let ac2 = this.state.anchor2;
+		const { anchor1, anchor2 } = this.state;
 		return (
 			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
-				<div className="pallete">Ease-In-Out</div>
+				<div
+					className={
+						this.props.theme ? 'dropdown dropdown-dark' : 'dropdown'
+					}
+				>
+					<select
+						className={
+							this.props.theme
+								? 'dropdown-select dropdown-select-dark '
+								: 'dropdown-select'
+						}
+					>
+						<option value={'linear'}>Linear</option>
+					</select>
+				</div>
+				<style jsx>{selectStyle}</style>
 				<svg
-					id="svg1"
+					id={`svg${this.props.num}`}
 					width="250"
 					height="300"
 					xmlns="http://www.w3.org/2000/svg"
@@ -155,40 +143,14 @@ class EaseCurve extends Component {
 					onMouseUp={this.handleUp}
 					onMouseLeave={this.handleUp}
 				>
-					{grid[0]}
-					{grid[1]}
-					<path
-						id="wire"
-						d={path(ac1, ac2)}
-						stroke="rgb(119,155,255)"
-						fill="none"
-					/>
-					<line
-						id="dotted-line-1"
-						x1="63"
-						y1="230"
-						x2={ac1.x}
-						y2={ac1.y}
-						stroke="#a7adba"
-						strokeWidth="0.5"
-						strokeDasharray="3px"
-					/>
-					<line
-						id="dotted-line-2"
-						x1="225"
-						y1="68"
-						x2={ac2.x}
-						y2={ac2.y}
-						stroke="#a7adba"
-						strokeWidth="0.5"
-						strokeDasharray="3px"
-					/>
+					<SvgGrid {...this.props} />
+					<SvgPath ac1={anchor1} ac2={anchor2} />
 					<circle
 						id="anchor1"
 						onMouseDown={this.handleDown}
 						onMouseUp={this.handleUp}
-						cx={ac1.x}
-						cy={ac1.y}
+						cx={anchor1.x}
+						cy={anchor1.y}
 						r="4"
 						strokeWidth="1"
 						fill="#5f7ccc"
@@ -198,38 +160,18 @@ class EaseCurve extends Component {
 						id="anchor2"
 						onMouseDown={this.handleDown}
 						onMouseUp={this.handleUp}
-						cx={ac2.x}
-						cy={ac2.y}
+						cx={anchor2.x}
+						cy={anchor2.y}
 						r="4"
 						strokeWidth="1"
 						fill="#5f7ccc"
 						stroke="#adc3ff"
 					/>
 				</svg>
+				<style jsx>{easeCurveStyle}</style>
+				<style jsx>{selectStyle}</style>
 				<style jsx>
 					{`
-						.container {
-							position: relative;
-							width: 100%;
-							height: 280px;
-							border-top: 1px solid rgb(214, 214, 214);
-							font-family: sans-serif;
-							padding-top: 4px;
-							padding-left: 2px;
-							padding-right: 2px;
-							overflow: hidden;
-							transition: 0.4s;
-						}
-
-						.dark {
-							border-top: 1px solid #313131;
-						}
-
-						svg {
-							position: relative;
-							background: none;
-						}
-
 						.pallete {
 							position: relative;
 							float: right;

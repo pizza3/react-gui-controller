@@ -19,8 +19,16 @@ export const container = css`
 		transition: 0.4s;
 	}
 
+	.container:hover {
+		background: rgb(245, 245, 245);
+	}
+
 	.dark {
 		border-top: 1px solid #313131;
+	}
+
+	.dark:hover {
+		background: rgb(21, 21, 21);
 	}
 
 	.hide {

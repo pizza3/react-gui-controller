@@ -11,7 +11,7 @@ class ReactController extends Component{
 				x:100,
 				y:50
 			},
-			dark:false
+			dark:true
 		};
 		this.handleHide=this.handleHide.bind(this);
 		this.handleData=this.handleData.bind(this);	

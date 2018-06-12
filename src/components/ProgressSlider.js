@@ -3,16 +3,12 @@ import {label, container} from './JSXStyles/commonStyles';
 import Container from './Container';
 
 class ProgessSlider extends Component{
-	constructor(props){
-		super(props);
-		this.state={
-			val:props.data[props.path]
+	state = { 
+			val:this.props.data[this.props.path]
 		};
-		this.handleRange=this.handleRange.bind(this);
-	}
+	
 
-
-	handleRange(e){
+	handleRange = e =>{
 		this.setState({
 			val:e.target.value
 		},()=>{

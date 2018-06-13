@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { colorStyle } from './JSXStyles/colorStyles';
-import { label } from './JSXStyles/commonStyles';
-import { container } from './JSXStyles/customCommonStyles';
 import CustomContainer from './CustomContainer';
 class Color extends Component {
 	constructor(props) {

@@ -9,8 +9,8 @@ export const controllerStyle = css`
 		border: 1px solid rgb(214, 214, 214);
 		border-radius: 4px;
 		overflow: hidden;
-		top: 50px;
-		left: 50px;
+		// top: 50px;
+		// left: 50px;
 	}
 
 	.dark {

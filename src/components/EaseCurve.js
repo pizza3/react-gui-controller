@@ -3,8 +3,9 @@ import CustomContainer from './CustomContainer';
 import SvgGrid from './EaseCurveUtils/SvgGrid';
 import SvgPath from './EaseCurveUtils/SvgPath';
 import { easeCurveStyle } from './JSXStyles/easeCurveStyles';
-import { selectStyle } from './JSXStyles/selectStyles';
-
+import Indicator from './EaseCurveUtils/Indicator';
+import EaseSetting from './EaseCurveUtils/EaseSetting';
+import SvgText from './EaseCurveUtils/SvgText';
 //map function is used to naomalise the values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
@@ -12,7 +13,7 @@ const MapRange = (value, low1, high1, low2, high2) => {
 
 class EaseCurve extends Component {
 	state = {
-		hide: false,
+		hide: true,
 		anchor1: {
 			x: 63,
 			y: 230
@@ -32,9 +33,30 @@ class EaseCurve extends Component {
 	};
 
 	componentDidMount() {
+		const { data, path } = this.props;
 		this.isMove = false;
-		console.log(
-			document.getElementById(`svg${this.props.num}`).getBoundingClientRect()
+		let val = data[path],
+			val2,
+			re = /\s*,\s*/;
+		val2 = val.replace(/ /g, '');
+		var l = val2.length;
+		val2 = val2.slice(13, l - 1);
+		val2 = val2.split(re);
+		console.log(val2);
+		this.setState(
+			{
+				anchor1: {
+					x: MapRange(val2[0], 0, 1, 63, 225),
+					y: MapRange(val2[1], 0, 1, 230, 68)
+				},
+				anchor2: {
+					x: MapRange(val2[2], 0, 1, 63, 225),
+					y: MapRange(val2[3], 0, 1, 230, 68)
+				}
+			},
+			() => {
+				this.setPointer();
+			}
 		);
 		this.element = document
 			.getElementById(`svg${this.props.num}`)
@@ -42,24 +64,35 @@ class EaseCurve extends Component {
 	}
 
 	setPointer = () => {
-		this.setState({
-			c1: {
-				x:
-					Math.round(MapRange(this.state.anchor1.x, 63, 225, 0, 1) * 100) /
-					100,
-				y:
-					Math.round(MapRange(this.state.anchor1.y, 68, 230, 1, 0) * 100) /
-					100
+		this.setState(
+			{
+				c1: {
+					x:
+						Math.round(
+							MapRange(this.state.anchor1.x, 63, 225, 0, 1) * 100
+						) / 100,
+					y:
+						Math.round(
+							MapRange(this.state.anchor1.y, 68, 230, 1, 0) * 100
+						) / 100
+				},
+				c2: {
+					x:
+						Math.round(
+							MapRange(this.state.anchor2.x, 63, 225, 0, 1) * 100
+						) / 100,
+					y:
+						Math.round(
+							MapRange(this.state.anchor2.y, 68, 230, 1, 0) * 100
+						) / 100
+				}
 			},
-			c2: {
-				x:
-					Math.round(MapRange(this.state.anchor2.x, 63, 225, 0, 1) * 100) /
-					100,
-				y:
-					Math.round(MapRange(this.state.anchor2.y, 68, 230, 1, 0) * 100) /
-					100
+			() => {
+				const { c1, c2 } = this.state;
+				const val = `cubic-bezier(${c1.x},${c1.y},${c2.x},${c2.y})`;
+				this.props.updateData(this.props.path, val);
 			}
-		});
+		);
 	};
 
 	handleDown = e => {
@@ -113,30 +146,29 @@ class EaseCurve extends Component {
 		this.setPointer();
 	};
 
+	handleHide = () => {
+		this.setState({
+			hide: !this.state.hide
+		});
+	};
+
 	render() {
 		const theme = this.props.theme ? 'container dark' : 'container';
-		const { anchor1, anchor2 } = this.state;
+		const { c1, c2, anchor1, anchor2 } = this.state;
+		const { data, path } = this.props;
 		return (
 			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
 				<div
-					className={
-						this.props.theme ? 'dropdown dropdown-dark' : 'dropdown'
-					}
+					className={this.props.theme ? 'text text-dark' : 'text'}
+					onClick={this.handleHide}
 				>
-					<select
-						className={
-							this.props.theme
-								? 'dropdown-select dropdown-select-dark '
-								: 'dropdown-select'
-						}
-					>
-						<option value={'linear'}>Linear</option>
-					</select>
+					{data[path]}
 				</div>
-				<style jsx>{selectStyle}</style>
+				<EaseSetting />
+				<Indicator ease={`cubic-bezier(${c1.x},${c1.y},${c2.x},${c2.y})`} />
 				<svg
 					id={`svg${this.props.num}`}
-					width="250"
+					width="100%"
 					height="300"
 					xmlns="http://www.w3.org/2000/svg"
 					onMouseMove={this.handleMove}
@@ -144,6 +176,7 @@ class EaseCurve extends Component {
 					onMouseLeave={this.handleUp}
 				>
 					<SvgGrid {...this.props} />
+					<SvgText />
 					<SvgPath ac1={anchor1} ac2={anchor2} />
 					<circle
 						id="anchor1"
@@ -169,28 +202,6 @@ class EaseCurve extends Component {
 					/>
 				</svg>
 				<style jsx>{easeCurveStyle}</style>
-				<style jsx>{selectStyle}</style>
-				<style jsx>
-					{`
-						.pallete {
-							position: relative;
-							float: right;
-							height: 23px;
-							width: 132px;
-							border-radius: 3px;
-							background: #fdfdfd;
-							border: 1px solid
-								${this.props.theme ? '#424242' : 'rgb(229, 229, 229)'};
-							margin-right: 4px;
-							cursor: pointer;
-							color: #7599ff;
-							font-size: 11px;
-							font-weight: 500;
-							padding-top: 5px;
-							padding-left: 7px;
-						}
-					`}
-				</style>
 			</CustomContainer>
 		);
 	}

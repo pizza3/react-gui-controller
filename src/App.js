@@ -10,8 +10,8 @@ import EaseCurve from './components/EaseCurve';
 class App extends Component {
 	state = {
 		data: {
-			easing2: 'linear',
-			easing: 'cubic-bezier(0.65, 0.05, 0.36, 3)'
+			easing2: 'cubic-bezier(1, 0, 0, 1)',
+			easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
 		}
 	};
 

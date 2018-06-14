@@ -32,7 +32,7 @@ const Indicator = props => {
 						background: #a0b7f7;
 						border-radius: 50%;
 						margin-left: 28px;
-						animation: anim 2.5s infinite;
+						animation: anim 3s infinite;
 						animation-timing-function: ${props.ease};
 					}
 

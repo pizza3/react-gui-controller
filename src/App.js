@@ -11,7 +11,8 @@ class App extends Component {
 	state = {
 		data: {
 			easing2: 'cubic-bezier(1, 0, 0, 1)',
-			easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+			easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+			color: '#000'
 		}
 	};
 
@@ -31,6 +32,7 @@ class App extends Component {
 			<ReactController data={data} onUpdate={this.update}>
 				<EaseCurve path="easing2" label="SkewXEasing" />
 				<EaseCurve path="easing" label="SkewYEasing" />
+				<Color path="color" label="Background" />
 			</ReactController>
 		);
 	}

@@ -37,6 +37,11 @@ export const easeCurveStyle = css`
 		cursor: pointer;
 	}
 
+	#anchor1,
+	#anchor2 {
+		cursor: pointer;
+	}
+
 	.text-dark {
 		background: #212121;
 		border-color: #585858;

@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { colorStyle } from './JSXStyles/colorStyles';
 import CustomContainer from './CustomContainer';
+
+const MapRange = (value, low1, high1, low2, high2) => {
+	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
+};
+
 class Color extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hide: true,
+			hide: false,
 			drag: false,
 			color: 'rgba(0,0,0,1)',
 			pos: {
+				x: 0,
+				y: 0
+			},
+			posStrip: {
 				x: 0,
 				y: 0
 			}
@@ -38,6 +47,72 @@ class Color extends Component {
 		this.fillStrip();
 		// console.log(this.hexToRgbA(this.rgbaColor));
 		//position pointer indicator
+		// console(this.hexToHSL('#a6ed8e'));
+
+		let a = this.rgbToHsl(198, 110, 108);
+		console.log(a[0]);
+		let val = MapRange(a[0], 0, 1, 0, 150);
+		console.log(val);
+		this.setState(
+			{
+				posStrip: {
+					x: 0,
+					y: val
+				}
+			},
+			() => {
+				let imageData = this.ctx2.getImageData(
+					0,
+					this.state.posStrip.y,
+					1,
+					1
+				).data;
+				this.rgbaColor =
+					'rgba(' +
+					imageData[0] +
+					',' +
+					imageData[1] +
+					',' +
+					imageData[2] +
+					',1)';
+				let a = this.rgbToHsl(imageData[0], imageData[1], imageData[2]);
+				console.log(a);
+				this.fillGradient();
+				//////
+				for (let i = 0; i < this.width1; i++) {
+					for (let j = 0; j < this.height1; j++) {
+						let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
+						// console.log(imageData);
+						if (
+							'rgba(198,110,108,1)' ===
+							'rgba(' +
+								imageData[0] +
+								',' +
+								imageData[1] +
+								',' +
+								imageData[2] +
+								',1)'
+						) {
+							this.setState({
+								color:
+									'rgba(' +
+									imageData[0] +
+									',' +
+									imageData[1] +
+									',' +
+									imageData[2] +
+									',1)',
+								pos: {
+									x: i,
+									y: j
+								}
+							});
+							console.log(i + ',' + j);
+						}
+					}
+				}
+			}
+		);
 	}
 
 	handleHide() {
@@ -62,31 +137,6 @@ class Color extends Component {
 		grdBlack.addColorStop(1, 'rgba(0,0,0,1)');
 		this.ctx1.fillStyle = grdBlack;
 		this.ctx1.fillRect(0, 0, this.width1, this.height1);
-		let color = this.hexToRgbA(this.rgbaColor);
-		for (let i = 0; i < this.width1; i++) {
-			for (let j = 0; j < this.height1; j++) {
-				let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
-				// console.log(imageData);
-				if (
-					color ===
-					'rgba(' +
-						imageData[0] +
-						',' +
-						imageData[1] +
-						',' +
-						imageData[2] +
-						',1)'
-				) {
-					this.setState({
-						pos: {
-							x: i,
-							y: j
-						}
-					});
-					console.log(i + ',' + j);
-				}
-			}
-		}
 	}
 
 	//this applies color to the hue strip of the color selector
@@ -148,6 +198,23 @@ class Color extends Component {
 			document
 				.getElementById('color-strip' + this.props.num)
 				.getBoundingClientRect().top;
+		if (y <= 0) {
+			y = 0;
+		} else if (y >= 149) {
+			y = 149;
+		}
+		this.setState(
+			{
+				color: this.rgbaColor,
+				posStrip: {
+					x: x,
+					y: y
+				}
+			},
+			() => {
+				// this.fillGradient();
+			}
+		);
 		let imageData = this.ctx2.getImageData(x, y, 1, 1).data;
 		this.rgbaColor =
 			'rgba(' +
@@ -157,10 +224,10 @@ class Color extends Component {
 			',' +
 			imageData[2] +
 			',1)';
+		let a = this.rgbToHsl(imageData[0], imageData[1], imageData[2]);
+		console.log(a);
+
 		this.fillGradient();
-		this.setState({
-			color: this.rgbaColor
-		});
 	}
 
 	handleDown(e) {
@@ -194,9 +261,38 @@ class Color extends Component {
 				',1)'
 			);
 		}
-		throw new Error('Bad Hex');
+		// throw new Error('Bad Hex');
 	}
 
+	rgbToHsl(r, g, b) {
+		(r /= 255), (g /= 255), (b /= 255);
+		var max = Math.max(r, g, b),
+			min = Math.min(r, g, b);
+		var h,
+			s,
+			l = (max + min) / 2;
+
+		if (max == min) {
+			h = s = 0; // achromatic
+		} else {
+			var d = max - min;
+			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+			switch (max) {
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
+			case g:
+				h = (b - r) / d + 2;
+				break;
+			case b:
+				h = (r - g) / d + 4;
+				break;
+			}
+			h /= 6;
+		}
+
+		return [h, s, l];
+	}
 	handleUp() {
 		this.setState({
 			drag: false
@@ -208,37 +304,46 @@ class Color extends Component {
 		return (
 			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
 				<div className="pallete" onClick={this.handleHide} />
-				<div
-					className={
-						this.props.theme
-							? 'block-parent block-parent-dark'
-							: 'block-parent'
-					}
-					onMouseLeave={this.handleUp}
-				>
-					<canvas
-						id={'color-block' + this.props.num}
-						className="color-block"
-						onMouseDown={this.handleDown}
-						onMouseMove={this.handleMove}
-						onMouseUp={this.handleUp}
-					/>
+				<div className="contain" onMouseLeave={this.handleUp}>
 					<div
-						className="block"
-						onMouseDown={this.handleDown}
-						onMouseMove={this.handleMove}
-						onMouseUp={this.handleUp}
-					/>
+						className={
+							this.props.theme
+								? 'block-parent block-parent-dark'
+								: 'block-parent'
+						}
+					>
+						<canvas
+							id={'color-block' + this.props.num}
+							className="color-block"
+							onMouseDown={this.handleDown}
+							onMouseMove={this.handleMove}
+							onMouseUp={this.handleUp}
+						/>
+						<div
+							className="block"
+							onMouseDown={this.handleDown}
+							onMouseMove={this.handleMove}
+							onMouseUp={this.handleUp}
+						/>
+					</div>
+					<div className="strip-parent">
+						<canvas
+							id={'color-strip' + this.props.num}
+							className="color-strip"
+							name="strip"
+							onMouseDown={this.handleDown}
+							onMouseMove={this.handleMove}
+							onMouseUp={this.handleUp}
+						/>
+						<div
+							className="block-strip"
+							name="strip"
+							onMouseDown={this.handleDown}
+							onMouseMove={this.handleMove}
+							onMouseUp={this.handleUp}
+						/>
+					</div>
 				</div>
-				<canvas
-					id={'color-strip' + this.props.num}
-					className="color-strip"
-					name="strip"
-					onMouseDown={this.handleDown}
-					onMouseMove={this.handleMove}
-					onMouseUp={this.handleUp}
-					onMouseLeave={this.handleUp}
-				/>
 				<style jsx>{colorStyle}</style>
 				<style jsx>
 					{`
@@ -252,6 +357,21 @@ class Color extends Component {
 							transform: translate(
 								${this.state.pos.x}px,
 								${this.state.pos.y}px
+							);
+						}
+
+						.block-strip {
+							position: absolute;
+							width: 10px;
+							height: 10px;
+							border: 1px solid #fff;
+							border-radius: 50%;
+							background: #fff;
+							transform-origin: center;
+							opacity: 0.4;
+							transform: translate(
+								${-2}px,
+								${this.state.posStrip.y - 5}px
 							);
 						}
 

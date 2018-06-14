@@ -32,7 +32,7 @@ class App extends Component {
 			<ReactController data={data} onUpdate={this.update}>
 				<EaseCurve path="easing2" label="SkewXEasing" />
 				<EaseCurve path="easing" label="SkewYEasing" />
-				<Color path="color" label="Background" />
+				<Color path="color" type="hex" label="Background" />
 			</ReactController>
 		);
 	}

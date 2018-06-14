@@ -36,6 +36,7 @@ export const colorStyle = css`
 		float: right;
 		width: 100%;
 		height: 100%;
+		border-radius: 8px;
 	}
 
 	.contain {

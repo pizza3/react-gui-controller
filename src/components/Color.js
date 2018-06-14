@@ -7,28 +7,20 @@ const MapRange = (value, low1, high1, low2, high2) => {
 };
 
 class Color extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			hide: false,
-			drag: false,
-			color: 'rgba(0,0,0,1)',
-			pos: {
-				x: 0,
-				y: 0
-			},
-			posStrip: {
-				x: 0,
-				y: 0
-			}
-		};
-		this.handleHide = this.handleHide.bind(this);
-		this.handleDown = this.handleDown.bind(this);
-		this.handleMove = this.handleMove.bind(this);
-		this.handleUp = this.handleUp.bind(this);
-		this.changeColorBlock = this.changeColorBlock.bind(this);
-		this.fillGradient = this.fillGradient.bind(this);
-	}
+	state = {
+		hide: false,
+		drag: false,
+		color: 'rgba(0,0,0,1)',
+		hueNob: null,
+		pos: {
+			x: 0,
+			y: 0
+		},
+		posStrip: {
+			x: 0,
+			y: 0
+		}
+	};
 
 	componentDidMount() {
 		//after the component has been mounted create canvas context and also apply setting's.
@@ -48,11 +40,8 @@ class Color extends Component {
 		// console.log(this.hexToRgbA(this.rgbaColor));
 		//position pointer indicator
 		// console(this.hexToHSL('#a6ed8e'));
-
 		let a = this.rgbToHsl(198, 110, 108);
-		console.log(a[0]);
 		let val = MapRange(a[0], 0, 1, 0, 150);
-		console.log(val);
 		this.setState(
 			{
 				posStrip: {
@@ -75,14 +64,10 @@ class Color extends Component {
 					',' +
 					imageData[2] +
 					',1)';
-				let a = this.rgbToHsl(imageData[0], imageData[1], imageData[2]);
-				console.log(a);
 				this.fillGradient();
-				//////
 				for (let i = 0; i < this.width1; i++) {
 					for (let j = 0; j < this.height1; j++) {
 						let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
-						// console.log(imageData);
 						if (
 							'rgba(198,110,108,1)' ===
 							'rgba(' +
@@ -105,9 +90,9 @@ class Color extends Component {
 								pos: {
 									x: i,
 									y: j
-								}
+								},
+								hueNob: this.rgbaColor
 							});
-							console.log(i + ',' + j);
 						}
 					}
 				}
@@ -115,14 +100,14 @@ class Color extends Component {
 		);
 	}
 
-	handleHide() {
+	handleHide = () => {
 		this.setState({
 			hide: !this.state.hide
 		});
-	}
+	};
 
 	//this applies the white, black and golor gradient to the canvas
-	fillGradient() {
+	fillGradient = () => {
 		this.ctx1.fillStyle = this.rgbaColor;
 		this.ctx1.fillRect(0, 0, this.width1, this.height1);
 
@@ -137,10 +122,26 @@ class Color extends Component {
 		grdBlack.addColorStop(1, 'rgba(0,0,0,1)');
 		this.ctx1.fillStyle = grdBlack;
 		this.ctx1.fillRect(0, 0, this.width1, this.height1);
-	}
+		let imageData = this.ctx1.getImageData(
+			this.state.pos.x,
+			this.state.pos.y,
+			1,
+			1
+		).data;
+		this.setState({
+			color:
+				'rgba(' +
+				imageData[0] +
+				',' +
+				imageData[1] +
+				',' +
+				imageData[2] +
+				',1)'
+		});
+	};
 
 	//this applies color to the hue strip of the color selector
-	fillStrip() {
+	fillStrip = () => {
 		this.ctx2.rect(0, 0, this.width2, this.height2);
 		let grd1 = this.ctx2.createLinearGradient(0, 0, 0, this.height1);
 		grd1.addColorStop(0, 'rgba(255, 0, 0, 1)');
@@ -152,9 +153,9 @@ class Color extends Component {
 		grd1.addColorStop(1, 'rgba(255, 0, 0, 1)');
 		this.ctx2.fillStyle = grd1;
 		this.ctx2.fill();
-	}
+	};
 
-	changeColorBlock(e) {
+	changeColorBlock = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
 		let x =
@@ -183,9 +184,9 @@ class Color extends Component {
 				y: y
 			}
 		});
-	}
+	};
 
-	changeColorStrip(e) {
+	changeColorStrip = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
 		let x =
@@ -207,7 +208,7 @@ class Color extends Component {
 			{
 				color: this.rgbaColor,
 				posStrip: {
-					x: x,
+					x: 0,
 					y: y
 				}
 			},
@@ -225,29 +226,31 @@ class Color extends Component {
 			imageData[2] +
 			',1)';
 		let a = this.rgbToHsl(imageData[0], imageData[1], imageData[2]);
-		console.log(a);
-
+		this.setState({
+			hueNob: this.rgbaColor
+		});
 		this.fillGradient();
-	}
+	};
 
-	handleDown(e) {
+	handleDown = e => {
 		this.setState({
 			drag: true
 		});
 		e.target.getAttribute('name') === 'strip'
 			? this.changeColorStrip(e)
 			: this.changeColorBlock(e);
-	}
+	};
 
-	handleMove(e) {
+	handleMove = e => {
 		if (this.state.drag) {
 			e.target.getAttribute('name') === 'strip'
 				? this.changeColorStrip(e)
 				: this.changeColorBlock(e);
 		}
-	}
+	};
+
 	// this implementation was taken from stackoverflow
-	hexToRgbA(hex) {
+	hexToRgbA = hex => {
 		var c;
 		if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
 			c = hex.substring(1).split('');
@@ -262,9 +265,9 @@ class Color extends Component {
 			);
 		}
 		// throw new Error('Bad Hex');
-	}
+	};
 
-	rgbToHsl(r, g, b) {
+	rgbToHsl = (r, g, b) => {
 		(r /= 255), (g /= 255), (b /= 255);
 		var max = Math.max(r, g, b),
 			min = Math.min(r, g, b);
@@ -278,26 +281,27 @@ class Color extends Component {
 			var d = max - min;
 			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 			switch (max) {
-			case r:
-				h = (g - b) / d + (g < b ? 6 : 0);
-				break;
-			case g:
-				h = (b - r) / d + 2;
-				break;
-			case b:
-				h = (r - g) / d + 4;
-				break;
+				case r:
+					h = (g - b) / d + (g < b ? 6 : 0);
+					break;
+				case g:
+					h = (b - r) / d + 2;
+					break;
+				case b:
+					h = (r - g) / d + 4;
+					break;
 			}
 			h /= 6;
 		}
 
 		return [h, s, l];
-	}
-	handleUp() {
+	};
+
+	handleUp = () => {
 		this.setState({
 			drag: false
 		});
-	}
+	};
 
 	render() {
 		const theme = this.props.theme ? 'container dark' : 'container';
@@ -354,6 +358,7 @@ class Color extends Component {
 							border: 1px solid #fff;
 							border-radius: 50%;
 							transform-origin: center;
+							background: ${this.state.color};
 							transform: translate(
 								${this.state.pos.x}px,
 								${this.state.pos.y}px
@@ -366,9 +371,8 @@ class Color extends Component {
 							height: 10px;
 							border: 1px solid #fff;
 							border-radius: 50%;
-							background: #fff;
+							background: ${this.state.hueNob};
 							transform-origin: center;
-							opacity: 0.4;
 							transform: translate(
 								${-2}px,
 								${this.state.posStrip.y - 5}px

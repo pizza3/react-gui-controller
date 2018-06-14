@@ -10,13 +10,17 @@ export const label = css`
 		padding-left: 4px;
 		font-weight: 100;
 		font-size: 12px;
-		color: rgb(119, 155, 255);
+		color: rgb(154, 171, 218);
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+	}
+
+	.label-dark {
+		color: rgb(98, 111, 148);
 	}
 `;
 

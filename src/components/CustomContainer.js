@@ -4,7 +4,9 @@ import { label } from './JSXStyles/commonStyles';
 const CustomContainer = props => {
 	return (
 		<div className={props.hide ? props.theme : `${props.theme} hide`}>
-			<div className="label">{props.label}</div>
+			<div className={props.theme ? 'label label-dark' : 'label'}>
+				{props.label}
+			</div>
 			{props.children}
 			<style jsx>{container}</style>
 			<style jsx>{label}</style>

@@ -10,9 +10,13 @@ import EaseCurve from './components/EaseCurve';
 class App extends Component {
 	state = {
 		data: {
+			text: 'Some Awesome Val',
+			gravity: false,
 			easing2: 'cubic-bezier(1, 0, 0, 1)',
 			easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-			color: '#000'
+			color: '#000',
+			preset: 'value3',
+			noise: 0.4
 		}
 	};
 
@@ -29,10 +33,24 @@ class App extends Component {
 	render() {
 		const { data } = this.state;
 		return (
-			<ReactController data={data} onUpdate={this.update}>
+			<ReactController data={data} theme="light" onUpdate={this.update}>
+				<InputText path="text" label="Head" />
 				<EaseCurve path="easing2" label="SkewXEasing" />
 				<EaseCurve path="easing" label="SkewYEasing" />
+				<CheckBox path="gravity" label="Gravity" />
 				<Color path="color" type="hex" label="Background" />
+				<Select
+					path="preset"
+					options={['value1', 'value2', 'value3', 'value4']}
+					label="Preset"
+				/>
+				<ProgessSlider
+					path="noise"
+					label="Noise"
+					min={0}
+					max={1}
+					step={0.01}
+				/>
 			</ReactController>
 		);
 	}

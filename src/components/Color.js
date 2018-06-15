@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { colorStyle } from './JSXStyles/colorStyles';
 import CustomContainer from './CustomContainer';
 
+//a simple map methos to normalize any values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
 };
 
 class Color extends Component {
 	state = {
-		hide: false,
+		hide: true,
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
@@ -65,6 +67,9 @@ class Color extends Component {
 					imageData[2] +
 					',1)';
 				this.fillGradient();
+
+				//these two loops check for the pixel position of the color in gradient block
+				//and sets the nob of the gradient color block to that position
 				for (let i = 0; i < this.width1; i++) {
 					for (let j = 0; j < this.height1; j++) {
 						let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
@@ -155,20 +160,22 @@ class Color extends Component {
 		this.ctx2.fill();
 	};
 
+	//this method is used to select color from the gradient block
+	//and stores the value in the color state
 	changeColorBlock = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
 		let x =
-			e.clientX -
-			document
-				.getElementById('color-block' + this.props.num)
-				.getBoundingClientRect().left;
-		let y =
-			e.clientY -
-			document
-				.getElementById('color-block' + this.props.num)
-				.getBoundingClientRect().top;
-		let imageData = this.ctx1.getImageData(x, y, 1, 1).data;
+				e.clientX -
+				document
+					.getElementById('color-block' + this.props.num)
+					.getBoundingClientRect().left,
+			y =
+				e.clientY -
+				document
+					.getElementById('color-block' + this.props.num)
+					.getBoundingClientRect().top,
+			imageData = this.ctx1.getImageData(x, y, 1, 1).data;
 		this.rgbaColor =
 			'rgba(' +
 			imageData[0] +
@@ -186,36 +193,33 @@ class Color extends Component {
 		});
 	};
 
+	//this function is for the hue scale color selection,
+	//when the nob is bieng clicked and updates the color gradient
 	changeColorStrip = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
 		let x =
-			e.clientX -
-			document
-				.getElementById('color-strip' + this.props.num)
-				.getBoundingClientRect().left;
-		let y =
-			e.clientY -
-			document
-				.getElementById('color-strip' + this.props.num)
-				.getBoundingClientRect().top;
+				e.clientX -
+				document
+					.getElementById('color-strip' + this.props.num)
+					.getBoundingClientRect().left,
+			y =
+				e.clientY -
+				document
+					.getElementById('color-strip' + this.props.num)
+					.getBoundingClientRect().top;
 		if (y <= 0) {
 			y = 0;
 		} else if (y >= 149) {
 			y = 149;
 		}
-		this.setState(
-			{
-				color: this.rgbaColor,
-				posStrip: {
-					x: 0,
-					y: y
-				}
-			},
-			() => {
-				// this.fillGradient();
+		this.setState({
+			color: this.rgbaColor,
+			posStrip: {
+				x: 0,
+				y: y
 			}
-		);
+		});
 		let imageData = this.ctx2.getImageData(x, y, 1, 1).data;
 		this.rgbaColor =
 			'rgba(' +
@@ -225,13 +229,13 @@ class Color extends Component {
 			',' +
 			imageData[2] +
 			',1)';
-		let a = this.rgbToHsl(imageData[0], imageData[1], imageData[2]);
 		this.setState({
 			hueNob: this.rgbaColor
 		});
 		this.fillGradient();
 	};
 
+	//event down function when any of the color nob is being pressed down with mouse
 	handleDown = e => {
 		this.setState({
 			drag: true
@@ -241,6 +245,7 @@ class Color extends Component {
 			: this.changeColorBlock(e);
 	};
 
+	//event move function when any of the color nob is being moved with mouse
 	handleMove = e => {
 		if (this.state.drag) {
 			e.target.getAttribute('name') === 'strip'
@@ -250,6 +255,7 @@ class Color extends Component {
 	};
 
 	// this implementation was taken from stackoverflow
+	//used to convert any hex to rgba
 	hexToRgbA = hex => {
 		var c;
 		if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
@@ -267,6 +273,8 @@ class Color extends Component {
 		// throw new Error('Bad Hex');
 	};
 
+	// this implementation was taken from stackoverflow
+	//used to covert any rgb  to hsl
 	rgbToHsl = (r, g, b) => {
 		(r /= 255), (g /= 255), (b /= 255);
 		var max = Math.max(r, g, b),
@@ -281,15 +289,15 @@ class Color extends Component {
 			var d = max - min;
 			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 			switch (max) {
-				case r:
-					h = (g - b) / d + (g < b ? 6 : 0);
-					break;
-				case g:
-					h = (b - r) / d + 2;
-					break;
-				case b:
-					h = (r - g) / d + 4;
-					break;
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
+			case g:
+				h = (b - r) / d + 2;
+				break;
+			case b:
+				h = (r - g) / d + 4;
+				break;
 			}
 			h /= 6;
 		}
@@ -304,14 +312,19 @@ class Color extends Component {
 	};
 
 	render() {
-		const theme = this.props.theme ? 'container dark' : 'container';
+		const themeName =
+			this.state.theme === 'dark' ? 'container dark' : 'container';
 		return (
-			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
+			<CustomContainer
+				{...this.props}
+				themeName={themeName}
+				hide={this.state.hide}
+			>
 				<div className="pallete" onClick={this.handleHide} />
 				<div className="contain" onMouseLeave={this.handleUp}>
 					<div
 						className={
-							this.props.theme
+							this.props.theme === 'dark'
 								? 'block-parent block-parent-dark'
 								: 'block-parent'
 						}
@@ -387,7 +400,9 @@ class Color extends Component {
 							border-radius: 3px;
 							background: ${this.state.color};
 							border: 1px solid
-								${this.props.theme ? '#424242' : 'rgb(229, 229, 229)'};
+								${this.props.theme === 'dark'
+				? '#424242'
+				: 'rgb(229, 229, 229)'};
 							margin-right: 4px;
 							cursor: pointer;
 						}
@@ -398,4 +413,14 @@ class Color extends Component {
 	}
 }
 
+Color.propTypes = {
+	theme: PropTypes.oneOf(['light', 'dark']),
+	label: PropTypes.string,
+	num: PropTypes.number
+};
+
+Color.defaultProps = {
+	label: '',
+	theme: 'light'
+};
 export default Color;

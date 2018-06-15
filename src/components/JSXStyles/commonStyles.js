@@ -10,7 +10,7 @@ export const label = css`
 		padding-left: 4px;
 		font-weight: 100;
 		font-size: 12px;
-		color: rgb(154, 171, 218);
+		color: rgb(133, 166, 249);
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;

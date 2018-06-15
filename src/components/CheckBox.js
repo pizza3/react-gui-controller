@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Container from './Container';
 import CheckBoxStyles from './JSXStyles/checkBoxStyles';
 class CheckBox extends Component {
-	
-		state = {
-			val: this.props.data[this.props.path]
-		};
-		
-	handleInputChange=(e)=> {
+	state = {
+		val: this.props.data[this.props.path]
+	};
+
+	handleInputChange = e => {
 		this.setState(
 			{
 				val: e.target.checked
@@ -16,7 +16,7 @@ class CheckBox extends Component {
 				this.props.updateData(this.props.path, this.state.val);
 			}
 		);
-	}
+	};
 
 	render() {
 		return (
@@ -32,3 +32,14 @@ class CheckBox extends Component {
 }
 
 export default CheckBox;
+
+CheckBox.propTypes = {
+	path: PropTypes.string.isRequired,
+	label: PropTypes.string.isRequired,
+	data: PropTypes.object,
+	updateData: PropTypes.func
+};
+
+CheckBox.defaultProps = {
+	label: ''
+};

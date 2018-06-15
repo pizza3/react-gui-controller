@@ -24,7 +24,7 @@ const CheckBoxStyles = props => {
 						height: 22px;
 						padding: 4px;
 						border-radius: 20px;
-						background: ${props.theme ? '#212121' : '#fafafa'};
+						background: ${props.theme === 'dark' ? '#212121' : '#fafafa'};
 						vertical-align: middle;
 						position: relative;
 						cursor: pointer;
@@ -32,7 +32,8 @@ const CheckBoxStyles = props => {
 						transition: background 350ms ease;
 						margin-right: 4px;
 						margin-top: 1px;
-						border: 1px solid ${props.theme ? '#585858' : '#e5e5e5'};
+						border: 1px solid
+							${props.theme === 'dark' ? '#585858' : '#e5e5e5'};
 					}
 
 					.switch${props.num}:before, .switch${props.num}:after {
@@ -53,8 +54,9 @@ const CheckBoxStyles = props => {
 					}
 
 					.switch${props.num}:after {
-						background: ${props.theme ? '#585858' : '#d8d8d8'};
-						border: 1px solid ${props.theme ? '#585858' : '#d6d6d6'};
+						background: ${props.theme === 'dark' ? '#585858' : '#d8d8d8'};
+						border: 1px solid
+							${props.theme === 'dark' ? '#585858' : '#d6d6d6'};
 						transform: translate3d(-2px, -50%, 0);
 					}
 
@@ -72,8 +74,9 @@ const CheckBoxStyles = props => {
 					}
 
 					input:checked + .switch${props.num}:after {
-						background: ${props.theme ? '#313131' : '#fff'};
-						border: 1px solid ${props.theme ? '#313131' : '#fff'};
+						background: ${props.theme === 'dark' ? '#313131' : '#fff'};
+						border: 1px solid
+							${props.theme === 'dark' ? '#313131' : '#fff'};
 						transform: translate3d(124%, -50%, 0);
 					}
 

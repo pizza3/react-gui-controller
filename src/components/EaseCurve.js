@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CustomContainer from './CustomContainer';
 import SvgGrid from './EaseCurveUtils/SvgGrid';
 import SvgPath from './EaseCurveUtils/SvgPath';
@@ -42,7 +43,6 @@ class EaseCurve extends Component {
 		var l = val2.length;
 		val2 = val2.slice(13, l - 1);
 		val2 = val2.split(re);
-		console.log(val2);
 		this.setState(
 			{
 				anchor1: {
@@ -104,12 +104,10 @@ class EaseCurve extends Component {
 		this.element = document
 			.getElementById(`svg${this.props.num}`)
 			.getBoundingClientRect();
-		console.log(this.x);
 	};
 
 	handleMove = e => {
 		if (this.isMove) {
-			console.log(this.element.x + this.x + ',' + e.clientX);
 			//check if anchor is leaving the grid from the right on x-axis
 			if (e.clientX - this.element.x >= 225) {
 				this.setState({
@@ -153,13 +151,20 @@ class EaseCurve extends Component {
 	};
 
 	render() {
-		const theme = this.props.theme ? 'container dark' : 'container';
+		const themeName =
+			this.props.theme === 'dark' ? 'container dark' : 'container';
 		const { c1, c2, anchor1, anchor2 } = this.state;
 		const { data, path } = this.props;
 		return (
-			<CustomContainer {...this.props} theme={theme} hide={this.state.hide}>
+			<CustomContainer
+				{...this.props}
+				themeName={themeName}
+				hide={this.state.hide}
+			>
 				<div
-					className={this.props.theme ? 'text text-dark' : 'text'}
+					className={
+						this.props.theme === 'dark' ? 'text text-dark' : 'text'
+					}
 					onClick={this.handleHide}
 				>
 					{data[path]}
@@ -208,3 +213,17 @@ class EaseCurve extends Component {
 }
 
 export default EaseCurve;
+
+EaseCurve.propTypes = {
+	path: PropTypes.string.isRequired,
+	theme: PropTypes.oneOf(['light', 'dark']),
+	data: PropTypes.object,
+	updateData: PropTypes.func,
+	label: PropTypes.string,
+	num: PropTypes.number
+};
+
+EaseCurve.defaultProps = {
+	label: '',
+	theme: 'light'
+};

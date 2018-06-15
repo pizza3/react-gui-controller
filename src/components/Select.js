@@ -1,44 +1,74 @@
-import React ,{Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Container from './Container';
-import {selectStyle} from './JSXStyles/selectStyles';
-class Select extends Component{
-	constructor(props){
+import { selectStyle } from './JSXStyles/selectStyles';
+class Select extends Component {
+	constructor(props) {
 		super(props);
-		this.state={
-			val:props.data[props.path]	
+		this.state = {
+			val: props.data[props.path]
 		};
-		this.handleChange=this.handleChange.bind(this);        
+		this.handleChange = this.handleChange.bind(this);
 	}
-    
-	handleChange(e){
-		this.setState({
-			val:e.target.value
-		},()=>{
-			this.props.updateData(this.props.path,this.state.val);
-		});
-	}
-    
 
-	render(){
-		const options=this.props.options.map((val,i)=>{
-			return(
-				<option key={i} value={val}>{val}</option>
+	handleChange(e) {
+		this.setState(
+			{
+				val: e.target.value
+			},
+			() => {
+				this.props.updateData(this.props.path, this.state.val);
+			}
+		);
+	}
+
+	render() {
+		const options = this.props.options.map((val, i) => {
+			return (
+				<option key={i} value={val}>
+					{val}
+				</option>
 			);
 		});
-		return(
+		return (
 			<Container {...this.props} label={this.props.label}>
-				<div className={this.props.theme?'dropdown dropdown-dark':'dropdown'}>
-					<select value={this.state.val} onChange={this.handleChange} className={this.props.theme?'dropdown-select dropdown-select-dark ':'dropdown-select'}>
+				<div
+					className={
+						this.props.theme === 'dark'
+							? 'dropdown dropdown-dark'
+							: 'dropdown'
+					}
+				>
+					<select
+						value={this.state.val}
+						onChange={this.handleChange}
+						className={
+							this.props.theme === 'dark'
+								? 'dropdown-select dropdown-select-dark '
+								: 'dropdown-select'
+						}
+					>
 						{options}
 					</select>
 				</div>
-				<style jsx>
-					{selectStyle}
-				</style>
+				<style jsx>{selectStyle}</style>
 			</Container>
 		);
 	}
 }
 
-
 export default Select;
+
+Select.propTypes = {
+	path: PropTypes.string.isRequired,
+	theme: PropTypes.oneOf(['light', 'dark']),
+	data: PropTypes.object,
+	updateData: PropTypes.func,
+	label: PropTypes.string,
+	options: PropTypes.array
+};
+
+Select.defaultProps = {
+	label: '',
+	theme: 'light'
+};

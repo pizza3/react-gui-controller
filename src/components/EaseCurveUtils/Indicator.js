@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Indicator = props => {
 	return (
@@ -56,3 +57,11 @@ const Indicator = props => {
 };
 
 export default Indicator;
+
+Indicator.propTypes = {
+	ease: PropTypes.string.isRequired
+};
+
+Indicator.defaultProps = {
+	ease: 'linear'
+};

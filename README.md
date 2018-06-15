@@ -1,9 +1,9 @@
 # react-gui
 
-##Table Of Contents
+## Table Of Contents
 
 -  [Introduction](#introduction)
 -  [Installation](#installation)
 -  [Docs](#docs)
 
-#Demo
+# Demo

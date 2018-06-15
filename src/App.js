@@ -33,7 +33,7 @@ class App extends Component {
 	render() {
 		const { data } = this.state;
 		return (
-			<ReactController data={data} theme="light" onUpdate={this.update}>
+			<ReactController data={data} theme="dark" onUpdate={this.update}>
 				<InputText path="text" label="Head" />
 				<EaseCurve path="easing2" label="SkewXEasing" />
 				<EaseCurve path="easing" label="SkewYEasing" />

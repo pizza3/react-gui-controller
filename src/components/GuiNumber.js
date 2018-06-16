@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { label, container } from './JSXStyles/commonStyles';
-import Container from './Container';
+import Container from './containerComponents/Container';
 
-class ProgessSlider extends Component {
+class GuiNumber extends Component {
 	state = {
 		val: this.props.data[this.props.path]
 	};
@@ -98,7 +98,7 @@ class ProgessSlider extends Component {
 	}
 }
 
-ProgessSlider.propTypes = {
+GuiNumber.propTypes = {
 	path: PropTypes.string.isRequired,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	data: PropTypes.object,
@@ -109,7 +109,7 @@ ProgessSlider.propTypes = {
 	label: PropTypes.string
 };
 
-ProgessSlider.defaultProps = {
+GuiNumber.defaultProps = {
 	label: '',
 	theme: 'light',
 	min: 0,
@@ -117,4 +117,4 @@ ProgessSlider.defaultProps = {
 	step: 0
 };
 
-export default ProgessSlider;
+export default GuiNumber;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { controllerStyle } from './JSXStyles/controllerStyles';
 
-class ReactController extends Component {
+class Gui extends Component {
 	state = {
 		hide: this.props.hide,
 		drag: false,
@@ -67,9 +67,9 @@ class ReactController extends Component {
 		);
 	}
 }
-export default ReactController;
+export default Gui;
 
-ReactController.propTypes = {
+Gui.propTypes = {
 	children: PropTypes.arrayOf(PropTypes.node),
 	data: PropTypes.object,
 	theme: PropTypes.oneOf(['light', 'dark']),
@@ -77,7 +77,15 @@ ReactController.propTypes = {
 	onUpdate: PropTypes.func.isRequired
 };
 
-ReactController.defaultProps = {
+Gui.defaultProps = {
 	theme: 'light',
 	hide: false
 };
+
+export { default as GuiString } from './GuiString';
+export { default as GuiNumber } from './GuiNumber';
+export { default as GuiSelect } from './GuiSelect';
+export { default as GuiEasing } from './GuiEasing';
+export { default as GuiColor } from './GuiColor';
+export { default as GuiBool } from './GuiBool';
+export { default as GuiButton } from './GuiButton';

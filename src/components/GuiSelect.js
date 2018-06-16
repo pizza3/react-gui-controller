@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Container from './Container';
+import Container from './containerComponents/Container';
 import { selectStyle } from './JSXStyles/selectStyles';
-class Select extends Component {
+class GuiSelect extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -57,9 +57,9 @@ class Select extends Component {
 	}
 }
 
-export default Select;
+export default GuiSelect;
 
-Select.propTypes = {
+GuiSelect.propTypes = {
 	path: PropTypes.string.isRequired,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	data: PropTypes.object,
@@ -68,7 +68,7 @@ Select.propTypes = {
 	options: PropTypes.array
 };
 
-Select.defaultProps = {
+GuiSelect.defaultProps = {
 	label: '',
 	theme: 'light'
 };

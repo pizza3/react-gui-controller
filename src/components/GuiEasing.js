@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CustomContainer from './CustomContainer';
-import SvgGrid from './EaseCurveUtils/SvgGrid';
-import SvgPath from './EaseCurveUtils/SvgPath';
+import CustomContainer from './containerComponents/CustomContainer';
+import SvgGrid from './EasingUtils/SvgGrid';
+import SvgPath from './EasingUtils/SvgPath';
 import { easeCurveStyle } from './JSXStyles/easeCurveStyles';
-import Indicator from './EaseCurveUtils/Indicator';
-import EaseSetting from './EaseCurveUtils/EaseSetting';
-import SvgText from './EaseCurveUtils/SvgText';
+import Indicator from './EasingUtils/Indicator';
+import EaseSetting from './EasingUtils/EaseSetting';
+import SvgText from './EasingUtils/SvgText';
 //map function is used to naomalise the values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
 };
 
-class EaseCurve extends Component {
+class GuiEasing extends Component {
 	state = {
 		hide: true,
 		anchor1: {
@@ -212,9 +212,9 @@ class EaseCurve extends Component {
 	}
 }
 
-export default EaseCurve;
+export default GuiEasing;
 
-EaseCurve.propTypes = {
+GuiEasing.propTypes = {
 	path: PropTypes.string.isRequired,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	data: PropTypes.object,
@@ -223,7 +223,7 @@ EaseCurve.propTypes = {
 	num: PropTypes.number
 };
 
-EaseCurve.defaultProps = {
+GuiEasing.defaultProps = {
 	label: '',
 	theme: 'light'
 };

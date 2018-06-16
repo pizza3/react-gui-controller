@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { textInput } from './JSXStyles/textInputStyles';
-import Container from './Container';
+import Container from './containerComponents/Container';
 
-class InputText extends Component {
+class GuiString extends Component {
 	state = { val: this.props.data[this.props.path] };
 
 	handleChange = e => {
@@ -36,9 +36,9 @@ class InputText extends Component {
 	}
 }
 
-export default InputText;
+export default GuiString;
 
-InputText.propTypes = {
+GuiString.propTypes = {
 	path: PropTypes.string.isRequired,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	data: PropTypes.object,
@@ -46,7 +46,7 @@ InputText.propTypes = {
 	label: PropTypes.string
 };
 
-InputText.defaultProps = {
+GuiString.defaultProps = {
 	label: '',
 	theme: 'light'
 };

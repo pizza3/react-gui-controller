@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colorStyle } from './JSXStyles/colorStyles';
-import CustomContainer from './CustomContainer';
+import CustomContainer from './containerComponents/CustomContainer';
 
 //a simple map methos to normalize any values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
 };
 
-class Color extends Component {
+class GuiColor extends Component {
 	state = {
 		hide: true,
 		drag: false,
@@ -413,14 +413,14 @@ class Color extends Component {
 	}
 }
 
-Color.propTypes = {
+GuiColor.propTypes = {
 	theme: PropTypes.oneOf(['light', 'dark']),
 	label: PropTypes.string,
 	num: PropTypes.number
 };
 
-Color.defaultProps = {
+GuiColor.defaultProps = {
 	label: '',
 	theme: 'light'
 };
-export default Color;
+export default GuiColor;

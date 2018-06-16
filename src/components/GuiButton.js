@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { buttonStyle } from './JSXStyles/buttonStyles';
-class Button extends Component {
+class GuiButton extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -25,15 +25,15 @@ class Button extends Component {
 	}
 }
 
-export default Button;
+export default GuiButton;
 
-Button.propTypes = {
+GuiButton.propTypes = {
 	label: PropTypes.string,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	onClick: PropTypes.func.isRequired
 };
 
-Button.defaultProps = {
+GuiButton.defaultProps = {
 	label: '',
 	theme: 'light'
 };

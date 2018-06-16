@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Container from './Container';
+import Container from './containerComponents/Container';
 import CheckBoxStyles from './JSXStyles/checkBoxStyles';
-class CheckBox extends Component {
+class GuiBool extends Component {
 	state = {
 		val: this.props.data[this.props.path]
 	};
@@ -31,15 +31,15 @@ class CheckBox extends Component {
 	}
 }
 
-export default CheckBox;
+export default GuiBool;
 
-CheckBox.propTypes = {
+GuiBool.propTypes = {
 	path: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	data: PropTypes.object,
 	updateData: PropTypes.func
 };
 
-CheckBox.defaultProps = {
+GuiBool.defaultProps = {
 	label: ''
 };

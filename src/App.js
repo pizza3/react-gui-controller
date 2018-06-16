@@ -5,7 +5,7 @@ class App extends Component {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,
-			background: '#85c5ba',
+			background: '#dc6900',
 			foreground: '#b7c485'
 		}
 	};

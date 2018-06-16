@@ -7,6 +7,16 @@
 -  [Usage](#usage)
 -  [Docs](#docs)
 
+## Introduction
+
+A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library.
+
+## Installation
+
+```
+npm install react-guicontroller --save
+```
+
 ## Usage
 
 ```

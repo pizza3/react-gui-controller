@@ -16,10 +16,6 @@ class App extends Component {
 		});
 	};
 
-	handleClick() {
-		console.log('click');
-	}
-
 	render() {
 		const { data } = this.state;
 		return (

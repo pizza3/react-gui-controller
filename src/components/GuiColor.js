@@ -26,6 +26,18 @@ class GuiColor extends Component {
 
 	componentDidMount() {
 		//after the component has been mounted create canvas context and also apply setting's.
+		let a;
+		let col;
+		if (this.props.type === 'hex') {
+			let val = this.props.data[this.props.path];
+			console.log(val);
+			col = this.hexToRgb(val);
+
+			console.log(col);
+			a = this.rgbToHsl(col[0], col[1], col[2]);
+		} else {
+			a = this.rgbToHsl(198, 110, 108);
+		}
 		let colorBlock = document.getElementById('color-block' + this.props.num);
 		this.ctx1 = colorBlock.getContext('2d');
 		this.width1 = colorBlock.width;
@@ -41,8 +53,7 @@ class GuiColor extends Component {
 		this.fillStrip();
 		// console.log(this.hexToRgbA(this.rgbaColor));
 		//position pointer indicator
-		// console(this.hexToHSL('#a6ed8e'));
-		let a = this.rgbToHsl(198, 110, 108);
+		// console(a[0]);
 		let val = MapRange(a[0], 0, 1, 0, 150);
 		this.setState(
 			{
@@ -74,7 +85,7 @@ class GuiColor extends Component {
 					for (let j = 0; j < this.height1; j++) {
 						let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
 						if (
-							'rgba(198,110,108,1)' ===
+							'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',1)' ===
 							'rgba(' +
 								imageData[0] +
 								',' +
@@ -256,23 +267,22 @@ class GuiColor extends Component {
 
 	// this implementation was taken from stackoverflow
 	//used to convert any hex to rgba
-	hexToRgbA = hex => {
-		var c;
-		if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-			c = hex.substring(1).split('');
-			if (c.length == 3) {
-				c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-			}
-			c = '0x' + c.join('');
-			return (
-				'rgba(' +
-				[(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') +
-				',1)'
-			);
-		}
-		// throw new Error('Bad Hex');
-	};
+	hexToRgb(hex) {
+		// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+		var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+		hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+			return r + r + g + g + b + b;
+		});
 
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result
+			? [
+				parseInt(result[1], 16),
+				parseInt(result[2], 16),
+				parseInt(result[3], 16)
+			  ]
+			: null;
+	}
 	// this implementation was taken from stackoverflow
 	//used to covert any rgb  to hsl
 	rgbToHsl = (r, g, b) => {

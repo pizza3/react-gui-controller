@@ -9,8 +9,6 @@ export const controllerStyle = css`
 		border: 1px solid rgb(214, 214, 214);
 		border-radius: 4px;
 		overflow: hidden;
-		// top: 50px;
-		// left: 50px;
 	}
 
 	.dark {
@@ -34,6 +32,7 @@ export const controllerStyle = css`
 		position: relative;
 		width: 100%;
 		height: 24px;
+		cursor: all-scroll;
 	}
 
 	.control-button {

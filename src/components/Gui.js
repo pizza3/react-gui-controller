@@ -12,6 +12,8 @@ class Gui extends Component {
 		}
 	};
 
+	componentDidMount() {}
+
 	handleHide = () => {
 		this.setState({
 			hide: !this.state.hide
@@ -56,6 +58,13 @@ class Gui extends Component {
 							y: 0
 						}
 					});
+				} else if (ydiff <= 0 || xdiff <= 0) {
+					this.setState({
+						pos: {
+							x: 0,
+							y: 0
+						}
+					});
 				} else {
 					this.setState({
 						pos: {
@@ -68,6 +77,12 @@ class Gui extends Component {
 		});
 
 		window.addEventListener('mouseup', () => {
+			this.setState({
+				drag: false
+			});
+		});
+
+		window.addEventListener('mouseleave', () => {
 			this.setState({
 				drag: false
 			});

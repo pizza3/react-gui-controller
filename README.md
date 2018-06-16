@@ -7,3 +7,7 @@
 -  [Docs](#docs)
 
 # Demo
+
+## License
+
+MIT

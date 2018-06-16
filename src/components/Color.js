@@ -313,7 +313,7 @@ class Color extends Component {
 
 	render() {
 		const themeName =
-			this.state.theme === 'dark' ? 'container dark' : 'container';
+			this.props.theme === 'dark' ? 'container dark' : 'container';
 		return (
 			<CustomContainer
 				{...this.props}

@@ -13,7 +13,7 @@
 import React, { Component } from 'react';
 import Gui, { GuiString, GuiNumber, GuiColor } from './components/Gui';
 class App extends Component {
-	state = {
+   state = {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,

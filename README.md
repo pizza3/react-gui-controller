@@ -9,12 +9,12 @@
 
 ## Introduction
 
-A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library.
+A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable
 
 ## Installation
 
 ```
-npm install react-guicontroller --save
+npm install react-gui-controller --save
 ```
 
 ## Usage

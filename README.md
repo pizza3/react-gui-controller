@@ -10,6 +10,7 @@
 ## Introduction
 
 A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable
+component's.
 
 ## Installation
 
@@ -53,6 +54,10 @@ class App extends Component {
 
 export default App;
 ```
+
+## Docs
+
+### Gui
 
 # Demo
 

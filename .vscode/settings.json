@@ -1,5 +1,6 @@
 {
 	"git.ignoreLimitWarning": true,
 	"editor.tabSize": 3,
-	"prettier.tabWidth": 3
+	"prettier.tabWidth": 3,
+	"editor.detectIndentation": false
 }

@@ -245,7 +245,7 @@ A select component for updating a value with one of the options supplied via the
 
 ##### required props
 
--  `options` - In the option prop we need to proved an array of options.
+-  `options` - In the options prop we need to proved an array of options.
 -  `path` - The state data object key, this will eventually going to be the initial value.
 
 ```js
@@ -262,15 +262,45 @@ A select component for updating a value with one of the options supplied via the
       });
    };
 
-   handleButton=()=>{
-      console.log('Button click occured')
-   }
-
    render() {
       const { data } = this.state;
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
             <GuiSelect path='framerate' options={['25fps', '30fps', '40fps', '60fps']} label="Framerate"/>
+         </Gui>
+      );
+   }
+...
+```
+
+### GuiColor
+
+A color picker component which can be used to mutate any specific colo type.
+
+##### required props
+
+-  `type` - Mention the type of color format you are using. `hex`,`rgb` & `hsl` are the format's available.
+-  `path` - The state data object key, this will eventually going to be the initial value.
+
+```js
+...
+   state = {
+      data: {
+         background: '#b7c485'
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme='dark' onUpdate={this.update}>
+            <GuiColor path='background' type='hex' label='Background' />
          </Gui>
       );
    }

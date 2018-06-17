@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import Gui, { GuiString, GuiNumber, GuiColor } from './components/Gui';
+import Gui, {
+	GuiString,
+	GuiNumber,
+	GuiColor,
+	GuiSelect
+} from './components/Gui';
 class App extends Component {
 	state = {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,
 			background: '#dc6900',
-			foreground: '#b7c485'
+			foreground: '#b7c485',
+			framerate: '30fps'
 		}
 	};
 
@@ -23,6 +29,11 @@ class App extends Component {
 				<GuiString path="text" label="Head" />
 				<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
 				<GuiColor path="background" label="Background" type="hex" />
+				<GuiSelect
+					path="framerate"
+					options={['25fps', '30fps', '40fps', '60fps']}
+					label="Framerate"
+				/>
 				<GuiColor path="foreground" label="Foreground" type="hex" />
 			</Gui>
 		);

@@ -147,7 +147,7 @@ component's with the help of `onUpdate` functional prop.
 ...
    state = {
       data: {
-		noise: 0.4
+         noise: 0.4
       }
    };
 
@@ -161,7 +161,7 @@ component's with the help of `onUpdate` functional prop.
       const { data } = this.state;
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
-			<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
+            <GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
          </Gui>
       );
    }
@@ -180,7 +180,7 @@ component's with the help of `onUpdate` functional prop.
 ...
    state = {
       data: {
-		gravity: false
+         gravity: false
       }
    };
 
@@ -194,7 +194,7 @@ component's with the help of `onUpdate` functional prop.
       const { data } = this.state;
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
-			<GuiBool path="gravity" label="Gravity"/>
+			<3GuiBool path="gravity" label="Gravity"/>
          </Gui>
       );
    }

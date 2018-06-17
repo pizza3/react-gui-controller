@@ -6,6 +6,7 @@
 -  [Installation](#installation)
 -  [Usage](#usage)
 -  [Docs](#docs)
+-  [Demo](#demo)
 
 ## Introduction
 
@@ -59,7 +60,7 @@ export default App;
 
 ### Gui
 
-Gui is the wrapper component which will create a new gui container and will distribute the `data` prop to other
+`Gui` is the wrapper component which will create a new gui container and will distribute the `data` prop to other
 child component's. This component will handle all the unidirectional data flow between the state data and child
 component's with the help of `onUpdate` functional prop.
 
@@ -77,10 +78,7 @@ component's with the help of `onUpdate` functional prop.
    ...
    state = {
       data: {
-         text: "Some Awesome Val",
-         noise: 0.4,
-         background: "#dc6900",
-         foreground: "#b7c485"
+         ...
       }
    };
 
@@ -99,6 +97,42 @@ component's with the help of `onUpdate` functional prop.
       );
    }
    ...
+```
+
+###GuiString
+`GuiString` is used to mutate any kind of string.
+
+##### required props
+
+-  `path` - The data object key
+
+##### optional props
+
+-  `theme` - The theme selector as `light` or `dark`, default is `light`.
+
+```js
+...
+   state = {
+      data: {
+         text: "Some Awesome Value"
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+            <GuiString path="text" label="Head" />
+         </Gui>
+      );
+   }
+...
 ```
 
 ## Demo

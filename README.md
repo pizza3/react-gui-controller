@@ -68,10 +68,12 @@ component's with the help of `onUpdate` functional prop.
 -  `data` - The data your Gui controller will mutate
 -  `onUpdate` - The method which will be called whenever an update is handled by the controller
 -  `children` - The dat.GUI components that make up the controller
+
+##### optional props
+
 -  `theme` - The theme selector as `light` or `dark`, default is `light`.
 
 ```js
-   ...
    ...
    state = {
       data: {
@@ -93,8 +95,6 @@ component's with the help of `onUpdate` functional prop.
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
             ...
-
-
          </Gui>
       );
    }

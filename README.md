@@ -11,7 +11,7 @@
 ## Introduction
 
 A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable
-component's. For styling this library uses Zeit [style-jsx](https://github.com/zeit/styled-jsx).
+component's. For styling this library uses Zeit [styled-jsx](https://github.com/zeit/styled-jsx).
 
 ## Installation
 
@@ -203,7 +203,8 @@ component's with the help of `onUpdate` functional prop.
 
 ### GuiButton
 
-`GuiButton` provides a button.
+`GuiButton` provides a button, under which you can specify the `onClick` prop and mention the
+funtion
 
 ##### required props
 
@@ -213,7 +214,7 @@ component's with the help of `onUpdate` functional prop.
 ...
    state = {
       data: {
-         gravity: false
+        ...
       }
    };
 
@@ -232,6 +233,44 @@ component's with the help of `onUpdate` functional prop.
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
             <GuiButton onClick={this.handleButton} label="Submit"/>
+         </Gui>
+      );
+   }
+...
+```
+
+### GuiSelect
+
+A select component for updating a value with one of the options supplied via the `options` prop. The original value from the `path` will always be added to the passed options array as the first item.
+
+##### required props
+
+-  `options` - In the option prop we need to proved an array of options.
+-  `path` - The state data object key, this will eventually going to be the initial value.
+
+```js
+...
+   state = {
+      data: {
+         framerate: '30fps'
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   handleButton=()=>{
+      console.log('Button click occured')
+   }
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+            <GuiSelect path='framerate' options={['25fps', '30fps', '40fps', '60fps']} label="Framerate"/>
          </Gui>
       );
    }

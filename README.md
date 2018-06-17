@@ -20,36 +20,36 @@ npm install react-gui-controller --save
 
 ## Usage
 
-```
-import React, { Component } from 'react';
-import Gui, { GuiString, GuiNumber, GuiColor } from './components/Gui';
+```js
+import React, { Component } from "react";
+import Gui, { GuiString, GuiNumber, GuiColor } from "./components/Gui";
 class App extends Component {
    state = {
-		data: {
-			text: 'Some Awesome Val',
-			noise: 0.4,
-			background: '#dc6900',
-			foreground: '#b7c485'
-		}
-	};
+      data: {
+         text: "Some Awesome Val",
+         noise: 0.4,
+         background: "#dc6900",
+         foreground: "#b7c485"
+      }
+   };
 
-	update = data => {
-		this.setState({
-			data
-		});
-	};
+   update = data => {
+      this.setState({
+         data
+      });
+   };
 
-	render() {
-		const { data } = this.state;
-		return (
-			<Gui data={data} theme="dark" onUpdate={this.update}>
-				<GuiString path="text" label="Head" />
-				<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
-				<GuiColor path="background" label="Background" type="hex" />
-				<GuiColor path="foreground" label="Foreground" type="hex" />
-			</Gui>
-		);
-	}
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+            <GuiString path="text" label="Head" />
+            <GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
+            <GuiColor path="background" label="Background" type="hex" />
+            <GuiColor path="foreground" label="Foreground" type="hex" />
+         </Gui>
+      );
+   }
 }
 
 export default App;
@@ -59,7 +59,11 @@ export default App;
 
 ### Gui
 
-# Demo
+Gui is the wrapper component which will create a new gui container and will distribute the `data` prop to other
+child component's. This component will handle all the unidirectional data flow between the state data and child
+component's with the help of `onUpdate` functional prop.
+
+## Demo
 
 ## License
 

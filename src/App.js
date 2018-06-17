@@ -10,8 +10,7 @@ class App extends Component {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,
-			background: '#dc6900',
-			foreground: '#b7c485',
+			foreground: '#deffd8',
 			framerate: '30fps'
 		}
 	};
@@ -28,7 +27,6 @@ class App extends Component {
 			<Gui data={data} theme="dark" onUpdate={this.update}>
 				<GuiString path="text" label="Head" />
 				<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
-				<GuiColor path="background" label="Background" type="hex" />
 				<GuiSelect
 					path="framerate"
 					options={['25fps', '30fps', '40fps', '60fps']}

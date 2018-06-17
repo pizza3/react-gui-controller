@@ -78,40 +78,16 @@ class GuiColor extends Component {
 					imageData[2] +
 					',1)';
 				this.fillGradient();
-
-				//these two loops check for the pixel position of the color in gradient block
-				//and sets the nob of the gradient color block to that position
-				for (let i = 0; i < this.width1; i++) {
-					for (let j = 0; j < this.height1; j++) {
-						let imageData = this.ctx1.getImageData(i, j, 1, 1).data;
-						if (
-							'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',1)' ===
-							'rgba(' +
-								imageData[0] +
-								',' +
-								imageData[1] +
-								',' +
-								imageData[2] +
-								',1)'
-						) {
-							this.setState({
-								color:
-									'rgba(' +
-									imageData[0] +
-									',' +
-									imageData[1] +
-									',' +
-									imageData[2] +
-									',1)',
-								pos: {
-									x: i,
-									y: j
-								},
-								hueNob: this.rgbaColor
-							});
-						}
-					}
-				}
+				let hsv = this.rgbToHsv(col[0], col[1], col[2]);
+				console.log(`${-(hsv[2] * 100) + 100}% ,${hsv[1] * 100}%`);
+				this.setState({
+					color: 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',1)',
+					pos: {
+						x: `${-(hsv[2] * 100) + 100}%`,
+						y: `${hsv[1] * 100}%`
+					},
+					hueNob: this.rgbaColor
+				});
 			}
 		);
 	}
@@ -314,6 +290,39 @@ class GuiColor extends Component {
 
 		return [h, s, l];
 	};
+	// used to convert rgb to hsv
+	rgbToHsv(r, g, b) {
+		(r /= 255), (g /= 255), (b /= 255);
+
+		var max = Math.max(r, g, b),
+			min = Math.min(r, g, b);
+		var h,
+			s,
+			v = max;
+
+		var d = max - min;
+		s = max == 0 ? 0 : d / max;
+
+		if (max == min) {
+			h = 0; // achromatic
+		} else {
+			switch (max) {
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
+			case g:
+				h = (b - r) / d + 2;
+				break;
+			case b:
+				h = (r - g) / d + 4;
+				break;
+			}
+
+			h /= 6;
+		}
+
+		return [h, s, v];
+	}
 
 	handleUp = () => {
 		this.setState({
@@ -382,10 +391,8 @@ class GuiColor extends Component {
 							border-radius: 50%;
 							transform-origin: center;
 							background: ${this.state.color};
-							transform: translate(
-								${this.state.pos.x}px,
-								${this.state.pos.y}px
-							);
+							top: ${this.state.pos.x};
+							left: ${this.state.pos.y};
 						}
 
 						.block-strip {

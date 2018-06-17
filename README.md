@@ -194,7 +194,7 @@ component's with the help of `onUpdate` functional prop.
       const { data } = this.state;
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
-			   <GuiBool path="gravity" label="Gravity"/>
+		      <GuiBool path="gravity" label="Gravity"/>
          </Gui>
       );
    }

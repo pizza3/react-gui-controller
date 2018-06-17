@@ -105,11 +105,9 @@ component's with the help of `onUpdate` functional prop.
 
 ##### required props
 
--  `path` - The data object key
+-  `path` - The state data object key.
 
 ##### optional props
-
--  `theme` - The theme selector as `light` or `dark`, default is `light`.
 
 ```js
 ...
@@ -130,6 +128,44 @@ component's with the help of `onUpdate` functional prop.
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
             <GuiString path="text" label="Head" />
+         </Gui>
+      );
+   }
+...
+```
+
+### GuiNumber
+
+`GuiNumber` provides a range slider to toggle between whole and decimal values.
+
+##### required props
+
+-  `path` - The state data object key, this will eventually going to be the initial value.
+-  `min` - The minimum value of the slider.
+-  `max` - The maximum value of the slider.
+-  `step` - The change in value of the slider.
+
+##### optional props
+
+```js
+...
+   state = {
+      data: {
+			noise: 0.4,
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+				<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
          </Gui>
       );
    }

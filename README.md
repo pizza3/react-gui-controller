@@ -99,7 +99,8 @@ component's with the help of `onUpdate` functional prop.
    ...
 ```
 
-###GuiString
+### GuiString
+
 `GuiString` is used to mutate any kind of string.
 
 ##### required props

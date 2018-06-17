@@ -11,7 +11,7 @@
 ## Introduction
 
 A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable
-component's.
+component's. For styling this library uses Zeit [style-jsx](https://github.com/zeit/styled-jsx).
 
 ## Installation
 
@@ -107,8 +107,6 @@ component's with the help of `onUpdate` functional prop.
 
 -  `path` - The state data object key.
 
-##### optional props
-
 ```js
 ...
    state = {
@@ -145,13 +143,11 @@ component's with the help of `onUpdate` functional prop.
 -  `max` - The maximum value of the slider.
 -  `step` - The change in value of the slider.
 
-##### optional props
-
 ```js
 ...
    state = {
       data: {
-			noise: 0.4,
+		noise: 0.4
       }
    };
 
@@ -165,7 +161,40 @@ component's with the help of `onUpdate` functional prop.
       const { data } = this.state;
       return (
          <Gui data={data} theme="dark" onUpdate={this.update}>
-				<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
+			<GuiNumber path="noise" label="Noise" min={0} max={1} step={0.1} />
+         </Gui>
+      );
+   }
+...
+```
+
+### GuiBool
+
+`GuiBool` provides a switch button to toggle between `true` and `false`.
+
+##### required props
+
+-  `path` - The state data object key, this will eventually going to be the initial value.
+
+```js
+...
+   state = {
+      data: {
+		gravity: false
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+			<GuiBool path="gravity" label="Gravity"/>
          </Gui>
       );
    }

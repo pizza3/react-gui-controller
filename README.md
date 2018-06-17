@@ -63,6 +63,44 @@ Gui is the wrapper component which will create a new gui container and will dist
 child component's. This component will handle all the unidirectional data flow between the state data and child
 component's with the help of `onUpdate` functional prop.
 
+##### required props
+
+-  `data` - The data your Gui controller will mutate
+-  `onUpdate` - The method which will be called whenever an update is handled by the controller
+-  `children` - The dat.GUI components that make up the controller
+-  `theme` - The theme selector as `light` or `dark`, default is `light`.
+
+```js
+   ...
+   ...
+   state = {
+      data: {
+         text: "Some Awesome Val",
+         noise: 0.4,
+         background: "#dc6900",
+         foreground: "#b7c485"
+      }
+   };
+
+   update = data => {
+      this.setState({
+         data
+      });
+   };
+
+   render() {
+      const { data } = this.state;
+      return (
+         <Gui data={data} theme="dark" onUpdate={this.update}>
+            ...
+
+
+         </Gui>
+      );
+   }
+   ...
+```
+
 ## Demo
 
 ## License

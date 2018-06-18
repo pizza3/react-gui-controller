@@ -14,7 +14,7 @@ class GuiColor extends Component {
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
-
+		rgb: null,
 		rpos: {
 			x: 0,
 			y: 0
@@ -32,11 +32,14 @@ class GuiColor extends Component {
 	componentDidMount() {
 		//after the component has been mounted create canvas context and also apply setting's.
 		let a;
-		let col;
+		let col, val;
 		if (this.props.type === 'hex') {
-			let val = this.props.data[this.props.path];
+			val = this.props.data[this.props.path];
 			col = this.hexToRgb(val);
 			a = this.rgbToHsl(col[0], col[1], col[2]);
+		} else if (this.props.type === 'rgb') {
+			val = this.props.data[this.props.path];
+			a = this.rgbToHsl(val.r, val.g, val.b);
 		} else {
 			a = this.rgbToHsl(198, 110, 108);
 		}
@@ -54,12 +57,12 @@ class GuiColor extends Component {
 		this.fillGradient();
 		this.fillStrip();
 		//position pointer indicator
-		let val = MapRange(a[0], 0, 1, 0, 150);
+		let val2 = MapRange(a[0], 0, 1, 0, 150);
 		this.setState(
 			{
 				posStrip: {
 					x: 0,
-					y: val
+					y: val2
 				}
 			},
 			() => {
@@ -78,15 +81,24 @@ class GuiColor extends Component {
 					imageData[2] +
 					',1)';
 				this.fillGradient();
-				let hsv = this.rgbToHsv(col[0], col[1], col[2]);
-				// console.log(
-				// 	`${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`
-				// );
+
+				//the positioning implementation with help of hsv was taken from
+				//the react-color library
+				let hsv;
+				let color;
+				if (this.props.type === 'hex') {
+					hsv = this.rgbToHsv(col[0], col[1], col[2]);
+					color = this.props.data[this.props.path];
+				} else if (this.props.type === 'rgb') {
+					hsv = this.rgbToHsv(val.r, val.g, val.b);
+					color = 'rgba(' + val.r + ',' + val.g + ',' + val.b + ',1)';
+				}
+
 				this.setState({
-					color: this.props.data[this.props.path],
+					color: color,
 					pos: {
-						x: `${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`,
-						y: `${(this.width1 * (hsv[1] * 100)) / 100 - 5}`
+						x: `${(this.height1 * (-(hsv[2] * 100) + 100)) / 100}`,
+						y: `${(this.width1 * (hsv[1] * 100)) / 100}`
 					},
 					rpos: {
 						x: 0,
@@ -129,12 +141,28 @@ class GuiColor extends Component {
 			this.height1
 		).data;
 
-		// if (this.props.type === 'hex') {
-		console.log('hex called');
-		this.setState({
-			color: this.rgbToHex(imageData[0], imageData[1], imageData[2])
-		});
-		// }
+		if (this.props.type === 'hex') {
+			// console.log('hex called');
+			this.setState({
+				color: this.rgbToHex(imageData[0], imageData[1], imageData[2])
+			});
+		} else if (this.props.type === 'rgb') {
+			this.setState({
+				color:
+					'rgba(' +
+					imageData[0] +
+					',' +
+					imageData[1] +
+					',' +
+					imageData[2] +
+					',1)',
+				rgb: {
+					r: imageData[0],
+					g: imageData[1],
+					b: imageData[2]
+				}
+			});
+		}
 		// } else {
 		// 	this.setState({
 		// 		color:
@@ -190,14 +218,28 @@ class GuiColor extends Component {
 			',' +
 			imageData[2] +
 			',1)';
-		this.setState({
-			color: this.rgbToHex(imageData[0], imageData[1], imageData[2]),
-			// color: this.rgbaColor,
-			pos: {
-				x: y - 5,
-				y: x - 5
-			}
-		});
+		if (this.props.type === 'hex') {
+			this.setState({
+				color: this.rgbToHex(imageData[0], imageData[1], imageData[2]),
+				pos: {
+					x: y,
+					y: x
+				}
+			});
+		} else if (this.props.type === 'rgb') {
+			this.setState({
+				color: this.rgbaColor,
+				rgb: {
+					r: imageData[0],
+					g: imageData[1],
+					b: imageData[2]
+				},
+				pos: {
+					x: y,
+					y: x
+				}
+			});
+		}
 	};
 
 	//this function is for the hue scale color selection,
@@ -258,7 +300,11 @@ class GuiColor extends Component {
 			e.target.getAttribute('name') === 'strip'
 				? this.changeColorStrip(e)
 				: this.changeColorBlock(e);
-			this.props.updateData(this.props.path, this.state.color);
+			if (this.props.type === 'hex') {
+				this.props.updateData(this.props.path, this.state.color);
+			} else if (this.props.type === 'rgb') {
+				this.props.updateData(this.props.path, this.state.rgb);
+			}
 		}
 	};
 
@@ -418,8 +464,8 @@ class GuiColor extends Component {
 							border-radius: 50%;
 							transform-origin: center;
 							background: ${this.state.color};
-							top: ${this.state.pos.x}px;
-							left: ${this.state.pos.y}px;
+							top: ${this.state.pos.x - 5}px;
+							left: ${this.state.pos.y - 5}px;
 						}
 
 						.block-strip {

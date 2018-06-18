@@ -10,7 +10,7 @@ class App extends Component {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,
-			foreground: '#deffd8',
+			foreground: '#1f331c',
 			framerate: '30fps'
 		}
 	};

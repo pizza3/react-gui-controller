@@ -14,6 +14,10 @@ class GuiColor extends Component {
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
+		rpos: {
+			x: 0,
+			y: 0
+		},
 		pos: {
 			x: 0,
 			y: 0
@@ -30,30 +34,25 @@ class GuiColor extends Component {
 		let col;
 		if (this.props.type === 'hex') {
 			let val = this.props.data[this.props.path];
-			console.log(val);
 			col = this.hexToRgb(val);
-
-			console.log(col);
 			a = this.rgbToHsl(col[0], col[1], col[2]);
 		} else {
 			a = this.rgbToHsl(198, 110, 108);
 		}
 		let colorBlock = document.getElementById('color-block' + this.props.num);
 		this.ctx1 = colorBlock.getContext('2d');
-		this.width1 = colorBlock.width;
-		this.height1 = colorBlock.height;
+		colorBlock.width = this.width1 = 239.08;
+		colorBlock.height = this.height1 = 148;
 		this.rgbaColor = '#f76262';
 
 		let colorStrip = document.getElementById('color-strip' + this.props.num);
 		this.ctx2 = colorStrip.getContext('2d');
-		this.width2 = colorStrip.width;
-		this.height2 = colorStrip.height;
+		colorStrip.width = this.width2 = 5.88;
+		colorStrip.height = this.height2 = 150;
 		this.ctx1.rect(0, 0, this.width1, this.height1);
 		this.fillGradient();
 		this.fillStrip();
-		// console.log(this.hexToRgbA(this.rgbaColor));
 		//position pointer indicator
-		// console(a[0]);
 		let val = MapRange(a[0], 0, 1, 0, 150);
 		this.setState(
 			{
@@ -79,13 +78,20 @@ class GuiColor extends Component {
 					',1)';
 				this.fillGradient();
 				let hsv = this.rgbToHsv(col[0], col[1], col[2]);
-				console.log(`${-(hsv[2] * 100) + 100}% ,${hsv[1] * 100}%`);
+				console.log(
+					`${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`
+				);
 				this.setState({
 					color: 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',1)',
 					pos: {
-						x: `${-(hsv[2] * 100) + 100}%`,
-						y: `${hsv[1] * 100}%`
+						x: `${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`,
+						y: `${(this.width1 * (hsv[1] * 100)) / 100 - 5}`
 					},
+					rpos: {
+						x: 0,
+						y: 0
+					},
+
 					hueNob: this.rgbaColor
 				});
 			}
@@ -114,11 +120,12 @@ class GuiColor extends Component {
 		grdBlack.addColorStop(1, 'rgba(0,0,0,1)');
 		this.ctx1.fillStyle = grdBlack;
 		this.ctx1.fillRect(0, 0, this.width1, this.height1);
+
 		let imageData = this.ctx1.getImageData(
-			this.state.pos.x,
 			this.state.pos.y,
-			1,
-			1
+			this.state.pos.x,
+			this.width1,
+			this.height1
 		).data;
 		this.setState({
 			color:
@@ -162,7 +169,8 @@ class GuiColor extends Component {
 				document
 					.getElementById('color-block' + this.props.num)
 					.getBoundingClientRect().top,
-			imageData = this.ctx1.getImageData(x, y, 1, 1).data;
+			imageData = this.ctx1.getImageData(x, y, this.width1, this.height1)
+				.data;
 		this.rgbaColor =
 			'rgba(' +
 			imageData[0] +
@@ -174,8 +182,8 @@ class GuiColor extends Component {
 		this.setState({
 			color: this.rgbaColor,
 			pos: {
-				x: x,
-				y: y
+				x: y - 5,
+				y: x - 5
 			}
 		});
 	};
@@ -356,6 +364,7 @@ class GuiColor extends Component {
 							onMouseUp={this.handleUp}
 						/>
 						<div
+							id={'block' + this.props.num}
 							className="block"
 							onMouseDown={this.handleDown}
 							onMouseMove={this.handleMove}
@@ -391,8 +400,8 @@ class GuiColor extends Component {
 							border-radius: 50%;
 							transform-origin: center;
 							background: ${this.state.color};
-							top: ${this.state.pos.x};
-							left: ${this.state.pos.y};
+							top: ${this.state.pos.x}px;
+							left: ${this.state.pos.y}px;
 						}
 
 						.block-strip {

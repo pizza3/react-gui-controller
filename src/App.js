@@ -10,7 +10,8 @@ class App extends Component {
 		data: {
 			text: 'Some Awesome Val',
 			noise: 0.4,
-			foreground: '#1f331c',
+			foreground: '#C1FFCA',
+			background: '#60efb8',
 			framerate: '30fps'
 		}
 	};
@@ -33,6 +34,7 @@ class App extends Component {
 					label="Framerate"
 				/>
 				<GuiColor path="foreground" label="Foreground" type="hex" />
+				<GuiColor path="background" label="Background" type="hex" />
 			</Gui>
 		);
 	}

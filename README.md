@@ -287,6 +287,11 @@ A color picker component which can be used to mutate any specific colo type.
    state = {
       data: {
          background: '#b7c485'
+         // background: {
+         //    r:255,
+         //    g:0,
+         //    b:0
+         // }
       }
    };
 

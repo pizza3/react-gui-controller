@@ -14,6 +14,7 @@ class GuiColor extends Component {
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
+
 		rpos: {
 			x: 0,
 			y: 0
@@ -78,11 +79,11 @@ class GuiColor extends Component {
 					',1)';
 				this.fillGradient();
 				let hsv = this.rgbToHsv(col[0], col[1], col[2]);
-				console.log(
-					`${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`
-				);
+				// console.log(
+				// 	`${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`
+				// );
 				this.setState({
-					color: 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',1)',
+					color: this.props.data[this.props.path],
 					pos: {
 						x: `${(this.height1 * (-(hsv[2] * 100) + 100)) / 100 - 5}`,
 						y: `${(this.width1 * (hsv[1] * 100)) / 100 - 5}`
@@ -127,16 +128,26 @@ class GuiColor extends Component {
 			this.width1,
 			this.height1
 		).data;
+
+		// if (this.props.type === 'hex') {
+		console.log('hex called');
 		this.setState({
-			color:
-				'rgba(' +
-				imageData[0] +
-				',' +
-				imageData[1] +
-				',' +
-				imageData[2] +
-				',1)'
+			color: this.rgbToHex(imageData[0], imageData[1], imageData[2])
 		});
+		// }
+		// } else {
+		// 	this.setState({
+		// 		color:
+		// 			'rgba(' +
+		// 			imageData[0] +
+		// 			',' +
+		// 			imageData[1] +
+		// 			',' +
+		// 			imageData[2] +
+		// 			',1)'
+		// 	});
+		// 	// this.props.updateData(this.props.path, this.state.color);
+		// }
 	};
 
 	//this applies color to the hue strip of the color selector
@@ -180,7 +191,8 @@ class GuiColor extends Component {
 			imageData[2] +
 			',1)';
 		this.setState({
-			color: this.rgbaColor,
+			color: this.rgbToHex(imageData[0], imageData[1], imageData[2]),
+			// color: this.rgbaColor,
 			pos: {
 				x: y - 5,
 				y: x - 5
@@ -246,6 +258,7 @@ class GuiColor extends Component {
 			e.target.getAttribute('name') === 'strip'
 				? this.changeColorStrip(e)
 				: this.changeColorBlock(e);
+			this.props.updateData(this.props.path, this.state.color);
 		}
 	};
 
@@ -267,6 +280,11 @@ class GuiColor extends Component {
 			  ]
 			: null;
 	}
+
+	rgbToHex(r, g, b) {
+		return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+	}
+
 	// this implementation was taken from stackoverflow
 	//used to covert any rgb  to hsl
 	rgbToHsl = (r, g, b) => {
@@ -442,7 +460,8 @@ class GuiColor extends Component {
 GuiColor.propTypes = {
 	theme: PropTypes.oneOf(['light', 'dark']),
 	label: PropTypes.string,
-	num: PropTypes.number
+	num: PropTypes.number,
+	updateData: PropTypes.func
 };
 
 GuiColor.defaultProps = {

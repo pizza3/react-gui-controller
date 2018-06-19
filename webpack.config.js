@@ -25,7 +25,7 @@ module.exports = {
 	},
 	// externals: externals(),
 	plugins: [
-		htmlPlugin,
+		// htmlPlugin,
 		new UglifyJsPlugin({
 			test: /\.js($|\?)/i
 		})

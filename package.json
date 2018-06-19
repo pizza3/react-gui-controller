@@ -1,7 +1,7 @@
 {
 	"name": "react-gui-controller",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A graphical user interface for changing states in react. Inspired from Google's popular dat.GUI controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable component's. For styling this library uses Zeit styled-jsx.",
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "webpack-dev-server --mode development --open --hot",
@@ -11,7 +11,7 @@
 		"type": "git",
 		"url": "git+https://github.com/pizza3/react-gui.git"
 	},
-	"author": "",
+	"author": "Yugam Dhuriya",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/pizza3/react-gui/issues"

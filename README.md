@@ -1,4 +1,4 @@
-# react-gui
+# react-gui-controller
 
 ## Table Of Contents
 

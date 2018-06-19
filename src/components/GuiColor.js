@@ -14,7 +14,8 @@ class GuiColor extends Component {
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
-		rgb: null,
+      rgb: null,
+      hsl:null,
 		rpos: {
 			x: 0,
 			y: 0

@@ -1,9 +1,15 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
 	template: './src/index.html',
 	filename: './index.html'
 });
+
+// const externals = () => ({
+// 	react: 'react',
+// 	'prop-types': 'prop-types'
+// });
 
 module.exports = {
 	module: {
@@ -17,5 +23,11 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [htmlPlugin]
+	// externals: externals(),
+	plugins: [
+		htmlPlugin,
+		new UglifyJsPlugin({
+			test: /\.js($|\?)/i
+		})
+	]
 };

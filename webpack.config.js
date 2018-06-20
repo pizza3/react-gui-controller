@@ -1,29 +1,31 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const htmlPlugin = new HtmlWebPackPlugin({
-	template: './src/index.html',
-	filename: './index.html'
-});
-
-// const externals = () => ({
-// 	react: 'react',
-// 	'prop-types': 'prop-types'
-// });
-
 module.exports = {
+	entry: './src/index.js',
+	output: {
+		path: path.resolve(__dirname, 'build'),
+		filename: 'index.js',
+		libraryTarget: 'commonjs2' // THIS IS THE MOST IMPORTANT LINE! :mindblow: I wasted more than 2 days until realize this was the line most important in all this guide.
+	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
+				include: path.resolve(__dirname, 'src'),
+				exclude: /(node_modules|bower_components|build)/,
 				use: {
 					loader: 'babel-loader'
+					//   options: {
+					//     presets: ['env']
+					//   }
 				}
 			}
 		]
 	},
-	// externals: externals(),
+	externals: {
+		react: 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
+	},
 	plugins: [
 		// htmlPlugin,
 		new UglifyJsPlugin({

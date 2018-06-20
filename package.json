@@ -2,21 +2,21 @@
 	"name": "react-gui-controller",
 	"version": "1.0.0",
 	"description": "A graphical user interface for changing states in react. Inspired from Google's popular dat.GUI controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable component's. For styling this library uses Zeit styled-jsx.",
-	"main": "dist/main.js",
+	"main": "build/index.js",
 	"scripts": {
 		"start": "webpack-dev-server --mode development --open --hot",
 		"build": "webpack --mode production"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/pizza3/react-gui.git"
+		"url": "git+https://github.com/pizza3/react-gui-controller.git"
 	},
 	"author": "Yugam Dhuriya",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/pizza3/react-gui/issues"
+		"url": "https://github.com/pizza3/react-gui-controller/issues"
 	},
-	"homepage": "https://github.com/pizza3/react-gui#readme",
+	"homepage": "https://github.com/pizza3/react-gui-controller#readme",
 	"dependencies": {
 		"styled-jsx": "^2.2.6"
 	},
@@ -35,12 +35,14 @@
 		"eslint": "^4.19.1",
 		"eslint-plugin-import": "^2.12.0",
 		"eslint-plugin-jsx-a11y": "^6.0.3",
-		"eslint-plugin-react": "^7.8.2",
+		"eslint-plugin-react": "^7.9.1",
 		"html-webpack-plugin": "^3.2.0",
-		"prop-types": "^15.6.1",
+		"prop-types": "^15.6.2",
+		"react": "^16.4.1",
+		"react-dom": "^16.4.1",
 		"uglifyjs-webpack-plugin": "^1.2.5",
-		"webpack": "^4.10.2",
-		"webpack-cli": "^3.0.1",
+		"webpack": "^4.12.0",
+		"webpack-cli": "^3.0.8",
 		"webpack-dev-server": "^3.1.4"
 	}
 }

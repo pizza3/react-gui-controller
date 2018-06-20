@@ -321,7 +321,7 @@ A color picker component which can be used to mutate any specific colo type.
 In source folder:
 
 ```bash
-npm run watch
+npm run start
 npm link
 ```
 

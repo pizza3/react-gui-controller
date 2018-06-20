@@ -1,6 +1,6 @@
 {
 	"name": "react-gui-controller",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A graphical user interface for changing states in react. Inspired from Google's popular dat.GUI controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable component's. For styling this library uses Zeit styled-jsx.",
 	"main": "build/index.js",
 	"scripts": {

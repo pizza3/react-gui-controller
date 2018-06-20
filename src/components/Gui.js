@@ -11,9 +11,6 @@ class Gui extends Component {
 			y: 0
 		}
 	};
-
-	componentDidMount() {}
-
 	handleHide = () => {
 		this.setState({
 			hide: !this.state.hide

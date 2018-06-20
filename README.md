@@ -7,6 +7,8 @@
 -  [Usage](#usage)
 -  [Docs](#docs)
 -  [Demo](#demo)
+-  [Development](#development)
+-  [License](#license)
 
 ## Introduction
 
@@ -313,6 +315,21 @@ A color picker component which can be used to mutate any specific colo type.
 ```
 
 ## Demo
+
+## Development
+
+In source folder:
+
+```bash
+npm run watch
+npm link
+```
+
+In project:
+
+```bash
+npm link react-gui-controller
+```
 
 ## License
 

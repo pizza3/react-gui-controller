@@ -45,12 +45,21 @@ class Gui extends Component {
 				let xdiff = -(this.start.x - e.clientX) + this.pos.x;
 				let ydiff = -(this.start.y - e.clientY) + this.pos.y;
 				if (xdiff <= 0) {
-					this.setState({
-						pos: {
-							x: 0,
-							y: ydiff
-						}
-					});
+					if (ydiff <= 0) {
+						this.setState({
+							pos: {
+								x: 0,
+								y: 0
+							}
+						});
+					} else {
+						this.setState({
+							pos: {
+								x: 0,
+								y: ydiff
+							}
+						});
+					}
 				} else if (ydiff <= 0) {
 					this.setState({
 						pos: {
@@ -146,14 +155,6 @@ Gui.propTypes = {
 };
 
 Gui.defaultProps = {
-	theme: 'light',
+	theme: 'dark',
 	hide: false
 };
-
-export { default as GuiString } from './GuiString';
-export { default as GuiNumber } from './GuiNumber';
-export { default as GuiSelect } from './GuiSelect';
-export { default as GuiEasing } from './GuiEasing';
-export { default as GuiColor } from './GuiColor';
-export { default as GuiBool } from './GuiBool';
-export { default as GuiButton } from './GuiButton';

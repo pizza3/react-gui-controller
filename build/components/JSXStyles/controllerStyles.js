@@ -1,0 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var controllerStyle = exports.controllerStyle = new String('.controller-body{position:fixed;width:300px;height:auto;background:rgb(250,250,250);border:1px solid rgb(214,214,214);border-radius:4px;overflow:hidden;}.dark{background:#212121;border:1px solid #313131;}.container{position:relative;width:100%;-webkit-transition:0.4s;transition:0.4s;max-height:calc(100vh - 54px);overflow:scroll;}.hide{max-height:0px;}.drag{position:relative;width:100%;height:24px;cursor:all-scroll;}.control-button{position:relative;width:100%;height:30px;text-align:center;color:rgb(119,155,255);font-family:sans-serif;font-size:12px;padding-top:8px;font-weight:100;cursor:pointer;border-top:1px solid rgb(214,214,214);}.control-button-dark{border-top:1px solid #313131;}');
+controllerStyle.__hash = '3685151520';
+controllerStyle.__scoped = '.controller-body.jsx-2295559041{position:fixed;width:300px;height:auto;background:rgb(250,250,250);border:1px solid rgb(214,214,214);border-radius:4px;overflow:hidden;}.dark.jsx-2295559041{background:#212121;border:1px solid #313131;}.container.jsx-2295559041{position:relative;width:100%;-webkit-transition:0.4s;transition:0.4s;max-height:calc(100vh - 54px);overflow:scroll;}.hide.jsx-2295559041{max-height:0px;}.drag.jsx-2295559041{position:relative;width:100%;height:24px;cursor:all-scroll;}.control-button.jsx-2295559041{position:relative;width:100%;height:30px;text-align:center;color:rgb(119,155,255);font-family:sans-serif;font-size:12px;padding-top:8px;font-weight:100;cursor:pointer;border-top:1px solid rgb(214,214,214);}.control-button-dark.jsx-2295559041{border-top:1px solid #313131;}';
+controllerStyle.__scopedHash = '2295559041';

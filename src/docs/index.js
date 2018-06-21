@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Example1 from './components/Example1';
 var mountNode = document.getElementById('root');
-ReactDOM.render(<div />, mountNode);
+ReactDOM.render(<Example1 />, mountNode);

@@ -4,7 +4,8 @@
 	"description": "A graphical user interface for changing states in react. Inspired from Google's popular dat.GUI controller library. This library provides additional functionalities such as Ease curve editor, Enhanced hue selector, Draggable placement and Stylable component's. For styling this library uses Zeit styled-jsx.",
 	"main": "build/index.js",
 	"scripts": {
-		"lib": "babel src/lib -d lib --copy-files",
+		"lib": "babel src/lib -d build --copy-files",
+		"lib:watch": "babel src/lib -w -d build --copy-files",
 		"start": "webpack-dev-server --mode development --open --hot",
 		"build": "webpack --mode production"
 	},

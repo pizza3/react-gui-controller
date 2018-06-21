@@ -1,10 +1,11 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: './src/lib/index.js',
+	entry: './src/docs/index.js',
 	output: {
-		path: path.resolve(__dirname, 'build'),
+		path: path.resolve(__dirname, 'docs'),
 		filename: 'index.js',
 		libraryTarget: 'commonjs2'
 	},
@@ -16,20 +17,25 @@ module.exports = {
 				exclude: /(node_modules|bower_components|build)/,
 				use: {
 					loader: 'babel-loader'
-					//   options: {
-					//     presets: ['env']
-					//   }
 				}
 			}
 		]
 	},
-	externals: {
-		react: 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
-	},
 	plugins: [
-		// htmlPlugin,
+		new HtmlWebpackPlugin({
+			template: path.join(__dirname, 'src/docs/index.html')
+		}),
 		new UglifyJsPlugin({
 			test: /\.js($|\?)/i
 		})
-	]
+	],
+
+	resolve: {
+		extensions: ['.js', '.jsx']
+	},
+	devServer: {
+		contentBase: path.join(__dirname, 'docs'),
+		port: 8000,
+		stats: 'minimal'
+	}
 };

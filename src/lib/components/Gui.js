@@ -152,6 +152,6 @@ Gui.propTypes = {
 };
 
 Gui.defaultProps = {
-	theme: 'dark',
+	theme: 'light',
 	hide: false
 };

@@ -38,10 +38,6 @@ var _Indicator = require('./EasingUtils/Indicator');
 
 var _Indicator2 = _interopRequireDefault(_Indicator);
 
-var _EaseSetting = require('./EasingUtils/EaseSetting');
-
-var _EaseSetting2 = _interopRequireDefault(_EaseSetting);
-
 var _SvgText = require('./EasingUtils/SvgText');
 
 var _SvgText2 = _interopRequireDefault(_SvgText);
@@ -211,7 +207,6 @@ var GuiEasing = function (_Component) {
 					},
 					data[path]
 				),
-				_react2.default.createElement(_EaseSetting2.default, null),
 				_react2.default.createElement(_Indicator2.default, { ease: 'cubic-bezier(' + c1.x + ',' + c1.y + ',' + c2.x + ',' + c2.y + ')' }),
 				_react2.default.createElement(
 					'svg',

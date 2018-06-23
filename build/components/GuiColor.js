@@ -138,8 +138,21 @@ var GuiColor = function (_Component) {
 			//don't use offset.X
 			//https://github.com/facebook/react/issues/4431
 			var x = e.clientX - document.getElementById('color-block' + _this.props.num).getBoundingClientRect().left,
-			    y = e.clientY - document.getElementById('color-block' + _this.props.num).getBoundingClientRect().top,
-			    imageData = _this.ctx1.getImageData(x, y, _this.width1, _this.height1).data;
+			    y = e.clientY - document.getElementById('color-block' + _this.props.num).getBoundingClientRect().top;
+
+			if (x >= 238) {
+				x = 237;
+			} else if (x <= 0) {
+				x = 0;
+			}
+			if (y <= 0) {
+				y = 0;
+			} else if (y >= 148) {
+				y = 148;
+			}
+
+			var imageData = _this.ctx1.getImageData(x, y, _this.width1, _this.height1).data;
+
 			_this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 			if (_this.props.type === 'hex') {
 				_this.setState({
@@ -180,7 +193,7 @@ var GuiColor = function (_Component) {
 					y: y
 				}
 			});
-			var imageData = _this.ctx2.getImageData(x, y, 1, 1).data;
+			var imageData = _this.ctx2.getImageData(_this.state.posStrip.x, _this.state.posStrip.y, 1, 1).data;
 			_this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 			_this.setState({
 				hueNob: _this.rgbaColor

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Controller from './Controller';
-import Canvas from './Canvas';
+import Page from './Page';
 class Example1 extends Component {
 	render() {
 		return (
 			<div>
-				<Controller render={data => <Canvas data={data} />} />
+				<Page />
 			</div>
 		);
 	}

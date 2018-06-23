@@ -8,8 +8,8 @@ import Gui, {
 class Controller extends Component {
 	state = {
 		data: {
-			text: 'Some Awesome Text!!',
-			background: '#dbfdfe',
+			text: 'Some Awesome Val',
+			background: '#7df9ff',
 			strength: 6,
 			type: 'square'
 		}

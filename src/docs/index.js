@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Example1 from './components/Example1/Example1';
+import App from './App';
 var mountNode = document.getElementById('root');
-ReactDOM.render(<Example1 />, mountNode);
+import { BrowserRouter as Router } from 'react-router-dom';
+
+ReactDOM.render(
+	<Router>
+		<App />
+	</Router>,
+	mountNode
+);

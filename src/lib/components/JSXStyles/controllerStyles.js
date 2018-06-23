@@ -9,6 +9,7 @@ export const controllerStyle = css`
 		border: 1px solid rgb(214, 214, 214);
 		border-radius: 4px;
 		overflow: hidden;
+		z-index: 100;
 	}
 
 	.dark {

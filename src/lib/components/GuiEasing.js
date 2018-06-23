@@ -5,7 +5,6 @@ import SvgGrid from './EasingUtils/SvgGrid';
 import SvgPath from './EasingUtils/SvgPath';
 import { easeCurveStyle } from './JSXStyles/easeCurveStyles';
 import Indicator from './EasingUtils/Indicator';
-import EaseSetting from './EasingUtils/EaseSetting';
 import SvgText from './EasingUtils/SvgText';
 //map function is used to naomalise the values
 const MapRange = (value, low1, high1, low2, high2) => {
@@ -169,7 +168,6 @@ class GuiEasing extends Component {
 				>
 					{data[path]}
 				</div>
-				<EaseSetting />
 				<Indicator ease={`cubic-bezier(${c1.x},${c1.y},${c2.x},${c2.y})`} />
 				<svg
 					id={`svg${this.props.num}`}

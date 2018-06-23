@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-
+import Img from '../../Assets/header.png';
 export default class Page extends Component {
 	state = {};
 
@@ -20,9 +20,16 @@ export default class Page extends Component {
 						</div>
 						<code>npm install react-gui-controller --save-dev</code>
 						<div>
-							<button>Basic Usage</button>
-							<button>Documentation</button>
+							<a href="https://github.com/pizza3/react-gui-controller#usage">
+								<button>Basic Usage</button>
+							</a>
+							<a href="https://github.com/pizza3/react-gui-controller#docs">
+								<button>Documentation</button>
+							</a>
 						</div>
+					</div>
+					<div className="content-right">
+						<img src={Img} alt="img" />
 					</div>
 				</div>
 				<style jsx>
@@ -46,14 +53,28 @@ export default class Page extends Component {
 							font-family: sans-serif;
 							color: #212121;
 							display: inline-block;
-						}
+                  }
+                  
+                  img{
+                     width: 95%;
+                  }
 
 						.content-left {
-							position: relative;
+                     position: relative;
+                     float:left;
 							width: 50%;
 							top: 50px;
 							height: calc(100vh - 50px);
 							padding-top: 19vh;
+                  }
+                  
+                  .content-right  {
+                     position: relative;
+                     float:left;
+							width: 50%;
+							top: 50px;
+							height: calc(100vh - 50px);
+                     padding-top: 12vh;
 						}
 
 						.content-left-head {

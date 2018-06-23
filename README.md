@@ -1,5 +1,8 @@
 # react-gui-controller
 
+<p align="center">
+  <img src="./src/docs/Assets/header.png" height="200" width="200">
+</p>
 ## Table Of Contents
 
 -  [Introduction](#introduction)

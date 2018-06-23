@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
 import Img from '../../Assets/header.png';
 export default class Page extends Component {
 	state = {};
@@ -7,7 +6,6 @@ export default class Page extends Component {
 	render() {
 		return (
 			<div className="page-body">
-				<Nav />
 				<div className="head">
 					<div className="content-left">
 						<div className="content-left-head">React Gui Controller</div>

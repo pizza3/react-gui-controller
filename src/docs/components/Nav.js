@@ -1,19 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
 	return (
 		<div className="nav">
-			<div className="link">Example2</div>
-			<div className="link">Example1</div>
-			<div className="link">Home</div>
+			<Link to="/example1">
+				<div className="link">Example2</div>
+			</Link>
+			<Link to="/example1">
+				<div className="link">Example1</div>
+			</Link>
+			<Link to="/">
+				<div className="link">Home</div>
+			</Link>
 			<style jsx>
 				{`
 					.nav {
 						position: fixed;
 						width: 100%;
 						height: 50px;
-						background: #f1f1f1;
-						padding-top: 10px;
+						background: transparent;
+						padding-top: 21px;
 						z-index: 10;
 					}
 
@@ -21,8 +28,10 @@ const Nav = () => {
 						font-family: 'Poppins', sans-serif;
 						float: right;
 						font-weight: 800;
-						margin-right: 28px;
+						margin-right: 56px;
 						font-size: 12px;
+						color: #212121;
+						cursor: pointer;
 					}
 				`}
 			</style>

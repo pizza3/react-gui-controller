@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 
 const RADIANS = Math.PI / 180;
-const STRENGTH = 2;
+const STRENGTH = 20;
 const ELASTICITY = 0.01;
 const DAMPING = 0.696;
 const MASS = 0.1;
 const MAX_SIZE = 40;
-const SIZE = 14;
+const SIZE = 10;
 const CIRCLE = 'circle';
 const SQUARE = 'square';
 const TYPE = SQUARE; // Render type
 const DPR = 1; // window.devicePixelRatio || 1;
 const DEMO_IMAGE =
-	'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/beavis_a_l.jpg';
+	'https://images.unsplash.com/photo-1529592488776-a5c9d4662d65?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4abd4db906006d7850106ca8897a274f&auto=format&fit=crop&w=1789&q=80';
 
 class Canvas extends Component {
 	state = {
 		isDragging: false,
 		hasLoaded: false,
-		tick: 0
+		tick: 0,
+		strength: this.props.data['data']['strength'],
+		type: this.props.data['data']['type']
 	};
 
 	componentDidMount() {
@@ -43,6 +45,19 @@ class Canvas extends Component {
 		this.addInitialImage();
 		this.setCanvasSize();
 		this.renderAnimation();
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		if (props.data['data']['type'] !== state.type) {
+         // cancelAnimationFrame(this.renderAnimation);
+			// this.addInitialImage();
+			// this.setCanvasSize();
+			// this.renderAnimation();
+			return {
+				type: props.data['data']['type']
+			};
+      }
+      return null;
 	}
 
 	setupListeners() {
@@ -89,7 +104,8 @@ class Canvas extends Component {
 			{
 				file
 			},
-			SIZE
+			SIZE,
+			'square'
 		);
 
 		this.image
@@ -137,7 +153,8 @@ class Canvas extends Component {
 			{
 				src: DEMO_IMAGE
 			},
-			SIZE
+			SIZE,
+			this.state.type
 		);
 
 		this.image
@@ -177,7 +194,8 @@ class Canvas extends Component {
 			const dx = fd.cx - x;
 			const dy = fd.cy - y;
 			const angle = Math.atan2(dy, dx);
-			let dist = STRENGTH / Math.sqrt(dx * dx + dy * dy);
+			let dist =
+				this.props.data['data']['strength'] / Math.sqrt(dx * dx + dy * dy);
 
 			if (mousedown) {
 				dist *= -1;
@@ -226,6 +244,7 @@ class Canvas extends Component {
 	};
 
 	renderAnimation = () => {
+		// this.addInitialImage();
 		if (this.hasLoaded) {
 			const bg = this.image.points[0].color;
 
@@ -271,12 +290,13 @@ class FluidImage {
 			src: false,
 			file: false
 		},
-		size = SIZE
+		size = SIZE,
+		imgtype
 	) {
 		this.src = image.src;
 		this.file = image.file;
 		this.size = size;
-
+		this.type = imgtype;
 		this.pw = 0; // numb of points width
 		this.ph = 0; // numb of points height
 		this.points = [];
@@ -355,8 +375,8 @@ class FluidImage {
 				const g = colors[pixelPosition + 1];
 				const b = colors[pixelPosition + 2];
 				const rgba = `rgba(${r}, ${g}, ${b}, 1)`;
-
-				const fluidPx = new FluidPixel(x, y, w, h, rgba);
+				const type = this.type;
+				const fluidPx = new FluidPixel(x, y, w, h, rgba, type);
 
 				this.points.push(fluidPx);
 			}
@@ -394,7 +414,7 @@ class FluidImage {
 }
 
 class FluidPixel {
-	constructor(x = 0, y = 0, w = 4, h = 4, color = 'red') {
+	constructor(x = 0, y = 0, w = 4, h = 4, color = 'red', type = 'circle') {
 		this.ox = x; // origin x
 		this.oy = y; // origin y
 		this.x = x;
@@ -413,6 +433,7 @@ class FluidPixel {
 		this.mass = MASS;
 		this.elasticity = ELASTICITY;
 		this.damping = DAMPING;
+		this.type = type;
 	}
 
 	setOrigin(x, y) {
@@ -462,14 +483,14 @@ class FluidPixel {
 		const { x, y, w, h, color } = this;
 		ctx.fillStyle = color;
 
-		if (TYPE === CIRCLE) {
+		if (this.type === 'circle') {
 			const _x = x - w / 2;
 			const _y = y - h / 2;
 			ctx.beginPath();
 			ctx.arc(_x, _y, w / 2, 0, Math.PI * 2, true);
 			ctx.closePath();
 			ctx.fill();
-		} else if (TYPE === SQUARE) {
+		} else if (this.type === 'square') {
 			ctx.fillRect(x, y, w, h);
 		}
 	}

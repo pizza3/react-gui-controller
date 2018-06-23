@@ -57,6 +57,22 @@ class Gui extends Component {
 							}
 						});
 					}
+				} else if (xdiff >= window.innerWidth - 300) {
+					if (ydiff <= 0) {
+						this.setState({
+							pos: {
+								x: window.innerWidth - 300,
+								y: 0
+							}
+						});
+					} else {
+						this.setState({
+							pos: {
+								x: window.innerWidth - 300,
+								y: ydiff
+							}
+						});
+					}
 				} else if (ydiff <= 0) {
 					this.setState({
 						pos: {

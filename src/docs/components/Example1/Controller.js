@@ -9,7 +9,7 @@ class Example1 extends Component {
 	state = {
 		data: {
 			text: 'Some Awesome Val',
-			background: '#ffaf87',
+			background: '#7df9ff',
 			strength: 6,
 			type: 'square'
 		}

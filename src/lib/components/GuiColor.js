@@ -14,8 +14,8 @@ class GuiColor extends Component {
 		drag: false,
 		color: 'rgba(0,0,0,1)',
 		hueNob: null,
-      rgb: null,
-      hsl:null,
+		rgb: null,
+		hsl: null,
 		rpos: {
 			x: 0,
 			y: 0
@@ -208,9 +208,22 @@ class GuiColor extends Component {
 				e.clientY -
 				document
 					.getElementById('color-block' + this.props.num)
-					.getBoundingClientRect().top,
-			imageData = this.ctx1.getImageData(x, y, this.width1, this.height1)
-				.data;
+					.getBoundingClientRect().top;
+
+		if (x >= 238) {
+			x = 237;
+		} else if (x <= 0) {
+			x = 0;
+		}
+		if (y <= 0) {
+			y = 0;
+		} else if (y >= 148) {
+			y = 148;
+		}
+
+		let imageData = this.ctx1.getImageData(x, y, this.width1, this.height1)
+			.data;
+
 		this.rgbaColor =
 			'rgba(' +
 			imageData[0] +
@@ -270,7 +283,7 @@ class GuiColor extends Component {
 				y: y
 			}
 		});
-		let imageData = this.ctx2.getImageData(x, y, 1, 1).data;
+		let imageData = this.ctx2.getImageData(this.state.posStrip.x, this.state.posStrip.y, 1, 1).data;
 		this.rgbaColor =
 			'rgba(' +
 			imageData[0] +

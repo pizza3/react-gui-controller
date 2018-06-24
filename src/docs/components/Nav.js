@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Logo from '../Assets/logo.svg';
 const Nav = () => {
 	return (
 		<div className="nav">
+			<Link to="/">
+				<img src={Logo} className="logo" />
+			</Link>
 			<Link to="/example1">
 				<div className="link">Example2</div>
 			</Link>
 			<Link to="/example1">
 				<div className="link">Example1</div>
-			</Link>
-			<Link to="/">
-				<div className="link">Home</div>
 			</Link>
 			<style jsx>
 				{`
@@ -32,6 +32,13 @@ const Nav = () => {
 						font-size: 12px;
 						color: #212121;
 						cursor: pointer;
+					}
+
+					.logo {
+						position: relative;
+						width: 50px;
+						float: left;
+						margin-left: 5%;
 					}
 				`}
 			</style>

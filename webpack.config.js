@@ -3,7 +3,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: path.join(__dirname, 'src/docs'),
+	entry: {
+		main: path.join(__dirname, 'src/docs')
+	},
 	output: {
 		path: path.join(__dirname, 'docs'),
 		filename: 'index.js',
@@ -25,6 +27,8 @@ module.exports = {
 	},
 	devServer: {
 		// historyAPIFallback will redirect 404s to /index.html.
+		publicPath: '/assets/', // here's the change
+		contentBase: path.join(__dirname, 'docs'),
 		historyApiFallback: true
 	},
 

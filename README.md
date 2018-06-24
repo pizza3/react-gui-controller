@@ -21,7 +21,7 @@ component's. For styling this library uses Zeit [styled-jsx](https://github.com/
 
 ## Installation
 
-```
+```js
 npm install react-gui-controller --save
 ```
 

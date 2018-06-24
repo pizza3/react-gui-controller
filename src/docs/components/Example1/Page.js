@@ -16,7 +16,7 @@ export default class Page extends Component {
 							Ease curve editor, Enhanced hue selector, Draggable
 							placement. For styling this library uses Zeit styled-jsx.
 						</div>
-						<code>npm install react-gui-controller --save-dev</code>
+						<code>npm install react-gui-controller --save</code>
 						<div>
 							<a href="https://github.com/pizza3/react-gui-controller#usage">
 								<button>Basic Usage</button>

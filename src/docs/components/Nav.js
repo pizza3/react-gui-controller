@@ -1,18 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Logo from '../Assets/logo.svg';
 const Nav = () => {
 	return (
 		<div className="nav">
-			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/'}>
-				<img src={Logo} className="logo" />
-			</Link>
-			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/example1'}>
-				<div className="link">Example2</div>
-			</Link>
-			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/example1'}>
-				<div className="link">Example1</div>
-			</Link>
+			<img src={Logo} className="logo" />
+			<div className="link">Example2</div>
+			<div className="link">Example1</div>
 			<style jsx>
 				{`
 					.nav {

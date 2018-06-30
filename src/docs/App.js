@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Example1 from './components/Example1/Example1';
-import Example2 from './components/Example2/Example2';
-import { Route, withRouter, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 
 class App extends Component {
@@ -9,22 +7,10 @@ class App extends Component {
 		return (
 			<div>
 				<Nav />
-				<Switch>
-					<Route
-						exact
-						path={process.env.PUBLIC_URL + 'react-gui-controller/'}
-						component={Example1}
-					/>
-					<Route
-						path={
-							process.env.PUBLIC_URL + 'react-gui-controller/example1'
-						}
-						component={Example2}
-					/>
-				</Switch>
+				<Example1 />
 			</div>
 		);
 	}
 }
 
-export default withRouter(App);
+export default App;

@@ -4,8 +4,6 @@ const Nav = () => {
 	return (
 		<div className="nav">
 			<img src={Logo} className="logo" />
-			<div className="link">Example2</div>
-			<div className="link">Example1</div>
 			<style jsx>
 				{`
 					.nav {

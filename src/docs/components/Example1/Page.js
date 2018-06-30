@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Controller from './Controller';
 import Img from '../../Assets/header.png';
+import Vid2 from '../../Assets/vid2.mp4';
+import Vid from '../../Assets/vid.mp4';
 export default class Page extends Component {
 	state = {};
 
@@ -30,49 +33,96 @@ export default class Page extends Component {
 						<img src={Img} alt="img" />
 					</div>
 				</div>
+				<div className="feature-head">
+					<div className="feature-title">Features</div>
+					<div className="head">
+						<div className="content-left">
+							<div className="content-left-head">Ease Curve Editor</div>
+							<div className="content-left-con">
+								Drag and drop the Gui across anywhere in the browser
+								window.
+							</div>
+						</div>
+						<div className="content-right">
+							<video src={Vid2} autoPlay loop />
+						</div>
+					</div>
+					<div className="head">
+						<div className="content-left">
+							<div className="content-left-head">Draggable GUI</div>
+							<div className="content-left-con">
+								Drag and drop the Gui across anywhere in the browser
+								window.
+							</div>
+						</div>
+						<div className="content-right">
+							<video src={Vid} autoPlay loop />
+						</div>
+					</div>
+				</div>
 				<style jsx>
 					{`
+						.feature-head {
+							position: relative;
+							width: 100%;
+							float: left;
+						}
+						.feature-title {
+							font-family: 'Poppins', sans-serif;
+							font-size: 29px;
+							color: #212121;
+							font-weight: 900;
+							text-align: center;
+						}
+						.feature-title::before {
+							content: '';
+							position: absolute;
+							width: 79px;
+							height: 8px;
+							top: 42px;
+							margin-left: 27px;
+							background: #3a6dff;
+						}
 						.page-body {
 							position: relative;
 							width: 100%;
 							height: 100vh;
-                  }
-                  
-                  .head{
-                     max-width: 1000px;
-                     display: block;
-                     width: 95%;
-                     margin: 0 auto;
-                 
-                  }
+						}
+
+						.head {
+							max-width: 1000px;
+							display: block;
+							width: 95%;
+							margin: 0 auto;
+						}
 
 						.label,
 						.content {
 							font-family: sans-serif;
 							color: #212121;
 							display: inline-block;
-                  }
-                  
-                  img{
-                     width: 95%;
-                  }
+						}
+
+						img {
+							width: 95%;
+						}
 
 						.content-left {
-                     position: relative;
-                     float:left;
+							position: relative;
+							float: left;
 							width: 50%;
 							top: 50px;
 							height: calc(100vh - 50px);
 							padding-top: 19vh;
-                  }
-                  
-                  .content-right  {
-                     position: relative;
-                     float:left;
+						}
+
+						.content-right {
+							position: relative;
+							float: left;
 							width: 50%;
 							top: 50px;
 							height: calc(100vh - 50px);
-                     padding-top: 12vh;
+							padding-top: 12vh;
 						}
 
 						.content-left-head {
@@ -106,31 +156,30 @@ export default class Page extends Component {
 							font-family: 'Poppins', sans-serif;
 							letter-spacing: 0.6px;
 							word-spacing: 4px;
-                  }
-                  
-                  button{
-                     background-color: #3a6eff;
-                     border :none;
-                     border-radius: 4px;
-                     padding: 12px 15px;
-                     -webkit-transition: 0.125s;
-                     -o-transition: 0.125s;
-                     transition: 0.125s;
-                     color: #f1f1f1;
-                     font-size: 13px;
-                     font-weight: 600;
-                     letter-spacing: 0.35px;
-                     display: inline-block;
-                     margin-top: 43px;
-                     cursor:pointer;
-                     margin-right: 20px;
-                     margin-bottom: 20px;
-                 }
+						}
 
-                 button:hover{
-                  background-color: #3a6eff;
-               }
-                  }
+						button {
+							background-color: #3a6eff;
+							border: none;
+							border-radius: 4px;
+							padding: 12px 15px;
+							-webkit-transition: 0.125s;
+							-o-transition: 0.125s;
+							transition: 0.125s;
+							color: #f1f1f1;
+							font-size: 13px;
+							font-weight: 600;
+							letter-spacing: 0.35px;
+							display: inline-block;
+							margin-top: 43px;
+							cursor: pointer;
+							margin-right: 20px;
+							margin-bottom: 20px;
+						}
+
+						button:hover {
+							background-color: #3a6eff;
+						}
 					`}
 				</style>
 			</div>

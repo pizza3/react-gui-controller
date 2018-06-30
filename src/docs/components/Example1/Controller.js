@@ -3,13 +3,15 @@ import Gui, {
 	GuiString,
 	GuiColor,
 	GuiNumber,
-	GuiSelect
+	GuiSelect,
+	GuiEasing
 } from '../../../lib/index';
 class Controller extends Component {
 	state = {
 		data: {
 			text: 'Some Awesome Text!!',
 			background: '#dbfdfe',
+			ease: 'cubic-bezier(0.445, 0.05, 0.55, 0.95)',
 			strength: 6,
 			type: 'square'
 		}
@@ -37,8 +39,8 @@ class Controller extends Component {
 						label="Type"
 						options={['square', 'circle']}
 					/>
+					<GuiEasing path="ease" label="Easing" />
 				</Gui>
-				{this.props.render(this.state)}
 			</div>
 		);
 	}

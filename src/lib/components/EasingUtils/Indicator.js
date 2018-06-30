@@ -2,6 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Indicator = props => {
+	let style = {
+		position: 'absolute',
+		width: '10px',
+		height: '10px',
+		background: '#a0b7f7',
+		borderRadius: '50%',
+		marginLeft: '28px',
+		animation: 'anim 3s infinite',
+		animationTimingFunction: `${props.ease}`
+	};
 	return (
 		<div className="indicator">
 			<div className="indicator-bob" />

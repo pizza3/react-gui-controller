@@ -4,13 +4,13 @@ import Logo from '../Assets/logo.svg';
 const Nav = () => {
 	return (
 		<div className="nav">
-			<Link to="/">
+			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/'}>
 				<img src={Logo} className="logo" />
 			</Link>
-			<Link to="/example1">
+			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/example1'}>
 				<div className="link">Example2</div>
 			</Link>
-			<Link to="/example1">
+			<Link to={process.env.PUBLIC_URL + 'react-gui-controller/example1'}>
 				<div className="link">Example1</div>
 			</Link>
 			<style jsx>

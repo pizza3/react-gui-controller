@@ -12,11 +12,13 @@ class App extends Component {
 				<Switch>
 					<Route
 						exact
-						path={process.env.PUBLIC_URL + '/'}
+						path={process.env.PUBLIC_URL + 'react-gui-controller/'}
 						component={Example1}
 					/>
 					<Route
-						path={process.env.PUBLIC_URL + '/example1'}
+						path={
+							process.env.PUBLIC_URL + 'react-gui-controller/example1'
+						}
 						component={Example2}
 					/>
 				</Switch>

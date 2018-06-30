@@ -9,13 +9,10 @@ class App extends Component {
 		return (
 			<div>
 				<Nav />
-				<Switch>
-					<Route exact path="/" component={Example1} />
-					<Route path="/example1" component={Example2} />
-				</Switch>
+				<Example1/>
 			</div>
 		);
 	}
 }
 
-export default withRouter(App);
+export default App;

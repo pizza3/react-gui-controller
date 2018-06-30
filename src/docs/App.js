@@ -10,8 +10,15 @@ class App extends Component {
 			<div>
 				<Nav />
 				<Switch>
-					<Route exact path="/" component={Example1} />
-					<Route path="/example1" component={Example2} />
+					<Route
+						exact
+						path={process.env.PUBLIC_URL + '/'}
+						component={Example1}
+					/>
+					<Route
+						path={process.env.PUBLIC_URL + '/example1'}
+						component={Example2}
+					/>
 				</Switch>
 			</div>
 		);

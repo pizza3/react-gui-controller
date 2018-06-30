@@ -20,8 +20,8 @@
 	},
 	"homepage": "https://github.com/pizza3/react-gui-controller#readme",
 	"dependencies": {
-		"styled-jsx": "^2.2.6",
-		"react-router-dom": "^4.3.1"
+		"react-router-dom": "^4.3.1",
+		"styled-jsx": "^2.2.6"
 	},
 	"peerDependencies": {
 		"react": "^16.4.0",

@@ -1,11 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../Assets/logo.svg';
 const Nav = () => {
 	return (
 		<div className="nav">
-			<img src={Logo} className="logo" />
-			<div className="link">Example2</div>
-			<div className="link">Example1</div>
+			<Link to="/">
+				<img src={Logo} className="logo" />
+			</Link>
+			<Link to="/example1">
+				<div className="link">Example2</div>
+			</Link>
+			<Link to="/example1">
+				<div className="link">Example1</div>
+			</Link>
 			<style jsx>
 				{`
 					.nav {

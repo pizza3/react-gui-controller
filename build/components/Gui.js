@@ -57,20 +57,22 @@ var Gui = function (_Component) {
 			var data = _this.props.data;
 			data[path] = val;
 			_this.props.onUpdate(data);
-		}, _this.handleDown = function (event) {
-			event.persist();
+		}, _this.handleDown = function (e) {
+			e.preventDefault();
+			e.persist();
 			var pos = _this.state.pos;
 
 			_this.pos = pos;
 			_this.setState({ drag: true }, function () {
 				_this.start = {
-					x: event.clientX,
-					y: event.clientY
+					x: e.clientX,
+					y: e.clientY
 				};
 				_this.handleMove();
 			});
 		}, _this.handleMove = function () {
 			window.addEventListener('mousemove', function (e) {
+				e.preventDefault();
 				if (_this.state.drag) {
 					var xdiff = -(_this.start.x - e.clientX) + _this.pos.x;
 					var ydiff = -(_this.start.y - e.clientY) + _this.pos.y;

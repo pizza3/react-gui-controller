@@ -6,7 +6,10 @@ import css from 'styled-jsx/css';
 
 export const container = css`
 	.container {
-		position: relative;
+      position: relative;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
 		width: 100%;
 		max-height: 32px;
 		border-top: 1px solid rgb(214, 214, 214);

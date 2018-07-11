@@ -2,7 +2,10 @@ import css from 'styled-jsx/css';
 
 export const textInput = css`
 	.inputText {
-		position: relative;
+      position: relative;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
 		float: right;
 		height: 22px;
 		margin-right: 4px;

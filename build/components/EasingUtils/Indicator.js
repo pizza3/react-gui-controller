@@ -19,6 +19,16 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Indicator = function Indicator(props) {
+	var style = {
+		position: 'absolute',
+		width: '10px',
+		height: '10px',
+		background: '#a0b7f7',
+		borderRadius: '50%',
+		marginLeft: '28px',
+		animation: 'anim 3s infinite',
+		animationTimingFunction: '' + props.ease
+	};
 	return _react2.default.createElement(
 		'div',
 		{

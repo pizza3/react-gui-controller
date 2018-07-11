@@ -9,6 +9,7 @@ class GuiNumber extends Component {
 	};
 
 	handleRange = e => {
+		e.preventDefault();		      
 		this.setState(
 			{
 				val: e.target.value
@@ -41,7 +42,10 @@ class GuiNumber extends Component {
 				<style jsx>
 					{`
 						input[type='range'] {
-							position: relative;
+                     position: relative;
+                     margin:0;
+                     padding:0;
+                     box-sizing:border-box;
 							float: right;
 							-moz-appearance: none;
 							-webkit-appearance: none;
@@ -76,7 +80,10 @@ class GuiNumber extends Component {
 						}
 
 						input[type='text'] {
-							position: relative;
+                     position: relative;
+                     margin:0;
+                     padding:0;
+                     box-sizing:border-box;
 							float: right;
 							width: 30px;
 							height: 22px;

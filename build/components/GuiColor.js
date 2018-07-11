@@ -137,6 +137,7 @@ var GuiColor = function (_Component) {
 		}, _this.changeColorBlock = function (e) {
 			//don't use offset.X
 			//https://github.com/facebook/react/issues/4431
+			e.preventDefault();
 			var x = e.clientX - document.getElementById('color-block' + _this.props.num).getBoundingClientRect().left,
 			    y = e.clientY - document.getElementById('color-block' + _this.props.num).getBoundingClientRect().top;
 
@@ -179,8 +180,8 @@ var GuiColor = function (_Component) {
 		}, _this.changeColorStrip = function (e) {
 			//don't use offset.X
 			//https://github.com/facebook/react/issues/4431
-			var x = e.clientX - document.getElementById('color-strip' + _this.props.num).getBoundingClientRect().left,
-			    y = e.clientY - document.getElementById('color-strip' + _this.props.num).getBoundingClientRect().top;
+			e.preventDefault();
+			var y = e.clientY - document.getElementById('color-strip' + _this.props.num).getBoundingClientRect().top;
 			if (y <= 0) {
 				y = 0;
 			} else if (y >= 149) {
@@ -200,11 +201,13 @@ var GuiColor = function (_Component) {
 			});
 			_this.fillGradient();
 		}, _this.handleDown = function (e) {
+			e.preventDefault();
 			_this.setState({
 				drag: true
 			});
 			e.target.getAttribute('name') === 'strip' ? _this.changeColorStrip(e) : _this.changeColorBlock(e);
 		}, _this.handleMove = function (e) {
+			e.preventDefault();
 			if (_this.state.drag) {
 				e.target.getAttribute('name') === 'strip' ? _this.changeColorStrip(e) : _this.changeColorBlock(e);
 				if (_this.props.type === 'hex') {
@@ -410,16 +413,16 @@ var GuiColor = function (_Component) {
 					themeName: themeName,
 					hide: this.state.hide
 				}),
-				_react2.default.createElement('div', { onClick: this.handleHide, className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'pallete'
+				_react2.default.createElement('div', { onClick: this.handleHide, className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'pallete'
 				}),
 				_react2.default.createElement(
 					'div',
-					{ onMouseLeave: this.handleUp, className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'contain'
+					{ onMouseLeave: this.handleUp, className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'contain'
 					},
 					_react2.default.createElement(
 						'div',
 						{
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + ((this.props.theme === 'dark' ? 'block-parent block-parent-dark' : 'block-parent') || '')
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + ((this.props.theme === 'dark' ? 'block-parent block-parent-dark' : 'block-parent') || '')
 						},
 						_react2.default.createElement('canvas', {
 							id: 'color-block' + this.props.num,
@@ -427,7 +430,7 @@ var GuiColor = function (_Component) {
 							onMouseDown: this.handleDown,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'color-block'
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'color-block'
 						}),
 						_react2.default.createElement('div', {
 							id: 'block' + this.props.num,
@@ -435,13 +438,13 @@ var GuiColor = function (_Component) {
 							onMouseDown: this.handleDown,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'block'
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'block'
 						})
 					),
 					_react2.default.createElement(
 						'div',
 						{
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'strip-parent'
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'strip-parent'
 						},
 						_react2.default.createElement('canvas', {
 							id: 'color-strip' + this.props.num,
@@ -450,14 +453,14 @@ var GuiColor = function (_Component) {
 							onMouseDown: this.handleDown,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'color-strip'
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'color-strip'
 						}),
 						_react2.default.createElement('div', {
 							name: 'strip',
 							onMouseDown: this.handleDown,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
-							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['2628926636', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'block-strip'
+							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['811225966', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'block-strip'
 						})
 					)
 				),
@@ -466,8 +469,8 @@ var GuiColor = function (_Component) {
 					css: _colorStyles.colorStyle.__scoped
 				}),
 				_react2.default.createElement(_style2.default, {
-					styleId: '2628926636',
-					css: '.block.__jsx-style-dynamic-selector{position:absolute;width:10px;height:10px;border:1px solid #fff;border-radius:50%;-webkit-transform-origin:center;-ms-transform-origin:center;transform-origin:center;background:' + this.state.color + ';top:' + (this.state.pos.x - 5) + 'px;left:' + (this.state.pos.y - 5) + 'px;}.block-strip.__jsx-style-dynamic-selector{position:absolute;width:10px;height:10px;border:1px solid #fff;border-radius:50%;background:' + this.state.hueNob + ';-webkit-transform-origin:center;-ms-transform-origin:center;transform-origin:center;-webkit-transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );-ms-transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );}.pallete.__jsx-style-dynamic-selector{position:relative;float:right;height:23px;width:132px;border-radius:3px;background:' + this.state.color + ';border:1px solid ' + (this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)') + ';margin-right:4px;cursor:pointer;}',
+					styleId: '811225966',
+					css: '.block.__jsx-style-dynamic-selector{position:absolute;margin:0;padding:0;box-sizing:border-box;width:10px;height:10px;border:1px solid #fff;border-radius:50%;-webkit-transform-origin:center;-ms-transform-origin:center;transform-origin:center;background:' + this.state.color + ';top:' + (this.state.pos.x - 5) + 'px;left:' + (this.state.pos.y - 5) + 'px;}.block-strip.__jsx-style-dynamic-selector{position:absolute;margin:0;padding:0;box-sizing:border-box;width:10px;height:10px;border:1px solid #fff;border-radius:50%;background:' + this.state.hueNob + ';-webkit-transform-origin:center;-ms-transform-origin:center;transform-origin:center;-webkit-transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );-ms-transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );transform:translate( ' + -2 + 'px, ' + (this.state.posStrip.y - 5) + 'px );}.pallete.__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;box-sizing:border-box;float:right;height:23px;width:132px;border-radius:3px;background:' + this.state.color + ';border:1px solid ' + (this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)') + ';margin-right:4px;cursor:pointer;}',
 					dynamic: [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']
 				})
 			);

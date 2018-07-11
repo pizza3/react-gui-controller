@@ -199,6 +199,7 @@ class GuiColor extends Component {
 	changeColorBlock = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
+		e.preventDefault();		            
 		let x =
 				e.clientX -
 				document
@@ -261,12 +262,8 @@ class GuiColor extends Component {
 	changeColorStrip = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
-		let x =
-				e.clientX -
-				document
-					.getElementById('color-strip' + this.props.num)
-					.getBoundingClientRect().left,
-			y =
+		e.preventDefault();		      
+		let y =
 				e.clientY -
 				document
 					.getElementById('color-strip' + this.props.num)
@@ -300,6 +297,7 @@ class GuiColor extends Component {
 
 	//event down function when any of the color nob is being pressed down with mouse
 	handleDown = e => {
+		e.preventDefault();		      
 		this.setState({
 			drag: true
 		});
@@ -310,6 +308,7 @@ class GuiColor extends Component {
 
 	//event move function when any of the color nob is being moved with mouse
 	handleMove = e => {
+		e.preventDefault();		      
 		if (this.state.drag) {
 			e.target.getAttribute('name') === 'strip'
 				? this.changeColorStrip(e)
@@ -467,11 +466,15 @@ class GuiColor extends Component {
 						/>
 					</div>
 				</div>
+
 				<style jsx>{colorStyle}</style>
 				<style jsx>
 					{`
 						.block {
-							position: absolute;
+                     position: absolute;
+                     margin:0;
+                     padding:0;
+                     box-sizing:border-box;
 							width: 10px;
 							height: 10px;
 							border: 1px solid #fff;
@@ -483,7 +486,10 @@ class GuiColor extends Component {
 						}
 
 						.block-strip {
-							position: absolute;
+                     position: absolute;
+                     margin:0;
+                     padding:0;
+                     box-sizing:border-box;
 							width: 10px;
 							height: 10px;
 							border: 1px solid #fff;
@@ -497,7 +503,10 @@ class GuiColor extends Component {
 						}
 
 						.pallete {
-							position: relative;
+                     position: relative;
+                     margin:0;
+                     padding:0;
+                     box-sizing:border-box;
 							float: right;
 							height: 23px;
 							width: 132px;

@@ -23,14 +23,15 @@ class Gui extends Component {
 		this.props.onUpdate(data);
 	};
 
-	handleDown = event => {
-		event.persist();
+	handleDown = e => {
+		e.preventDefault();		
+		e.persist();
 		let { pos } = this.state;
 		this.pos = pos;
 		this.setState({ drag: true }, () => {
 			this.start = {
-				x: event.clientX,
-				y: event.clientY
+				x: e.clientX,
+				y: e.clientY
 			};
 			this.handleMove();
 		});
@@ -38,6 +39,7 @@ class Gui extends Component {
 
 	handleMove = () => {
 		window.addEventListener('mousemove', e => {
+			e.preventDefault();		
 			if (this.state.drag) {
 				let xdiff = -(this.start.x - e.clientX) + this.pos.x;
 				let ydiff = -(this.start.y - e.clientY) + this.pos.y;

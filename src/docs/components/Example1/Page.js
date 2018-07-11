@@ -38,10 +38,7 @@ export default class Page extends Component {
 					<div className="head">
 						<div className="content-left">
 							<div className="content-left-head">Ease Curve Editor</div>
-							<div className="content-left-con">
-								Drag and drop the Gui across anywhere in the browser
-								window.
-							</div>
+							<div className="content-left-con">Ease Curve Editor</div>
 						</div>
 						<div className="content-right">
 							<video src={Vid2} autoPlay loop />

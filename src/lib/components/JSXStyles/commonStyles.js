@@ -4,7 +4,10 @@ import css from 'styled-jsx/css';
 
 export const label = css`
 	.label {
-		position: relative;
+      position: relative;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
 		float: left;
 		padding-top: 5px;
 		padding-left: 4px;
@@ -26,7 +29,10 @@ export const label = css`
 
 export const container = css`
 	.container {
-		position: relative;
+      position: relative;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
 		width: 100%;
 		height: 32px;
 		border-top: 1px solid rgb(214, 214, 214);

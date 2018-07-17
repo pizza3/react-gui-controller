@@ -320,7 +320,8 @@ A color picker component which can be used to mutate any specific colo type.
 
 ## Demo
 
-###Demo1
+### Demo1
+
 [![Edit Example1](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/wo7pr1278l)
 
 ## Development

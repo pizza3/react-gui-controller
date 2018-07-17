@@ -1,5 +1,7 @@
 # react-gui-controller
 
+[![Build Status](https://travis-ci.com/pizza3/react-gui-controller.svg?token=4NFkLbpiPxAhFzZX3Yhz&branch=master)](https://travis-ci.com/pizza3/react-gui-controller)
+
 <p align="center">
   <img src="./src/docs/Assets/logo.svg" height="200" width="200">
 </p>

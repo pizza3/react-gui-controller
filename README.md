@@ -5,7 +5,7 @@
 </p>
 
 [![Build Status](https://travis-ci.com/pizza3/react-gui-controller.svg?token=4NFkLbpiPxAhFzZX3Yhz&branch=master)](https://travis-ci.com/pizza3/react-gui-controller)
-
+![status](https://img.shields.io/badge/version-1.0.3-brightgreen.svg)
 ![status](https://img.shields.io/badge/size-91.1KB-brightgreen.svg)
 
 ## Table Of Contents

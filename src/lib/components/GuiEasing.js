@@ -95,6 +95,8 @@ class GuiEasing extends Component {
 	};
 
 	handleDown = e => {
+			e.preventDefault();		
+
 		//select the particular anchor and update it with its
 		//corresponding state
 		this.el = e.target.getAttribute('id');
@@ -106,6 +108,8 @@ class GuiEasing extends Component {
 	};
 
 	handleMove = e => {
+			e.preventDefault();		
+
 		if (this.isMove) {
 			//check if anchor is leaving the grid from the right on x-axis
 			if (e.clientX - this.element.x >= 225) {

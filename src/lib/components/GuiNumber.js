@@ -43,9 +43,6 @@ class GuiNumber extends Component {
 					{`
 						input[type='range'] {
                      position: relative;
-                     margin:0;
-                     padding:0;
-                     box-sizing:border-box;
 							float: right;
 							-moz-appearance: none;
 							-webkit-appearance: none;

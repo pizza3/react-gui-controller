@@ -75,7 +75,7 @@ var GuiNumber = function (_Component) {
 					type: 'text',
 					value: this.state.val,
 					onChange: this.handleRange,
-					className: 'jsx-' + _commonStyles.label.__scopedHash + ' jsx-' + _commonStyles.container.__scopedHash + ' ' + _style2.default.dynamic([['2328511878', [this.props.theme === 'dark' ? '#424242' : '#E5E5E5', this.props.theme === 'dark' ? '#313131' : '#FFFFFF', this.props.theme === 'dark' ? '#424242' : '#e5e5e5', this.props.theme === 'dark' ? '#212121' : '#fafafa']]])
+					className: 'jsx-' + _commonStyles.label.__scopedHash + ' jsx-' + _commonStyles.container.__scopedHash + ' ' + _style2.default.dynamic([['3612020454', [this.props.theme === 'dark' ? '#424242' : '#E5E5E5', this.props.theme === 'dark' ? '#313131' : '#FFFFFF', this.props.theme === 'dark' ? '#424242' : '#e5e5e5', this.props.theme === 'dark' ? '#212121' : '#fafafa']]])
 				}),
 				_react2.default.createElement('input', {
 					type: 'range',
@@ -84,7 +84,7 @@ var GuiNumber = function (_Component) {
 					step: step,
 					value: this.state.val,
 					onChange: this.handleRange,
-					className: 'jsx-' + _commonStyles.label.__scopedHash + ' jsx-' + _commonStyles.container.__scopedHash + ' ' + _style2.default.dynamic([['2328511878', [this.props.theme === 'dark' ? '#424242' : '#E5E5E5', this.props.theme === 'dark' ? '#313131' : '#FFFFFF', this.props.theme === 'dark' ? '#424242' : '#e5e5e5', this.props.theme === 'dark' ? '#212121' : '#fafafa']]])
+					className: 'jsx-' + _commonStyles.label.__scopedHash + ' jsx-' + _commonStyles.container.__scopedHash + ' ' + _style2.default.dynamic([['3612020454', [this.props.theme === 'dark' ? '#424242' : '#E5E5E5', this.props.theme === 'dark' ? '#313131' : '#FFFFFF', this.props.theme === 'dark' ? '#424242' : '#e5e5e5', this.props.theme === 'dark' ? '#212121' : '#fafafa']]])
 				}),
 				_react2.default.createElement(_style2.default, {
 					styleId: _commonStyles.label.__scopedHash,
@@ -95,8 +95,8 @@ var GuiNumber = function (_Component) {
 					css: _commonStyles.container.__scoped
 				}),
 				_react2.default.createElement(_style2.default, {
-					styleId: '2328511878',
-					css: 'input[type=\'range\'].__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;box-sizing:border-box;float:right;-moz-appearance:none;-webkit-appearance:none;background-color:' + (this.props.theme === 'dark' ? '#424242' : '#E5E5E5') + ';width:117px;height:2px;border-radius:5px;margin:0 auto;margin-top:10px;margin-right:5px;outline:0;}input[type=\'range\'].__jsx-style-dynamic-selector::-webkit-slider-thumb{-webkit-appearance:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:' + (this.props.theme === 'dark' ? '#313131' : '#FFFFFF') + ';width:10px;height:10px;border-radius:50%;border:1px solid #779bff;cursor:pointer;-webkit-transition:0.3s ease-in-out;transition:0.3s ease-in-out;}input[type=\'range\'].__jsx-style-dynamic-selector::-webkit-slider-thumb.__jsx-style-dynamic-selector:active{-webkit-transform:scale(1.8);-ms-transform:scale(1.8);transform:scale(1.8);}input[type=\'text\'].__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;box-sizing:border-box;float:right;width:30px;height:22px;border-radius:3px;border:1px solid ' + (this.props.theme === 'dark' ? '#424242' : '#e5e5e5') + ';outline:none;background:' + (this.props.theme === 'dark' ? '#212121' : '#fafafa') + ';margin-right:4px;color:#779bff;font-weight:500;}',
+					styleId: '3612020454',
+					css: 'input[type=\'range\'].__jsx-style-dynamic-selector{position:relative;float:right;-moz-appearance:none;-webkit-appearance:none;background-color:' + (this.props.theme === 'dark' ? '#424242' : '#E5E5E5') + ';width:117px;height:2px;border-radius:5px;margin:0 auto;margin-top:10px;margin-right:5px;outline:0;}input[type=\'range\'].__jsx-style-dynamic-selector::-webkit-slider-thumb{-webkit-appearance:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:' + (this.props.theme === 'dark' ? '#313131' : '#FFFFFF') + ';width:10px;height:10px;border-radius:50%;border:1px solid #779bff;cursor:pointer;-webkit-transition:0.3s ease-in-out;transition:0.3s ease-in-out;}input[type=\'range\'].__jsx-style-dynamic-selector::-webkit-slider-thumb.__jsx-style-dynamic-selector:active{-webkit-transform:scale(1.8);-ms-transform:scale(1.8);transform:scale(1.8);}input[type=\'text\'].__jsx-style-dynamic-selector{position:relative;margin:0;padding:0;box-sizing:border-box;float:right;width:30px;height:22px;border-radius:3px;border:1px solid ' + (this.props.theme === 'dark' ? '#424242' : '#e5e5e5') + ';outline:none;background:' + (this.props.theme === 'dark' ? '#212121' : '#fafafa') + ';margin-right:4px;color:#779bff;font-weight:500;}',
 					dynamic: [this.props.theme === 'dark' ? '#424242' : '#E5E5E5', this.props.theme === 'dark' ? '#313131' : '#FFFFFF', this.props.theme === 'dark' ? '#424242' : '#e5e5e5', this.props.theme === 'dark' ? '#212121' : '#fafafa']
 				})
 			);

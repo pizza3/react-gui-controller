@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { colorStyle } from './JSXStyles/colorStyles';
 import CustomContainer from './containerComponents/CustomContainer';
-
+import {
+	HexToRgb,
+	RgbToHex,
+	RgbToHsl,
+	RgbToHsv
+} from './ColorUtils/Conversion';
 //a simple map methos to normalize any values
 const MapRange = (value, low1, high1, low2, high2) => {
 	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
@@ -36,13 +41,13 @@ class GuiColor extends Component {
 		let col, val;
 		if (this.props.type === 'hex') {
 			val = this.props.data[this.props.path];
-			col = this.hexToRgb(val);
-			a = this.rgbToHsl(col[0], col[1], col[2]);
+			col = HexToRgb(val);
+			a = RgbToHsl(col[0], col[1], col[2]);
 		} else if (this.props.type === 'rgb') {
 			val = this.props.data[this.props.path];
-			a = this.rgbToHsl(val.r, val.g, val.b);
+			a = RgbToHsl(val.r, val.g, val.b);
 		} else {
-			a = this.rgbToHsl(198, 110, 108);
+			a = RgbToHsl(198, 110, 108);
 		}
 		let colorBlock = document.getElementById('color-block' + this.props.num);
 		this.ctx1 = colorBlock.getContext('2d');
@@ -88,10 +93,10 @@ class GuiColor extends Component {
 				let hsv;
 				let color;
 				if (this.props.type === 'hex') {
-					hsv = this.rgbToHsv(col[0], col[1], col[2]);
+					hsv = RgbToHsv(col[0], col[1], col[2]);
 					color = this.props.data[this.props.path];
 				} else if (this.props.type === 'rgb') {
-					hsv = this.rgbToHsv(val.r, val.g, val.b);
+					hsv = RgbToHsv(val.r, val.g, val.b);
 					color = 'rgba(' + val.r + ',' + val.g + ',' + val.b + ',1)';
 				}
 
@@ -143,9 +148,8 @@ class GuiColor extends Component {
 		).data;
 
 		if (this.props.type === 'hex') {
-			// console.log('hex called');
 			this.setState({
-				color: this.rgbToHex(imageData[0], imageData[1], imageData[2])
+				color: RgbToHex(imageData[0], imageData[1], imageData[2])
 			});
 		} else if (this.props.type === 'rgb') {
 			this.setState({
@@ -164,25 +168,13 @@ class GuiColor extends Component {
 				}
 			});
 		}
-		// } else {
-		// 	this.setState({
-		// 		color:
-		// 			'rgba(' +
-		// 			imageData[0] +
-		// 			',' +
-		// 			imageData[1] +
-		// 			',' +
-		// 			imageData[2] +
-		// 			',1)'
-		// 	});
-		// 	// this.props.updateData(this.props.path, this.state.color);
-		// }
 	};
 
 	//this applies color to the hue strip of the color selector
 	fillStrip = () => {
-		this.ctx2.rect(0, 0, this.width2, this.height2);
-		let grd1 = this.ctx2.createLinearGradient(0, 0, 0, this.height1);
+		let { ctx2, width2, height2, height1 } = this;
+		ctx2.rect(0, 0, width2, height2);
+		let grd1 = ctx2.createLinearGradient(0, 0, 0, height1);
 		grd1.addColorStop(0, 'rgba(255, 0, 0, 1)');
 		grd1.addColorStop(0.17, 'rgba(255, 255, 0, 1)');
 		grd1.addColorStop(0.34, 'rgba(0, 255, 0, 1)');
@@ -190,8 +182,8 @@ class GuiColor extends Component {
 		grd1.addColorStop(0.68, 'rgba(0, 0, 255, 1)');
 		grd1.addColorStop(0.85, 'rgba(255, 0, 255, 1)');
 		grd1.addColorStop(1, 'rgba(255, 0, 0, 1)');
-		this.ctx2.fillStyle = grd1;
-		this.ctx2.fill();
+		ctx2.fillStyle = grd1;
+		ctx2.fill();
 	};
 
 	//this method is used to select color from the gradient block
@@ -199,7 +191,7 @@ class GuiColor extends Component {
 	changeColorBlock = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
-		e.preventDefault();		            
+		e.preventDefault();
 		let x =
 				e.clientX -
 				document
@@ -235,7 +227,7 @@ class GuiColor extends Component {
 			',1)';
 		if (this.props.type === 'hex') {
 			this.setState({
-				color: this.rgbToHex(imageData[0], imageData[1], imageData[2]),
+				color: RgbToHex(imageData[0], imageData[1], imageData[2]),
 				pos: {
 					x: y,
 					y: x
@@ -262,26 +254,29 @@ class GuiColor extends Component {
 	changeColorStrip = e => {
 		//don't use offset.X
 		//https://github.com/facebook/react/issues/4431
-		e.preventDefault();		      
+		const { posStrip } = this.state;
+		const { num } = this.props;
+
+		let { ctx2, rgbaColor } = this;
+		e.preventDefault();
 		let y =
-				e.clientY -
-				document
-					.getElementById('color-strip' + this.props.num)
-					.getBoundingClientRect().top;
+			e.clientY -
+			document.getElementById('color-strip' + num).getBoundingClientRect()
+				.top;
 		if (y <= 0) {
 			y = 0;
 		} else if (y >= 149) {
 			y = 149;
 		}
 		this.setState({
-			color: this.rgbaColor,
+			color: rgbaColor,
 			posStrip: {
 				x: 0,
 				y: y
 			}
 		});
-		let imageData = this.ctx2.getImageData(this.state.posStrip.x, this.state.posStrip.y, 1, 1).data;
-		this.rgbaColor =
+		let imageData = ctx2.getImageData(posStrip.x, posStrip.y, 1, 1).data;
+		rgbaColor =
 			'rgba(' +
 			imageData[0] +
 			',' +
@@ -290,14 +285,14 @@ class GuiColor extends Component {
 			imageData[2] +
 			',1)';
 		this.setState({
-			hueNob: this.rgbaColor
+			hueNob: rgbaColor
 		});
 		this.fillGradient();
 	};
 
 	//event down function when any of the color nob is being pressed down with mouse
 	handleDown = e => {
-		e.preventDefault();		      
+		e.preventDefault();
 		this.setState({
 			drag: true
 		});
@@ -308,106 +303,20 @@ class GuiColor extends Component {
 
 	//event move function when any of the color nob is being moved with mouse
 	handleMove = e => {
-		e.preventDefault();		      
+		const { path } = this.props;
+		const { color, rgb } = this.state;
+		e.preventDefault();
 		if (this.state.drag) {
 			e.target.getAttribute('name') === 'strip'
 				? this.changeColorStrip(e)
 				: this.changeColorBlock(e);
 			if (this.props.type === 'hex') {
-				this.props.updateData(this.props.path, this.state.color);
+				this.props.updateData(path, color);
 			} else if (this.props.type === 'rgb') {
-				this.props.updateData(this.props.path, this.state.rgb);
+				this.props.updateData(path, rgb);
 			}
 		}
 	};
-
-	// this implementation was taken from stackoverflow
-	//used to convert any hex to rgba
-	hexToRgb(hex) {
-		// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-		var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-		hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-			return r + r + g + g + b + b;
-		});
-
-		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-		return result
-			? [
-				parseInt(result[1], 16),
-				parseInt(result[2], 16),
-				parseInt(result[3], 16)
-			  ]
-			: null;
-	}
-
-	rgbToHex(r, g, b) {
-		return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-	}
-
-	// this implementation was taken from stackoverflow
-	//used to covert any rgb  to hsl
-	rgbToHsl = (r, g, b) => {
-		(r /= 255), (g /= 255), (b /= 255);
-		var max = Math.max(r, g, b),
-			min = Math.min(r, g, b);
-		var h,
-			s,
-			l = (max + min) / 2;
-
-		if (max == min) {
-			h = s = 0; // achromatic
-		} else {
-			var d = max - min;
-			s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-			switch (max) {
-			case r:
-				h = (g - b) / d + (g < b ? 6 : 0);
-				break;
-			case g:
-				h = (b - r) / d + 2;
-				break;
-			case b:
-				h = (r - g) / d + 4;
-				break;
-			}
-			h /= 6;
-		}
-
-		return [h, s, l];
-	};
-	// used to convert rgb to hsv
-	rgbToHsv(r, g, b) {
-		(r /= 255), (g /= 255), (b /= 255);
-
-		var max = Math.max(r, g, b),
-			min = Math.min(r, g, b);
-		var h,
-			s,
-			v = max;
-
-		var d = max - min;
-		s = max == 0 ? 0 : d / max;
-
-		if (max == min) {
-			h = 0; // achromatic
-		} else {
-			switch (max) {
-			case r:
-				h = (g - b) / d + (g < b ? 6 : 0);
-				break;
-			case g:
-				h = (b - r) / d + 2;
-				break;
-			case b:
-				h = (r - g) / d + 4;
-				break;
-			}
-
-			h /= 6;
-		}
-
-		return [h, s, v];
-	}
 
 	handleUp = () => {
 		this.setState({
@@ -471,10 +380,10 @@ class GuiColor extends Component {
 				<style jsx>
 					{`
 						.block {
-                     position: absolute;
-                     margin:0;
-                     padding:0;
-                     box-sizing:border-box;
+							position: absolute;
+							margin: 0;
+							padding: 0;
+							box-sizing: border-box;
 							width: 10px;
 							height: 10px;
 							border: 1px solid #fff;
@@ -486,13 +395,14 @@ class GuiColor extends Component {
 						}
 
 						.block-strip {
-                     position: absolute;
-                     margin:0;
-                     padding:0;
-                     box-sizing:border-box;
+							position: absolute;
+							margin: 0;
+							padding: 0;
+							box-sizing: border-box;
 							width: 10px;
 							height: 10px;
-							border: 1px solid #fff;
+							border: 1px solid
+								${this.props.theme === 'dark' ? '#fff' : '#ccc'};
 							border-radius: 50%;
 							background: ${this.state.hueNob};
 							transform-origin: center;
@@ -503,10 +413,10 @@ class GuiColor extends Component {
 						}
 
 						.pallete {
-                     position: relative;
-                     margin:0;
-                     padding:0;
-                     box-sizing:border-box;
+							position: relative;
+							margin: 0;
+							padding: 0;
+							box-sizing: border-box;
 							float: right;
 							height: 23px;
 							width: 132px;

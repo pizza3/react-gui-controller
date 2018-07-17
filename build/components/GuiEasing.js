@@ -108,6 +108,8 @@ var GuiEasing = function (_Component) {
 				_this.props.updateData(_this.props.path, val);
 			});
 		}, _this.handleDown = function (e) {
+			e.preventDefault();
+
 			//select the particular anchor and update it with its
 			//corresponding state
 			_this.el = e.target.getAttribute('id');
@@ -115,6 +117,8 @@ var GuiEasing = function (_Component) {
 			_this.x = _this.state[_this.el].x;
 			_this.element = document.getElementById('svg' + _this.props.num).getBoundingClientRect();
 		}, _this.handleMove = function (e) {
+			e.preventDefault();
+
 			if (_this.isMove) {
 				//check if anchor is leaving the grid from the right on x-axis
 				if (e.clientX - _this.element.x >= 225) {

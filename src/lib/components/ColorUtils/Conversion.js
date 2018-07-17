@@ -85,4 +85,9 @@ const RgbToHsv = (r, g, b) => {
 	return [h, s, v];
 };
 
-export { HexToRgb, RgbToHex, RgbToHsl, RgbToHsv };
+//a simple map methos to normalize any values
+const MapRange = (value, low1, high1, low2, high2) => {
+	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
+};
+
+export { HexToRgb, RgbToHex, RgbToHsl, RgbToHsv, MapRange };

@@ -7,7 +7,8 @@
 		"lib": "babel src/lib -d build --copy-files",
 		"lib:watch": "babel src/lib -w -d build --copy-files",
 		"start": "webpack-dev-server --mode development --open --hot",
-		"build": "webpack --mode production"
+		"build": "webpack --mode production",
+		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
@@ -34,6 +35,9 @@
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"babel-preset-env": "^1.7.0",
 		"babel-preset-react": "^6.24.1",
+		"enzyme": "^3.3.0",
+		"enzyme-adapter-react-16": "^1.1.1",
+		"enzyme-to-json": "^3.3.4",
 		"eslint": "^4.19.1",
 		"eslint-plugin-import": "^2.12.0",
 		"eslint-plugin-jsx-a11y": "^6.0.3",

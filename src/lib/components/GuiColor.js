@@ -6,12 +6,9 @@ import {
 	HexToRgb,
 	RgbToHex,
 	RgbToHsl,
-	RgbToHsv
+	RgbToHsv,
+	MapRange
 } from './ColorUtils/Conversion';
-//a simple map methos to normalize any values
-const MapRange = (value, low1, high1, low2, high2) => {
-	return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
-};
 
 class GuiColor extends Component {
 	state = {
@@ -256,8 +253,7 @@ class GuiColor extends Component {
 		//https://github.com/facebook/react/issues/4431
 		const { posStrip } = this.state;
 		const { num } = this.props;
-
-		let { ctx2, rgbaColor } = this;
+		let { ctx2 } = this;
 		e.preventDefault();
 		let y =
 			e.clientY -
@@ -269,14 +265,14 @@ class GuiColor extends Component {
 			y = 149;
 		}
 		this.setState({
-			color: rgbaColor,
+			color: this.rgbaColor,
 			posStrip: {
 				x: 0,
 				y: y
 			}
 		});
 		let imageData = ctx2.getImageData(posStrip.x, posStrip.y, 1, 1).data;
-		rgbaColor =
+		this.rgbaColor =
 			'rgba(' +
 			imageData[0] +
 			',' +
@@ -284,10 +280,14 @@ class GuiColor extends Component {
 			',' +
 			imageData[2] +
 			',1)';
-		this.setState({
-			hueNob: rgbaColor
-		});
-		this.fillGradient();
+		this.setState(
+			{
+				hueNob: this.rgbaColor
+			},
+			() => {
+				this.fillGradient();
+			}
+		);
 	};
 
 	//event down function when any of the color nob is being pressed down with mouse
@@ -299,6 +299,14 @@ class GuiColor extends Component {
 		e.target.getAttribute('name') === 'strip'
 			? this.changeColorStrip(e)
 			: this.changeColorBlock(e);
+	};
+
+	handleDownStrip = e => {
+		e.preventDefault();
+		this.setState({
+			drag: true
+		});
+		this.changeColorStrip(e);
 	};
 
 	//event move function when any of the color nob is being moved with mouse
@@ -362,14 +370,14 @@ class GuiColor extends Component {
 							id={'color-strip' + this.props.num}
 							className="color-strip"
 							name="strip"
-							onMouseDown={this.handleDown}
+							onMouseDown={this.handleDownStrip}
 							onMouseMove={this.handleMove}
 							onMouseUp={this.handleUp}
 						/>
 						<div
 							className="block-strip"
 							name="strip"
-							onMouseDown={this.handleDown}
+							onMouseDown={this.handleDownStrip}
 							onMouseMove={this.handleMove}
 							onMouseUp={this.handleUp}
 						/>

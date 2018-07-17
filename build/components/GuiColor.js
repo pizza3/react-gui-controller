@@ -36,11 +36,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//a simple map methos to normalize any values
-var MapRange = function MapRange(value, low1, high1, low2, high2) {
-	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-};
-
 var GuiColor = function (_Component) {
 	_inherits(GuiColor, _Component);
 
@@ -177,8 +172,7 @@ var GuiColor = function (_Component) {
 			var posStrip = _this.state.posStrip;
 			var num = _this.props.num;
 			var _this3 = _this,
-			    ctx2 = _this3.ctx2,
-			    rgbaColor = _this3.rgbaColor;
+			    ctx2 = _this3.ctx2;
 
 			e.preventDefault();
 			var y = e.clientY - document.getElementById('color-strip' + num).getBoundingClientRect().top;
@@ -188,24 +182,31 @@ var GuiColor = function (_Component) {
 				y = 149;
 			}
 			_this.setState({
-				color: rgbaColor,
+				color: _this.rgbaColor,
 				posStrip: {
 					x: 0,
 					y: y
 				}
 			});
 			var imageData = ctx2.getImageData(posStrip.x, posStrip.y, 1, 1).data;
-			rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
+			_this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
 			_this.setState({
-				hueNob: rgbaColor
+				hueNob: _this.rgbaColor
+			}, function () {
+				_this.fillGradient();
 			});
-			_this.fillGradient();
 		}, _this.handleDown = function (e) {
 			e.preventDefault();
 			_this.setState({
 				drag: true
 			});
 			e.target.getAttribute('name') === 'strip' ? _this.changeColorStrip(e) : _this.changeColorBlock(e);
+		}, _this.handleDownStrip = function (e) {
+			e.preventDefault();
+			_this.setState({
+				drag: true
+			});
+			_this.changeColorStrip(e);
 		}, _this.handleMove = function (e) {
 			var path = _this.props.path;
 			var _this$state = _this.state,
@@ -261,7 +262,7 @@ var GuiColor = function (_Component) {
 			this.fillGradient();
 			this.fillStrip();
 			//position pointer indicator
-			var val2 = MapRange(a[0], 0, 1, 0, 150);
+			var val2 = (0, _Conversion.MapRange)(a[0], 0, 1, 0, 150);
 			this.setState({
 				posStrip: {
 					x: 0,
@@ -366,14 +367,14 @@ var GuiColor = function (_Component) {
 							id: 'color-strip' + this.props.num,
 
 							name: 'strip',
-							onMouseDown: this.handleDown,
+							onMouseDown: this.handleDownStrip,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
 							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['957223759', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.props.theme === 'dark' ? '#fff' : '#ccc', this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'color-strip'
 						}),
 						_react2.default.createElement('div', {
 							name: 'strip',
-							onMouseDown: this.handleDown,
+							onMouseDown: this.handleDownStrip,
 							onMouseMove: this.handleMove,
 							onMouseUp: this.handleUp,
 							className: 'jsx-' + _colorStyles.colorStyle.__scopedHash + ' ' + _style2.default.dynamic([['957223759', [this.state.color, this.state.pos.x - 5, this.state.pos.y - 5, this.props.theme === 'dark' ? '#fff' : '#ccc', this.state.hueNob, -2, this.state.posStrip.y - 5, this.state.color, this.props.theme === 'dark' ? '#424242' : 'rgb(229, 229, 229)']]]) + ' ' + 'block-strip'

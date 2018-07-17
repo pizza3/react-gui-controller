@@ -84,7 +84,13 @@ var RgbToHsv = function RgbToHsv(r, g, b) {
 	return [h, s, v];
 };
 
+//a simple map methos to normalize any values
+var MapRange = function MapRange(value, low1, high1, low2, high2) {
+	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+};
+
 exports.HexToRgb = HexToRgb;
 exports.RgbToHex = RgbToHex;
 exports.RgbToHsl = RgbToHsl;
 exports.RgbToHsv = RgbToHsv;
+exports.MapRange = MapRange;

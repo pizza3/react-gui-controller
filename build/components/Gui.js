@@ -206,7 +206,7 @@ exports.default = Gui;
 
 
 Gui.propTypes = {
-	children: _propTypes2.default.arrayOf(_propTypes2.default.node),
+	children: _propTypes2.default.object,
 	data: _propTypes2.default.object,
 	theme: _propTypes2.default.oneOf(['light', 'dark']),
 	hide: _propTypes2.default.bool,

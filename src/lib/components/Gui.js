@@ -24,7 +24,7 @@ class Gui extends Component {
 	};
 
 	handleDown = e => {
-		e.preventDefault();		
+		e.preventDefault();
 		e.persist();
 		let { pos } = this.state;
 		this.pos = pos;
@@ -39,7 +39,7 @@ class Gui extends Component {
 
 	handleMove = () => {
 		window.addEventListener('mousemove', e => {
-			e.preventDefault();		
+			e.preventDefault();
 			if (this.state.drag) {
 				let xdiff = -(this.start.x - e.clientX) + this.pos.x;
 				let ydiff = -(this.start.y - e.clientY) + this.pos.y;
@@ -162,7 +162,7 @@ class Gui extends Component {
 export default Gui;
 
 Gui.propTypes = {
-	children: PropTypes.arrayOf(PropTypes.node),
+	children: PropTypes.object,
 	data: PropTypes.object,
 	theme: PropTypes.oneOf(['light', 'dark']),
 	hide: PropTypes.bool,

@@ -76,9 +76,9 @@ component's with the help of `onUpdate` functional prop.
 
 ##### required props
 
--  `data` - The data your Gui controller will mutate
--  `onUpdate` - The method which will be called whenever an update is handled by the controller
--  `children` - The dat.GUI components that make up the controller
+-  `data` - The data your Gui controller will mutate.
+-  `onUpdate` - The method which will be called whenever an update is handled by the controller.
+-  `children` - The dat.GUI components that make up the controller.
 
 ##### optional props
 
@@ -214,7 +214,7 @@ component's with the help of `onUpdate` functional prop.
 ### GuiButton
 
 `GuiButton` provides a button, under which you can specify the `onClick` prop and mention the
-funtion
+funtion.
 
 ##### required props
 

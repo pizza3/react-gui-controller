@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Controller from './Controller';
 import Img from '../../Assets/header.png';
-import Vid2 from '../../Assets/vid2.mp4';
-import Vid from '../../Assets/vid.mp4';
 export default class Page extends Component {
 	state = {};
 
@@ -33,53 +30,8 @@ export default class Page extends Component {
 						<img src={Img} alt="img" />
 					</div>
 				</div>
-				<div className="feature-head">
-					<div className="feature-title">Features</div>
-					<div className="head">
-						<div className="content-left">
-							<div className="content-left-head">Ease Curve Editor</div>
-							<div className="content-left-con">Ease Curve Editor</div>
-						</div>
-						<div className="content-right">
-							<video src={Vid2} autoPlay loop />
-						</div>
-					</div>
-					<div className="head">
-						<div className="content-left">
-							<div className="content-left-head">Draggable GUI</div>
-							<div className="content-left-con">
-								Drag and drop the Gui across anywhere in the browser
-								window.
-							</div>
-						</div>
-						<div className="content-right">
-							<video src={Vid} autoPlay loop />
-						</div>
-					</div>
-				</div>
 				<style jsx>
 					{`
-						.feature-head {
-							position: relative;
-							width: 100%;
-							float: left;
-						}
-						.feature-title {
-							font-family: 'Poppins', sans-serif;
-							font-size: 29px;
-							color: #212121;
-							font-weight: 900;
-							text-align: center;
-						}
-						.feature-title::before {
-							content: '';
-							position: absolute;
-							width: 79px;
-							height: 8px;
-							top: 42px;
-							margin-left: 27px;
-							background: #3a6dff;
-						}
 						.page-body {
 							position: relative;
 							width: 100%;

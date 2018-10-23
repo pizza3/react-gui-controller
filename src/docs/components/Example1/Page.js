@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Img from '../../Assets/header.png';
+
 export default class Page extends Component {
 	state = {};
 

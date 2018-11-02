@@ -33,7 +33,7 @@ npm install react-gui-controller --save
 
 ```js
 import React, { Component } from "react";
-import Gui, { GuiString, GuiNumber, GuiColor } from "./components/Gui";
+import Gui, { GuiString, GuiNumber, GuiColor } from "react-gui-controller";
 class App extends Component {
    state = {
       data: {
@@ -345,7 +345,8 @@ npm link react-gui-controller
 
 ## Stuff to get done
 
-* [ ] support for local storage
+* [ ] Support for local storage.
+* [ ] Ease curve pre defined graphs.
 
 ## License
 

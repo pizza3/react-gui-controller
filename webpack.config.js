@@ -24,7 +24,7 @@ module.exports = {
 		]
 	},
 	devServer: {
-		// contentBase: '/',
+		contentBase: '/',
 		// historyAPIFallback will redirect 404s to /index.html.
 		historyApiFallback: true
 	},

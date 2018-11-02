@@ -343,6 +343,10 @@ In project:
 npm link react-gui-controller
 ```
 
+## Stuff to get done
+
+* [ ] support for local storage
+
 ## License
 
 MIT

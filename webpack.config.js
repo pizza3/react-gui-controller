@@ -7,7 +7,6 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'docs'),
 		filename: 'index.js',
-		//publicPath allows you to specify the base path for all the assets within your application.
       publicPath: "./"
 	},
 	module: {
@@ -25,7 +24,6 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: '/',
-		// historyAPIFallback will redirect 404s to /index.html.
 		historyApiFallback: true
 	},
 

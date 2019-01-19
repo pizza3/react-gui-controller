@@ -8,6 +8,12 @@
 ![status](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
 ![status](https://img.shields.io/badge/size-91.1KB-brightgreen.svg)
 
+
+<p align="center">
+  <img src="./demo.gif" height="334" width="550">
+</p>
+
+
 ## Table Of Contents
 
 -  [Introduction](#introduction)

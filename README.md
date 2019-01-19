@@ -1,18 +1,12 @@
 # react-gui-controller
 
-<p align="center">
-  <img src="./src/docs/Assets/logo.svg" height="200" width="200">
+<p  align="center" >
+  <img src="./src/docs/Assets/logo.svg" height="auto" width="200">
 </p>
 
 [![Build Status](https://travis-ci.com/pizza3/react-gui-controller.svg?token=4NFkLbpiPxAhFzZX3Yhz&branch=master)](https://travis-ci.com/pizza3/react-gui-controller)
 ![status](https://img.shields.io/badge/version-1.0.4-brightgreen.svg)
 ![status](https://img.shields.io/badge/size-91.1KB-brightgreen.svg)
-
-
-<p align="center">
-  <img src="./demo.gif" height="334" width="550">
-</p>
-
 
 ## Table Of Contents
 
@@ -29,6 +23,11 @@
 
 A graphical user interface for changing states in react. Inspired from Google's popular [dat.GUI](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) controller library. This library provides additional functionalities such as Ease curve editor, Draggable placement and Stylable
 component's. For styling this library uses Zeit [styled-jsx](https://github.com/zeit/styled-jsx).
+
+<p  align="center" >
+   <img src="./demo.gif" height="auto"    width="550">
+</p>
+
 
 ## Installation
 
